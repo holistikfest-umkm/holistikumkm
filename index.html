@@ -27,6 +27,9 @@
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh}
 
+/* FIX: class hidden */
+.hidden{display:none!important}
+
 /* NAV */
 nav{position:fixed;top:0;left:0;right:0;background:var(--ink);z-index:100;height:60px;display:flex;align-items:center;padding:0 32px;justify-content:space-between}
 .nav-logo{font-family:'Syne',sans-serif;font-size:1.1rem;color:#fff;letter-spacing:.02em}
@@ -53,7 +56,6 @@ nav{position:fixed;top:0;left:0;right:0;background:var(--ink);z-index:100;height
 /* RULES STRIP */
 .rules-strip{background:var(--food);padding:20px 32px;display:flex;gap:32px;justify-content:center;flex-wrap:wrap}
 .rule-item{display:flex;align-items:center;gap:8px;color:#fff;font-size:.85rem;font-weight:600}
-.rule-item svg{flex-shrink:0}
 
 /* MAIN LAYOUT */
 .main-wrap{max-width:1300px;margin:0 auto;padding:40px 24px}
@@ -117,9 +119,6 @@ nav{position:fixed;top:0;left:0;right:0;background:var(--ink);z-index:100;height
 .stand-cell{border-radius:6px;padding:7px 4px;text-align:center;font-size:.7rem;font-weight:800;cursor:pointer;transition:.15s;user-select:none;border:1.5px solid transparent}
 .stand-cell.type-multi{background:#D9E8FA;color:#2563EB;border-color:#BFDBFE}
 .stand-cell.type-food{background:#FDE8D5;color:#C2410C;border-color:#FCD9BD}
-.stand-cell.grade-A{box-shadow:inset 0 -2px 0 rgba(0,0,0,.12)}
-.stand-cell.grade-B{opacity:.92}
-.stand-cell.grade-C{opacity:.8}
 .stand-cell.available:hover{transform:scale(1.06);box-shadow:0 2px 8px rgba(0,0,0,.15)}
 .stand-cell.selected-stand{background:var(--ink)!important;color:#fff!important;border-color:var(--ink)!important;transform:scale(1.06)}
 .stand-cell.booked-stand{background:#E5E0D8!important;color:#A09890!important;cursor:not-allowed;border-color:#D5CFC7!important}
@@ -142,7 +141,6 @@ nav{position:fixed;top:0;left:0;right:0;background:var(--ink);z-index:100;height
 .upload-area .up-text{font-size:.85rem;font-weight:600}
 .upload-area .up-hint{font-size:.75rem;color:var(--muted);margin-top:4px}
 .upload-preview{display:none;margin-top:12px}
-.upload-preview img{max-height:100px;border-radius:8px;border:1px solid var(--border)}
 .upload-preview.show{display:flex;gap:10px;align-items:center;font-size:.82rem;font-weight:600;color:var(--accent2)}
 
 /* PRICE SUMMARY */
@@ -189,7 +187,7 @@ nav{position:fixed;top:0;left:0;right:0;background:var(--ink);z-index:100;height
 .btn-dl:hover{background:#E5E0D8}
 
 /* ADMIN PANEL */
-.admin-header{background:var(--ink);color:#fff;border-radius:14px;padding:24px;margin-bottom:24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:gap}
+.admin-header{background:var(--ink);color:#fff;border-radius:14px;padding:24px;margin-bottom:24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
 .admin-title{font-family:'Syne',sans-serif;font-size:1.5rem}
 .admin-sub{color:rgba(255,255,255,.5);font-size:.85rem;margin-top:4px}
 .stats-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:16px;margin-bottom:24px}
@@ -279,22 +277,28 @@ nav{position:fixed;top:0;left:0;right:0;background:var(--ink);z-index:100;height
 .loading-text{color:#fff;font-weight:700}
 @keyframes spin{to{transform:rotate(360deg)}}
 
-/* BLOK LABELS */
-.blok-label{text-align:center;font-size:.68rem;color:var(--muted);margin-bottom:4px;font-weight:600}
-.zone-header{background:#F0EDE8;border-bottom:1px solid var(--border);padding:4px;text-align:center;font-size:.65rem;font-weight:800;color:var(--muted);letter-spacing:.05em}
-.zone-header.food-zone{background:#FDE8D5;color:#C2410C}
-.zone-header.multi-zone{background:#EBF1FB;color:#2563EB}
-
-/* DENAH VISUAL HEADER */
-.denah-top{background:var(--ink);color:#fff;border-radius:12px 12px 0 0;padding:10px;text-align:center;font-family:'Syne',sans-serif;letter-spacing:.05em;font-size:.9rem;margin-bottom:0}
+/* DENAH VISUAL */
+.denah-top{background:var(--ink);color:#fff;border-radius:12px 12px 0 0;padding:10px;text-align:center;font-family:'Syne',sans-serif;letter-spacing:.05em;font-size:.9rem}
 .pintu-bar{display:flex;gap:8px;align-items:center;justify-content:center;background:#F0EDE8;border:1px solid var(--border);border-top:none;border-radius:0 0 12px 12px;padding:8px;font-size:.78rem;font-weight:700;color:var(--muted);margin-bottom:16px}
-.pintu-dot{width:28px;height:28px;background:var(--ink);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:.65rem;font-weight:800}
 .bottom-area{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-bottom:16px}
 .bottom-cell{padding:8px 14px;border-radius:8px;font-size:.73rem;font-weight:700;border:1.5px solid var(--border)}
 .bottom-cell.toilet-c{background:#EBF1FB;color:#2563EB;border-color:#BFDBFE}
 .bottom-cell.food-c{background:#FDE8D5;color:#C2410C;border-color:#FCD9BD}
 .bottom-cell.play-c{background:#F3E8FF;color:#7C3AED;border-color:#DDD6FE}
 .bottom-cell.gsm-c{background:#D1FAE5;color:#065F46;border-color:#6EE7B7}
+.zone-header{background:#F0EDE8;border-bottom:1px solid var(--border);padding:4px;text-align:center;font-size:.65rem;font-weight:800;color:var(--muted);letter-spacing:.05em}
+.zone-header.food-zone{background:#FDE8D5;color:#C2410C}
+.zone-header.multi-zone{background:#EBF1FB;color:#2563EB}
+
+/* SECTION LABEL */
+.section-label{font-size:.75rem;font-weight:800;letter-spacing:.1em;color:var(--muted);text-transform:uppercase;margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid var(--border)}
+
+/* FLOAT HELP */
+.float-help{position:fixed;bottom:24px;right:24px;width:48px;height:48px;background:var(--food);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.4rem;cursor:pointer;box-shadow:0 4px 16px rgba(212,98,26,.4);z-index:50;border:none;font-family:'Plus Jakarta Sans',sans-serif;transition:.2s}
+.float-help:hover{transform:scale(1.1)}
+
+/* ADMIN BADGE */
+.admin-badge{background:var(--food);color:#fff;font-size:.7rem;padding:3px 8px;border-radius:5px;font-weight:800}
 
 /* RESPONSIVE */
 @media(max-width:768px){
@@ -309,13 +313,6 @@ nav{position:fixed;top:0;left:0;right:0;background:var(--ink);z-index:100;height
 @media(max-width:480px){
   .cat-cards{grid-template-columns:1fr}
 }
-
-/* FLOAT HELP */
-.float-help{position:fixed;bottom:24px;right:24px;width:48px;height:48px;background:var(--food);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.4rem;cursor:pointer;box-shadow:0 4px 16px rgba(212,98,26,.4);z-index:50;border:none;font-family:'Plus Jakarta Sans',sans-serif;transition:.2s}
-.float-help:hover{transform:scale(1.1)}
-
-/* SECTION LABEL */
-.section-label{font-size:.75rem;font-weight:800;letter-spacing:.1em;color:var(--muted);text-transform:uppercase;margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid var(--border)}
 </style>
 </head>
 <body>
@@ -383,7 +380,7 @@ nav{position:fixed;top:0;left:0;right:0;background:var(--ink);z-index:100;height
     <div class="top-tab active" onclick="switchTab('daftar')">📝 Pendaftaran</div>
     <div class="top-tab" onclick="switchTab('tiket')">🎫 Tiket Saya</div>
     <div class="top-tab" onclick="switchTab('rules')">📋 Ketentuan</div>
-    <div class="top-tab admin-tab-btn hidden" onclick="switchTab('admin')">⚙️ Admin</div>
+    <div class="top-tab hidden" id="adminTabBtn" onclick="switchTab('admin')">⚙️ Admin</div>
   </div>
 
   <!-- TAB: DAFTAR -->
@@ -431,10 +428,9 @@ nav{position:fixed;top:0;left:0;right:0;background:var(--ink);z-index:100;height
         
         <div class="notice info">
           <span>ℹ️</span>
-          <div>Anda memilih kategori <strong id="noticeCategory">–</strong>. Hanya stand yang sesuai kategori yang bisa dipilih. Grade menentukan harga dan lokasi dalam denah.</div>
+          <div>Anda memilih kategori <strong id="noticeCategory">–</strong>. Hanya stand yang sesuai kategori yang bisa dipilih.</div>
         </div>
 
-        <!-- GRADE -->
         <div class="section-label">Pilih Grade</div>
         <div class="grade-tabs">
           <div class="grade-tab active" onclick="selectGrade('A')" id="gtab-A">
@@ -451,7 +447,6 @@ nav{position:fixed;top:0;left:0;right:0;background:var(--ink);z-index:100;height
           </div>
         </div>
 
-        <!-- DENAH MAP -->
         <div class="section-label">Denah Stand</div>
         <div class="denah-top">▲ PINTU MASUK UTAMA</div>
         <div class="map-container">
@@ -470,7 +465,6 @@ nav{position:fixed;top:0;left:0;right:0;background:var(--ink);z-index:100;height
           <div class="legend-item"><div class="legend-dot" style="background:#E5E0D8;border:1.5px solid #D5CFC7"></div>Terisi</div>
         </div>
 
-        <!-- STAND INFO -->
         <div class="stand-info-box" id="standInfoBox">
           <div class="sib-row"><span>Stand dipilih</span><strong id="sibStand">–</strong></div>
           <div class="sib-row"><span>Tipe</span><strong id="sibType">–</strong></div>
@@ -521,7 +515,7 @@ nav{position:fixed;top:0;left:0;right:0;background:var(--ink);z-index:100;height
         </div>
         <div class="btn-nav">
           <button class="btn-secondary" onclick="goStep(2)">← Kembali</button>
-          <button class="btn-primary" onclick="nextStep3()" id="btnStep3">Lanjut → Upload Dokumen</button>
+          <button class="btn-primary" onclick="nextStep3()">Lanjut → Upload Dokumen</button>
         </div>
       </div>
     </div>
@@ -534,14 +528,14 @@ nav{position:fixed;top:0;left:0;right:0;background:var(--ink);z-index:100;height
 
         <div class="notice warn">
           <span>⚠️</span>
-          <div>Pastikan foto <strong>KTP jelas terbaca</strong> dan bukti transfer menampilkan <strong>nama pengirim, nominal, dan tanggal</strong>. Format JPG/PNG, maks. 32MB. File akan diupload ke <strong>ImgBB</strong> (hosting gambar gratis).</div>
+          <div>Pastikan foto <strong>KTP jelas terbaca</strong> dan bukti transfer menampilkan <strong>nama pengirim, nominal, dan tanggal</strong>. Format JPG/PNG, maks. 32MB. File akan diupload ke <strong>ImgBB</strong>.</div>
         </div>
 
         <div class="section-label">Dokumen Identitas</div>
         <div class="form-grid">
           <div class="field">
             <label>Foto KTP <span style="color:var(--food)">*</span></label>
-            <div class="upload-area" onclick="triggerUpload('ktpFile')">
+            <div class="upload-area">
               <input type="file" id="ktpFile" accept="image/*" onchange="previewUpload('ktpFile','ktpPreview')">
               <div class="up-icon">🪪</div>
               <div class="up-text">Klik atau drag KTP ke sini</div>
@@ -551,7 +545,7 @@ nav{position:fixed;top:0;left:0;right:0;background:var(--ink);z-index:100;height
           </div>
           <div class="field">
             <label>Bukti Transfer Pembayaran <span style="color:var(--food)">*</span></label>
-            <div class="upload-area" onclick="triggerUpload('transferFile')">
+            <div class="upload-area">
               <input type="file" id="transferFile" accept="image/*" onchange="previewUpload('transferFile','transferPreview')">
               <div class="up-icon">🏦</div>
               <div class="up-text">Klik atau drag bukti transfer</div>
@@ -573,7 +567,7 @@ nav{position:fixed;top:0;left:0;right:0;background:var(--ink);z-index:100;height
 
         <div class="btn-nav">
           <button class="btn-secondary" onclick="goStep(3)">← Kembali</button>
-          <button class="btn-primary" onclick="nextStep4()" id="btnStep4">Lanjut → Konfirmasi</button>
+          <button class="btn-primary" onclick="nextStep4()">Lanjut → Konfirmasi</button>
         </div>
       </div>
     </div>
@@ -670,7 +664,6 @@ nav{position:fixed;top:0;left:0;right:0;background:var(--ink);z-index:100;height
         <tr><td>🛍️ Multi Produk</td><td>A1 – C27</td><td>Zona kiri dan tengah, 5 blok kolom kiri</td></tr>
         <tr><td>🍜 Makanan & Minuman</td><td>A5 – C33</td><td>Zona tengah dan kanan, 5 blok kolom kanan</td></tr>
       </table>
-      <div style="margin-top:12px;font-size:.82rem;color:var(--muted)">* Stand A5–A6, B5–B6, C5–C6, A7–A8, B7–B8, C7–C8 merupakan zona overlap (khusus Makanan).</div>
     </div>
 
     <div class="rules-card">
@@ -679,7 +672,7 @@ nav{position:fixed;top:0;left:0;right:0;background:var(--ink);z-index:100;height
         <li>Satu peserta hanya diperbolehkan mendaftar <strong>satu stand</strong>.</li>
         <li>Stand yang telah dibooking tidak dapat dibatalkan setelah admin melakukan approval.</li>
         <li>Peserta wajib hadir minimal <strong>30 menit sebelum</strong> acara dimulai untuk check-in.</li>
-        <li>Ukuran stand adalah <strong>2×2 meter</strong> (sesuai denahnya). Peserta tidak boleh melebihi batas stand.</li>
+        <li>Ukuran stand adalah <strong>2×2 meter</strong>. Peserta tidak boleh melebihi batas stand.</li>
         <li>Panitia berhak membatalkan booking apabila bukti transfer tidak valid atau palsu.</li>
         <li>Stand yang sudah di-approve tidak dapat diganti lokasi kecuali atas kebijakan panitia.</li>
         <li>Peserta bertanggung jawab penuh atas kebersihan dan keamanan barang di stand masing-masing.</li>
@@ -725,8 +718,8 @@ nav{position:fixed;top:0;left:0;right:0;background:var(--ink);z-index:100;height
         <div class="admin-sub">Kelola seluruh pendaftaran stand UMKM 2026</div>
       </div>
       <div style="display:flex;gap:10px;flex-wrap:wrap">
-        <button class="btn-csv" onclick="exportCSV()">📥 Export CSV</button>
-        <button class="btn-csv" onclick="exportCSVFull()">📊 Export Lengkap</button>
+        <button class="btn-csv" onclick="exportCSV()">📥 Export CSV (Approved)</button>
+        <button class="btn-csv" onclick="exportCSVFull()">📊 Export Semua</button>
       </div>
     </div>
 
@@ -758,15 +751,17 @@ nav{position:fixed;top:0;left:0;right:0;background:var(--ink);z-index:100;height
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
 import { getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
-import { getFirestore, collection, addDoc, getDocs, doc, updateDoc, query, where, onSnapshot, serverTimestamp, orderBy } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
-// Firebase Storage tidak digunakan — menggunakan ImgBB API
+import { getFirestore, collection, addDoc, getDocs, doc, updateDoc, query, where, onSnapshot, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
 
+// ── FIREBASE CONFIG (lengkap) ─────────────────────────────
 const firebaseConfig = {
   apiKey: "AIzaSyDRUD_rNBVhADEeLDihluv5UuXkdYoSJlY",
   authDomain: "holistikfestumkm-ccb4b.firebaseapp.com",
   projectId: "holistikfestumkm-ccb4b",
+  storageBucket: "holistikfestumkm-ccb4b.firebasestorage.app",
   messagingSenderId: "539848946942",
-  appId: "1:539848946942:web:6c02c5631321de179da1af"
+  appId: "1:539848946942:web:6c02c5631321de179da1af",
+  measurementId: "G-4J081P8LQN"
 };
 
 const app = initializeApp(firebaseConfig);
@@ -774,9 +769,8 @@ const auth = getAuth(app);
 const db = getFirestore(app);
 const provider = new GoogleAuthProvider();
 
-// ─── IMGBB CONFIG ─────────────────────────────────────────
-// Daftar gratis di https://imgbb.com → My Profile → API → Add API key
-// Ganti string di bawah dengan API key Anda
+// ── IMGBB ─────────────────────────────────────────────────
+// Daftar gratis di https://imgbb.com → My Profile → API
 const IMGBB_API_KEY = 'GANTI_DENGAN_API_KEY_IMGBB_ANDA';
 
 async function uploadToImgBB(file, label) {
@@ -784,325 +778,273 @@ async function uploadToImgBB(file, label) {
   const formData = new FormData();
   formData.append('image', file);
   formData.append('key', IMGBB_API_KEY);
-  const res = await fetch('https://api.imgbb.com/1/upload', {
-    method: 'POST',
-    body: formData
-  });
+  const res = await fetch('https://api.imgbb.com/1/upload', { method:'POST', body:formData });
   const json = await res.json();
-  if (!json.success) throw new Error('Upload ' + label + ' gagal: ' + (json.error?.message || 'Unknown error'));
-  return json.data.url; // URL gambar langsung
+  if (!json.success) throw new Error('Upload ' + label + ' gagal: ' + (json.error?.message || 'Unknown'));
+  return json.data.url;
 }
 
-// ─── ADMIN EMAILS ────────────────────────────────────────
-const ADMIN_EMAILS = ["sobatambyar1990@gmail.com","holistikfestumkm@gmail.com"];
+// ── ADMIN EMAILS ──────────────────────────────────────────
+const ADMIN_EMAILS = ['sobatambyar1990@gmail.com', 'holistikfestumkm@gmail.com'];
 
-// ─── HARGA ───────────────────────────────────────────────
-const PRICES = { A:1250000, B:1100000, C:950000 };
+// ── HARGA ─────────────────────────────────────────────────
+const PRICES = { A:1250000, B:1100000, C:1000000 };
 
-// ─── DEFINISI STAND ──────────────────────────────────────
-// Berdasarkan foto denah: 5 blok kolom
-// Multi Produk: A1-A4, A11-A14, A21-A24, B1-B4, B11-B14, B21-B24, C1-C4, C11-C14, C24-C27
-// Makanan: A5-A10, A15-A20, A25-A30, B5-B10, B15-B20, B25-B30, C5-C10, C13-C16, C20-C23, C28-C33
-// Grade: A = baris A, B = baris B, C = baris C
-
+// ── DEFINISI STAND ────────────────────────────────────────
 function buildStands() {
-  // BLOK 1 (warung/kiri): A1,A2,A11,A12,A21,A22,B1,B2,B11,B12,B21,B22,C1,C2,C11,C12,C24,C25
-  // BLOK 2: A3,A4,A13,A14,A23,A24,B3*=B2,B4,B13,B14,B23,B24,C3,C4,C13,C14,C26,C27
-  // BLOK 3 (tengah diclin): A5,A6,A15,A16,A25,A26,B5,B6,B15,B16,B25,B26,C5,C6,C15,C16,C28,C29
-  // BLOK 4: A7,A8,A17,A18,A27,A28,B7,B8,B17,B18,B27,B28,C7,C8,C20,C21,C30,C31
-  // BLOK 5 (kanan): A9,A10,A19,A20,A29,A30,B9,B10,B19,B20,B29,B30,C9,C10,C22,C23,C32,C33
   const stands = [];
-  // Blok 1 – Multi
-  const blok1Multi = [
-    ['A1','A2'],['A11','A12'],['A21','A22'],
-    ['B1','B2'],['B11','B12'],['B21','B22'],
-    ['C1','C2'],['C11','C12'],['C24','C25']
-  ];
-  blok1Multi.forEach(([l,r])=>{
-    stands.push({id:l,type:'multi',blok:1,grade:l[0]});
-    stands.push({id:r,type:'multi',blok:1,grade:r[0]});
+  const blok1Multi = [['A1','A2'],['A11','A12'],['A21','A22'],['B1','B2'],['B11','B12'],['B21','B22'],['C1','C2'],['C11','C12'],['C24','C25']];
+  const blok2Multi = [['A3','A4'],['A13','A14'],['A23','A24'],['B3','B4'],['B13','B14'],['B23','B24'],['C3','C4'],['C13','C14'],['C26','C27']];
+  const blok3Food  = [['A5','A6'],['A15','A16'],['A25','A26'],['B5','B6'],['B15','B16'],['B25','B26'],['C5','C6'],['C15','C16'],['C28','C29']];
+  const blok4Food  = [['A7','A8'],['A17','A18'],['A27','A28'],['B7','B8'],['B17','B18'],['B27','B28'],['C7','C8'],['C20','C21'],['C30','C31']];
+  const blok5Food  = [['A9','A10'],['A19','A20'],['A29','A30'],['B9','B10'],['B19','B20'],['B29','B30'],['C9','C10'],['C22','C23'],['C32','C33']];
+  const addBlok = (pairs, type, blok) => pairs.forEach(([l,r]) => {
+    stands.push({id:l, type, blok, grade:l[0]});
+    stands.push({id:r, type, blok, grade:r[0]});
   });
-  // Blok 2 – Multi
-  const blok2Multi = [
-    ['A3','A4'],['A13','A14'],['A23','A24'],
-    ['B2','B4'],['B13','B14'],['B23','B24'],
-    ['C3','C4'],['C13','C14'],['C26','C27']
-  ];
-  blok2Multi.forEach(([l,r])=>{
-    stands.push({id:l,type:'multi',blok:2,grade:l[0]});
-    stands.push({id:r,type:'multi',blok:2,grade:r[0]});
-  });
-  // Blok 3 – Food
-  const blok3Food = [
-    ['A5','A6'],['A15','A16'],['A25','A26'],
-    ['B5','B6'],['B15','B16'],['B25','B26'],
-    ['C5','C6'],['C15','C16'],['C28','C29']
-  ];
-  blok3Food.forEach(([l,r])=>{
-    stands.push({id:l,type:'food',blok:3,grade:l[0]});
-    stands.push({id:r,type:'food',blok:3,grade:r[0]});
-  });
-  // Blok 4 – Food
-  const blok4Food = [
-    ['A7','A8'],['A17','A18'],['A27','A28'],
-    ['B7','B8'],['B17','B18'],['B27','B28'],
-    ['C7','C8'],['C20','C21'],['C30','C31']
-  ];
-  blok4Food.forEach(([l,r])=>{
-    stands.push({id:l,type:'food',blok:4,grade:l[0]});
-    stands.push({id:r,type:'food',blok:4,grade:r[0]});
-  });
-  // Blok 5 – Food
-  const blok5Food = [
-    ['A9','A10'],['A19','A20'],['A29','A30'],
-    ['B9','B10'],['B19','B20'],['B29','B30'],
-    ['C9','C10'],['C22','C23'],['C32','C33']
-  ];
-  blok5Food.forEach(([l,r])=>{
-    stands.push({id:l,type:'food',blok:5,grade:l[0]});
-    stands.push({id:r,type:'food',blok:5,grade:r[0]});
-  });
+  addBlok(blok1Multi,'multi',1); addBlok(blok2Multi,'multi',2);
+  addBlok(blok3Food,'food',3);   addBlok(blok4Food,'food',4); addBlok(blok5Food,'food',5);
   return stands;
 }
 const ALL_STANDS = buildStands();
 
-// ─── STATE ────────────────────────────────────────────────
-let currentUser = null;
-let selectedStand = null;
+// ── STATE ─────────────────────────────────────────────────
+let currentUser      = null;
+let selectedStand    = null;
 let selectedCategory = null;
-let selectedGrade = 'A';
-let bookedStands = {};
+let selectedGrade    = 'A';
+let bookedStands     = {};
 let allRegistrations = [];
 let currentRegistrationId = null;
-let adminFilter = 'all';
+let adminFilter      = 'all';
 
-// ─── UTIL ─────────────────────────────────────────────────
-function rupiah(n){ return new Intl.NumberFormat('id-ID',{style:'currency',currency:'IDR',minimumFractionDigits:0}).format(n); }
-function showLoading(t){ document.getElementById('loadingText').textContent=t||'Memproses...'; document.getElementById('loadingOverlay').classList.add('open'); }
-function hideLoading(){ document.getElementById('loadingOverlay').classList.remove('open'); }
+// ── UTIL ──────────────────────────────────────────────────
+const rupiah = n => new Intl.NumberFormat('id-ID',{style:'currency',currency:'IDR',minimumFractionDigits:0}).format(n);
+const showLoading = t => { document.getElementById('loadingText').textContent = t||'Memproses...'; document.getElementById('loadingOverlay').classList.add('open'); };
+const hideLoading = () => document.getElementById('loadingOverlay').classList.remove('open');
 
-// ─── AUTH ─────────────────────────────────────────────────
-window.loginGoogle = async function(){
+// ── AUTH ──────────────────────────────────────────────────
+window.loginGoogle = async function() {
   try {
+    provider.setCustomParameters({ prompt: 'select_account' });
     const r = await signInWithPopup(auth, provider);
     currentUser = r.user;
     renderNav();
-  } catch(e){ alert('Login gagal: '+e.message); }
+  } catch(e) {
+    console.error('Login error:', e);
+    alert('Login gagal: ' + e.message);
+  }
 };
 
-window.logout = async function(){
+window.logout = async function() {
   await signOut(auth);
   location.reload();
 };
 
-function renderNav(){
-  if(!currentUser){ 
-    document.getElementById('navRight').innerHTML='<button class="btn-login" onclick="loginGoogle()">🔐 Login Google</button>';
-    return; 
+function renderNav() {
+  if (!currentUser) {
+    document.getElementById('navRight').innerHTML = '<button class="btn-login" onclick="loginGoogle()">🔐 Login Google</button>';
+    document.getElementById('adminTabBtn').classList.add('hidden');
+    return;
   }
-  const isAdmin = ADMIN_EMAILS.includes(currentUser.email);
-  document.getElementById('navRight').innerHTML=`
+
+  const email = currentUser.email || '';
+  const isAdmin = ADMIN_EMAILS.includes(email);
+
+  // Debug log — bisa dihapus setelah konfirmasi bekerja
+  console.log('[Auth] Email:', email, '| isAdmin:', isAdmin);
+
+  document.getElementById('navRight').innerHTML = `
     <div class="user-chip">
-      <img src="${currentUser.photoURL||''}" onerror="this.style.display='none'">
-      <div class="uname">${currentUser.displayName||currentUser.email}</div>
-      ${isAdmin?'<span style="background:var(--food);color:#fff;font-size:.7rem;padding:3px 8px;border-radius:5px;font-weight:800">ADMIN</span>':''}
+      <img src="${currentUser.photoURL||''}" onerror="this.style.display='none'" alt="">
+      <div class="uname">${currentUser.displayName || email}</div>
+      ${isAdmin ? '<span class="admin-badge">ADMIN</span>' : ''}
       <button class="btn-logout" onclick="logout()">Keluar</button>
     </div>`;
-  if(isAdmin){
-    document.querySelectorAll('.admin-tab-btn').forEach(b=>b.classList.remove('hidden'));
+
+  // FIX: pakai style.display bukan classList (tidak bergantung CSS .hidden)
+  const adminTab = document.getElementById('adminTabBtn');
+  if (isAdmin) {
+    adminTab.style.display = 'block';
     loadAdminRealtime();
+  } else {
+    adminTab.style.display = 'none';
   }
-  document.getElementById('loginNotice').style.display='none';
+
+  document.getElementById('loginNotice').style.display = 'none';
   loadMyTickets();
-  // prefill email
-  if(document.getElementById('emailInput'))
-    document.getElementById('emailInput').value = currentUser.email||'';
+
+  const emailInput = document.getElementById('emailInput');
+  if (emailInput) emailInput.value = email;
 }
 
-onAuthStateChanged(auth, user=>{
+onAuthStateChanged(auth, user => {
   currentUser = user;
   renderNav();
 });
 
-// ─── TABS ─────────────────────────────────────────────────
-window.switchTab = function(tab){
-  document.querySelectorAll('.top-tab').forEach((t,i)=>{
-    const tabs=['daftar','tiket','rules','admin'];
-    t.classList.toggle('active', tabs[i]===tab);
-  });
-  document.querySelectorAll('.tab-content').forEach(tc=>{
-    tc.classList.toggle('active', tc.id==='tab-'+tab);
-  });
+// ── TABS ──────────────────────────────────────────────────
+window.switchTab = function(tab) {
+  const tabs = ['daftar','tiket','rules','admin'];
+  document.querySelectorAll('.top-tab').forEach((t,i) => t.classList.toggle('active', tabs[i]===tab));
+  document.querySelectorAll('.tab-content').forEach(tc => tc.classList.toggle('active', tc.id==='tab-'+tab));
 };
 
-// ─── WIZARD ───────────────────────────────────────────────
-window.goStep = function(n){
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+// ── WIZARD ────────────────────────────────────────────────
+window.goStep = function(n) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.getElementById('step'+n).classList.add('active');
-  document.querySelectorAll('.wz-step').forEach((s,i)=>{
+  document.querySelectorAll('.wz-step').forEach((s,i) => {
     s.classList.remove('active','done');
-    if(i+1===n) s.classList.add('active');
-    if(i+1<n) s.classList.add('done');
+    if (i+1===n) s.classList.add('active');
+    if (i+1<n)  s.classList.add('done');
   });
   window.scrollTo({top:200,behavior:'smooth'});
 };
 
-// ─── STEP 1: CATEGORY ────────────────────────────────────
-window.selectCategory = function(cat){
+// ── STEP 1: CATEGORY ──────────────────────────────────────
+window.selectCategory = function(cat) {
   selectedCategory = cat;
   selectedStand = null;
-  document.getElementById('cat-multi').classList.toggle('selected',cat==='multi');
-  document.getElementById('cat-food').classList.toggle('selected',cat==='food');
+  document.getElementById('cat-multi').classList.toggle('selected', cat==='multi');
+  document.getElementById('cat-food').classList.toggle('selected',  cat==='food');
   document.getElementById('btnStep1').disabled = false;
 };
 
-window.nextStep1 = function(){
-  if(!selectedCategory){ alert('Pilih kategori terlebih dahulu.'); return; }
-  document.getElementById('noticeCategory').textContent = selectedCategory==='multi'?'Multi Produk':'Makanan & Minuman';
+window.nextStep1 = function() {
+  if (!selectedCategory) { alert('Pilih kategori terlebih dahulu.'); return; }
+  document.getElementById('noticeCategory').textContent = selectedCategory==='multi' ? 'Multi Produk' : 'Makanan & Minuman';
   buildDenahMap();
   goStep(2);
 };
 
-// ─── STEP 2: STAND & GRADE ───────────────────────────────
-window.selectGrade = function(g){
+// ── STEP 2: STAND & GRADE ─────────────────────────────────
+window.selectGrade = function(g) {
   selectedGrade = g;
-  document.querySelectorAll('.grade-tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.grade-tab').forEach(t => t.classList.remove('active'));
   document.getElementById('gtab-'+g).classList.add('active');
   buildDenahMap();
-  if(selectedStand){
-    // re-highlight
-    const el = document.querySelector(`.stand-cell[data-id="${selectedStand}"]`);
-    if(el) el.classList.add('selected-stand');
-  }
 };
 
-function buildDenahMap(){
+function buildDenahMap() {
   const map = document.getElementById('denahMap');
-  map.innerHTML='';
+  map.innerHTML = '';
   const BLOK_NAMES = ['Blok I','Blok II','Blok III','Blok IV','Blok V'];
-  for(let b=1;b<=5;b++){
-    const blokStands = ALL_STANDS.filter(s=>s.blok===b);
+  for (let b=1; b<=5; b++) {
+    const blokStands = ALL_STANDS.filter(s => s.blok===b);
+    const isFood = b >= 3;
     const div = document.createElement('div');
-    div.className='blok';
-    const isFood3to5 = b>=3;
-    div.innerHTML=`<div class="blok-header">${BLOK_NAMES[b-1]}</div>
-    <div class="${isFood3to5?'zone-header food-zone':'zone-header multi-zone'}">${isFood3to5?'MAKANAN':'MULTI PRODUK'}</div>
-    <div class="blok-inner" id="blok-inner-${b}"></div>`;
+    div.className = 'blok';
+    div.innerHTML = `
+      <div class="blok-header">${BLOK_NAMES[b-1]}</div>
+      <div class="${isFood ? 'zone-header food-zone' : 'zone-header multi-zone'}">${isFood ? 'MAKANAN' : 'MULTI PRODUK'}</div>
+      <div class="blok-inner" id="blok-inner-${b}"></div>`;
     map.appendChild(div);
     const inner = div.querySelector('.blok-inner');
-    // group by rows of 2
-    const rows = [];
-    for(let i=0;i<blokStands.length;i+=2){
-      rows.push([blokStands[i],blokStands[i+1]]);
-    }
-    rows.forEach(row=>{
+    for (let i=0; i<blokStands.length; i+=2) {
       const rowDiv = document.createElement('div');
-      rowDiv.className='stand-row';
-      row.forEach(s=>{
-        if(!s){ const ph=document.createElement('div'); ph.className='stand-cell hidden-stand'; rowDiv.appendChild(ph); return; }
+      rowDiv.className = 'stand-row';
+      [blokStands[i], blokStands[i+1]].forEach(s => {
+        if (!s) { const ph=document.createElement('div'); ph.className='stand-cell hidden-stand'; rowDiv.appendChild(ph); return; }
         const cell = document.createElement('div');
-        const isBooked = bookedStands[s.id];
+        const isBooked   = bookedStands[s.id];
         const isFiltered = selectedCategory && s.type !== selectedCategory;
-        cell.className=`stand-cell type-${s.type} grade-${s.grade}`;
-        cell.dataset.id=s.id;
-        cell.textContent=s.id;
-        if(isBooked){
+        cell.className = `stand-cell type-${s.type}`;
+        cell.dataset.id = s.id;
+        cell.textContent = s.id;
+        if (isBooked) {
           cell.classList.add('booked-stand');
-          cell.title='Stand sudah terisi';
-        } else if(isFiltered){
-          cell.style.opacity='.25';
-          cell.style.cursor='not-allowed';
-          cell.title='Tidak sesuai kategori Anda';
+          cell.title = 'Stand sudah terisi';
+        } else if (isFiltered) {
+          cell.style.opacity = '.25';
+          cell.style.cursor  = 'not-allowed';
+          cell.title = 'Tidak sesuai kategori Anda';
         } else {
           cell.classList.add('available');
-          cell.onclick=()=>handleSelectStand(s,cell);
+          cell.onclick = () => handleSelectStand(s, cell);
         }
-        if(s.id===selectedStand && !isBooked && !isFiltered){
-          cell.classList.add('selected-stand');
-        }
+        if (s.id === selectedStand && !isBooked && !isFiltered) cell.classList.add('selected-stand');
         rowDiv.appendChild(cell);
       });
       inner.appendChild(rowDiv);
-    });
+    }
   }
   document.getElementById('transferAmount').textContent = rupiah(PRICES[selectedGrade]);
 }
 
-function handleSelectStand(s, el){
-  if(bookedStands[s.id]) return;
-  if(selectedCategory && s.type!==selectedCategory){ 
-    alert(`Stand ${s.id} adalah zona ${s.type==='food'?'Makanan':'Multi Produk'}, tidak sesuai kategori Anda.`); 
-    return; 
+function handleSelectStand(s, el) {
+  if (bookedStands[s.id]) return;
+  if (selectedCategory && s.type !== selectedCategory) {
+    alert(`Stand ${s.id} adalah zona ${s.type==='food'?'Makanan':'Multi Produk'}, tidak sesuai kategori Anda.`);
+    return;
   }
   selectedStand = s.id;
-  document.querySelectorAll('.stand-cell').forEach(c=>c.classList.remove('selected-stand'));
+  document.querySelectorAll('.stand-cell').forEach(c => c.classList.remove('selected-stand'));
   el.classList.add('selected-stand');
-  // info box
   const box = document.getElementById('standInfoBox');
   box.classList.add('show');
-  document.getElementById('sibStand').textContent=s.id;
-  document.getElementById('sibType').textContent=s.type==='food'?'Makanan':'Multi Produk';
-  document.getElementById('sibGrade').textContent='Grade '+selectedGrade+' ('+s.grade+' row)';
-  document.getElementById('sibPrice').textContent=rupiah(PRICES[selectedGrade]);
-  document.getElementById('btnStep2').disabled=false;
+  document.getElementById('sibStand').textContent = s.id;
+  document.getElementById('sibType').textContent  = s.type==='food' ? 'Makanan' : 'Multi Produk';
+  document.getElementById('sibGrade').textContent = 'Grade ' + selectedGrade;
+  document.getElementById('sibPrice').textContent = rupiah(PRICES[selectedGrade]);
+  document.getElementById('btnStep2').disabled = false;
 }
 
-window.nextStep2 = function(){
-  if(!selectedStand){ alert('Pilih stand terlebih dahulu.'); return; }
+window.nextStep2 = function() {
+  if (!selectedStand) { alert('Pilih stand terlebih dahulu.'); return; }
   goStep(3);
 };
 
-// ─── STEP 3: DATA ─────────────────────────────────────────
-window.nextStep3 = function(){
-  const sn=document.getElementById('standName').value.trim();
-  const on=document.getElementById('ownerName').value.trim();
-  const ph=document.getElementById('phone').value.trim();
-  const em=document.getElementById('emailInput').value.trim();
-  const pt=document.getElementById('productType').value.trim();
-  if(!sn||!on||!ph||!em||!pt){ alert('Lengkapi semua field yang wajib (*).'); return; }
-  if(!/^08[0-9]{8,11}$/.test(ph.replace(/[-\s]/g,''))){ alert('Format nomor WhatsApp tidak valid (contoh: 081234567890)'); return; }
+// ── STEP 3: DATA ──────────────────────────────────────────
+window.nextStep3 = function() {
+  const sn = document.getElementById('standName').value.trim();
+  const on = document.getElementById('ownerName').value.trim();
+  const ph = document.getElementById('phone').value.trim();
+  const em = document.getElementById('emailInput').value.trim();
+  const pt = document.getElementById('productType').value.trim();
+  if (!sn||!on||!ph||!em||!pt) { alert('Lengkapi semua field yang wajib (*).'); return; }
+  if (!/^08[0-9]{8,11}$/.test(ph.replace(/[-\s]/g,''))) { alert('Format nomor WhatsApp tidak valid (contoh: 081234567890)'); return; }
   goStep(4);
 };
 
-// ─── STEP 4: DOKUMEN ─────────────────────────────────────
-window.triggerUpload = function(id){ /* handled by input click */ };
-window.previewUpload = function(inputId, previewId){
+// ── STEP 4: DOKUMEN ───────────────────────────────────────
+window.previewUpload = function(inputId, previewId) {
   const f = document.getElementById(inputId).files[0];
   const prev = document.getElementById(previewId);
-  if(!f){ prev.classList.remove('show'); prev.innerHTML=''; return; }
+  if (!f) { prev.classList.remove('show'); prev.innerHTML=''; return; }
   prev.classList.add('show');
-  if(f.type.startsWith('image/')){
+  if (f.type.startsWith('image/')) {
     const url = URL.createObjectURL(f);
-    prev.innerHTML=`<img src="${url}" style="max-height:80px;border-radius:6px;border:1px solid var(--border)"><span>✅ ${f.name}</span>`;
+    prev.innerHTML = `<img src="${url}" style="max-height:80px;border-radius:6px;border:1px solid var(--border)"><span>✅ ${f.name}</span>`;
   } else {
-    prev.innerHTML=`<span>📄 ${f.name}</span>`;
+    prev.innerHTML = `<span>📄 ${f.name}</span>`;
   }
 };
 
-window.nextStep4 = function(){
+window.nextStep4 = function() {
   const ktp = document.getElementById('ktpFile').files[0];
-  const tr = document.getElementById('transferFile').files[0];
-  if(!ktp||!tr){ alert('Upload KTP dan bukti transfer terlebih dahulu.'); return; }
-  if(ktp.size>32*1024*1024||tr.size>32*1024*1024){ alert('Ukuran file maksimal 32MB.'); return; }
-  if(!ktp.type.startsWith('image/')||!tr.type.startsWith('image/')){ alert('File harus berupa gambar (JPG, PNG, dll).'); return; }
+  const tr  = document.getElementById('transferFile').files[0];
+  if (!ktp||!tr) { alert('Upload KTP dan bukti transfer terlebih dahulu.'); return; }
+  if (ktp.size>32*1024*1024 || tr.size>32*1024*1024) { alert('Ukuran file maksimal 32MB.'); return; }
+  if (!ktp.type.startsWith('image/') || !tr.type.startsWith('image/')) { alert('File harus berupa gambar (JPG, PNG).'); return; }
   buildSummary();
   goStep(5);
 };
 
-// ─── STEP 5: SUMMARY ─────────────────────────────────────
-function buildSummary(){
-  const sn=document.getElementById('standName').value;
-  const on=document.getElementById('ownerName').value;
-  const ph=document.getElementById('phone').value;
-  const em=document.getElementById('emailInput').value;
-  const pt=document.getElementById('productType').value;
-  const ad=document.getElementById('address').value;
-  document.getElementById('sumStand').textContent=selectedStand;
-  document.getElementById('sumCategory').textContent=selectedCategory==='food'?'Makanan & Minuman':'Multi Produk';
-  document.getElementById('sumGrade').textContent='Grade '+selectedGrade+' — '+rupiah(PRICES[selectedGrade]);
-  document.getElementById('sumPrice').textContent=rupiah(PRICES[selectedGrade]);
-  document.getElementById('summaryContent').innerHTML=`
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px 24px;font-size:.87rem;margin-bottom:0">
+// ── STEP 5: SUMMARY ───────────────────────────────────────
+function buildSummary() {
+  const sn = document.getElementById('standName').value;
+  const on = document.getElementById('ownerName').value;
+  const ph = document.getElementById('phone').value;
+  const em = document.getElementById('emailInput').value;
+  const pt = document.getElementById('productType').value;
+  const ad = document.getElementById('address').value;
+  document.getElementById('sumStand').textContent    = selectedStand;
+  document.getElementById('sumCategory').textContent = selectedCategory==='food' ? 'Makanan & Minuman' : 'Multi Produk';
+  document.getElementById('sumGrade').textContent    = 'Grade ' + selectedGrade + ' — ' + rupiah(PRICES[selectedGrade]);
+  document.getElementById('sumPrice').textContent    = rupiah(PRICES[selectedGrade]);
+  document.getElementById('summaryContent').innerHTML = `
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px 24px;font-size:.87rem">
       ${[['Nama UMKM',sn],['Nama Pemilik',on],['WhatsApp',ph],['Email',em],['Jenis Produk',pt],['Alamat',ad||'–']].map(([l,v])=>`
       <div style="padding:8px 0;border-bottom:1px solid var(--border)">
         <div style="color:var(--muted);font-size:.78rem;margin-bottom:3px">${l}</div>
@@ -1111,129 +1053,112 @@ function buildSummary(){
     </div>`;
 }
 
-// ─── SUBMIT ───────────────────────────────────────────────
-window.submitRegistration = async function(){
-  if(!document.getElementById('agreeCheck').checked){ alert('Centang persetujuan ketentuan terlebih dahulu.'); return; }
-  if(!currentUser){ alert('Silakan login Google terlebih dahulu.'); return; }
-  
+// ── SUBMIT ────────────────────────────────────────────────
+window.submitRegistration = async function() {
+  if (!document.getElementById('agreeCheck').checked) { alert('Centang persetujuan ketentuan terlebih dahulu.'); return; }
+  if (!currentUser) { alert('Silakan login Google terlebih dahulu.'); return; }
   try {
-    if(IMGBB_API_KEY === 'GANTI_DENGAN_API_KEY_IMGBB_ANDA'){
-      hideLoading();
-      alert('⚠️ ImgBB API Key belum diisi!\n\nBuka index.html → cari IMGBB_API_KEY → isi dengan API key dari imgbb.com');
+    if (IMGBB_API_KEY === 'GANTI_DENGAN_API_KEY_IMGBB_ANDA') {
+      alert('⚠️ ImgBB API Key belum diisi!\nBuka file HTML → cari IMGBB_API_KEY → isi dengan key dari imgbb.com');
       return;
     }
     const ktp = document.getElementById('ktpFile').files[0];
-    const tr = document.getElementById('transferFile').files[0];
-
+    const tr  = document.getElementById('transferFile').files[0];
     const ktpUrl = await uploadToImgBB(ktp, 'KTP');
-    const trUrl = await uploadToImgBB(tr, 'Bukti Transfer');
-    
+    const trUrl  = await uploadToImgBB(tr,  'Bukti Transfer');
     showLoading('Menyimpan pendaftaran...');
     const data = {
-      uid: currentUser.uid,
-      email: currentUser.email,
-      standName: document.getElementById('standName').value,
-      ownerName: document.getElementById('ownerName').value,
-      phone: document.getElementById('phone').value,
-      emailPeserta: document.getElementById('emailInput').value,
+      uid:         currentUser.uid,
+      email:       currentUser.email,
+      standName:   document.getElementById('standName').value,
+      ownerName:   document.getElementById('ownerName').value,
+      phone:       document.getElementById('phone').value,
+      emailPeserta:document.getElementById('emailInput').value,
       productType: document.getElementById('productType').value,
-      address: document.getElementById('address').value,
-      category: selectedCategory==='food'?'Makanan':'Multi Produk',
-      grade: selectedGrade,
+      address:     document.getElementById('address').value,
+      category:    selectedCategory==='food' ? 'Makanan' : 'Multi Produk',
+      grade:       selectedGrade,
       boothNumber: selectedStand,
-      price: PRICES[selectedGrade],
-      paymentStatus: 'pending',
-      ktpUrl, transferUrl: trUrl,
-      createdAt: serverTimestamp()
+      price:       PRICES[selectedGrade],
+      paymentStatus:'pending',
+      ktpUrl,
+      transferUrl: trUrl,
+      createdAt:   serverTimestamp()
     };
-    const docRef = await addDoc(collection(db,'registrations'),data);
+    const docRef = await addDoc(collection(db,'registrations'), data);
     currentRegistrationId = docRef.id;
-    
-    // Mark as booked
     bookedStands[selectedStand] = true;
-    
     hideLoading();
     showSuccessStep(data, docRef.id);
     loadMyTickets();
-  } catch(e){
+  } catch(e) {
     hideLoading();
-    alert('Terjadi kesalahan: '+e.message);
+    console.error(e);
+    alert('Terjadi kesalahan: ' + e.message);
   }
 };
 
-function showSuccessStep(d, id){
-  document.getElementById('tcStand').textContent = d.boothNumber;
-  document.getElementById('tcName').textContent = d.standName;
+function showSuccessStep(d, id) {
+  document.getElementById('tcStand').textContent    = d.boothNumber;
+  document.getElementById('tcName').textContent     = d.standName;
   document.getElementById('tcCategory').textContent = d.category;
-  document.getElementById('tcPrice').textContent = rupiah(d.price);
+  document.getElementById('tcPrice').textContent    = rupiah(d.price);
   const qrDiv = document.getElementById('qr-display');
-  qrDiv.innerHTML='';
-  new QRCode(qrDiv,{text:id,width:100,height:100});
+  qrDiv.innerHTML = '';
+  new QRCode(qrDiv, {text:id, width:100, height:100});
   goStep(6);
 }
 
-// ─── DOWNLOAD PDF ─────────────────────────────────────────
-window.downloadPDF = function(id){
+// ── PDF ───────────────────────────────────────────────────
+window.downloadPDF = function(id) {
   const {jsPDF} = window.jspdf;
   const pdf = new jsPDF({orientation:'portrait',unit:'mm',format:'a5'});
-  const rid = id||currentRegistrationId||'—';
-  // Header
-  pdf.setFillColor(26,23,20);
-  pdf.rect(0,0,148,28,'F');
-  pdf.setTextColor(255,255,255);
-  pdf.setFontSize(14);
-  pdf.setFont('helvetica','bold');
+  const rid = id || currentRegistrationId || '—';
+  pdf.setFillColor(26,23,20); pdf.rect(0,0,148,28,'F');
+  pdf.setTextColor(255,255,255); pdf.setFontSize(14); pdf.setFont('helvetica','bold');
   pdf.text('HOLISTIK FEST UMKM 2026',10,12);
-  pdf.setFontSize(9);
-  pdf.setFont('helvetica','normal');
+  pdf.setFontSize(9); pdf.setFont('helvetica','normal');
   pdf.text('KWITANSI PENDAFTARAN STAND',10,20);
-  // Body
-  pdf.setTextColor(26,23,20);
-  pdf.setFontSize(10);
+  pdf.setTextColor(26,23,20); pdf.setFontSize(10);
   const info = [
     ['ID Registrasi',rid],
-    ['Stand',document.getElementById('tcStand')?.textContent||'–'],
+    ['Stand',   document.getElementById('tcStand')?.textContent||'–'],
     ['Nama UMKM',document.getElementById('tcName')?.textContent||'–'],
-    ['Kategori',document.getElementById('tcCategory')?.textContent||'–'],
-    ['Total',document.getElementById('tcPrice')?.textContent||'–'],
-    ['Status','Menunggu Verifikasi'],
-    ['Tanggal',new Date().toLocaleDateString('id-ID',{day:'numeric',month:'long',year:'numeric'})],
+    ['Kategori', document.getElementById('tcCategory')?.textContent||'–'],
+    ['Total',    document.getElementById('tcPrice')?.textContent||'–'],
+    ['Status',   'Menunggu Verifikasi'],
+    ['Tanggal',  new Date().toLocaleDateString('id-ID',{day:'numeric',month:'long',year:'numeric'})],
   ];
-  let y = 38;
+  let y=38;
   info.forEach(([l,v])=>{
-    pdf.setFont('helvetica','normal'); pdf.setTextColor(100,90,80);
-    pdf.text(l, 10, y);
-    pdf.setFont('helvetica','bold'); pdf.setTextColor(26,23,20);
-    pdf.text(v, 70, y);
-    y += 10;
+    pdf.setFont('helvetica','normal'); pdf.setTextColor(100,90,80); pdf.text(l,10,y);
+    pdf.setFont('helvetica','bold');   pdf.setTextColor(26,23,20);  pdf.text(v,70,y);
+    y+=10;
   });
-  // Footer
-  pdf.setFillColor(212,98,26);
-  pdf.rect(0,185,148,15,'F');
-  pdf.setTextColor(255,255,255);
-  pdf.setFontSize(8);
+  pdf.setFillColor(212,98,26); pdf.rect(0,185,148,15,'F');
+  pdf.setTextColor(255,255,255); pdf.setFontSize(8);
   pdf.text('Simpan kwitansi ini sebagai bukti pendaftaran stand Anda.',10,193);
   pdf.save(`kwitansi-${rid}.pdf`);
 };
 
-// ─── MY TICKETS ───────────────────────────────────────────
-async function loadMyTickets(){
-  if(!currentUser) return;
-  const q = query(collection(db,'registrations'),where('uid','==',currentUser.uid));
+// ── MY TICKETS ────────────────────────────────────────────
+async function loadMyTickets() {
+  if (!currentUser) return;
+  const q    = query(collection(db,'registrations'), where('uid','==',currentUser.uid));
   const snap = await getDocs(q);
   const grid = document.getElementById('ticketsGrid');
-  grid.innerHTML='';
-  if(snap.empty){ grid.innerHTML='<div style="color:var(--muted);font-size:.9rem">Belum ada pendaftaran.</div>'; return; }
-  snap.forEach(docu=>{
+  grid.innerHTML = '';
+  if (snap.empty) { grid.innerHTML='<div style="color:var(--muted);font-size:.9rem">Belum ada pendaftaran.</div>'; return; }
+  snap.forEach(docu => {
     const d = docu.data();
-    const statusBadge = d.paymentStatus==='approved'?'approved':d.paymentStatus==='rejected'?'rejected':'pending';
+    const statusClass = d.paymentStatus==='approved'?'approved':d.paymentStatus==='rejected'?'rejected':'pending';
     const statusLabel = d.paymentStatus==='approved'?'✅ Disetujui':d.paymentStatus==='rejected'?'❌ Ditolak':'⏳ Menunggu';
     const tkt = document.createElement('div');
-    tkt.className='tkt';
-    tkt.innerHTML=`
+    tkt.className = 'tkt';
+    tkt.innerHTML = `
       <div class="tkt-top">
         <div class="tkt-stand">${d.boothNumber||'–'}</div>
-        <div class="tkt-badge ${statusBadge}">${statusLabel}</div>
+        <div class="tkt-badge ${statusClass}">${statusLabel}</div>
       </div>
       <div class="tkt-rows">
         <div><span>Nama UMKM</span><span>${d.standName}</span></div>
@@ -1250,9 +1175,9 @@ async function loadMyTickets(){
   });
 }
 
-window.downloadPDFFromData = async function(id){
-  const snap = await getDocs(query(collection(db,'registrations'),where('__name__','==',id)));
-  if(snap.empty) return;
+window.downloadPDFFromData = async function(id) {
+  const snap = await getDocs(query(collection(db,'registrations'), where('__name__','==',id)));
+  if (snap.empty) return;
   const d = snap.docs[0].data();
   const {jsPDF} = window.jspdf;
   const pdf = new jsPDF({orientation:'portrait',unit:'mm',format:'a5'});
@@ -1262,16 +1187,17 @@ window.downloadPDFFromData = async function(id){
   pdf.setFontSize(9); pdf.setFont('helvetica','normal');
   pdf.text('KWITANSI PENDAFTARAN STAND',10,20);
   pdf.setTextColor(26,23,20); pdf.setFontSize(10);
-  const info=[
+  const info = [
     ['ID Registrasi',id],['Stand',d.boothNumber],['Nama UMKM',d.standName],
     ['Nama Pemilik',d.ownerName],['Kategori',d.category],['Grade',d.grade||'–'],
-    ['Total',rupiah(d.price)],['Status',d.paymentStatus==='approved'?'✅ Disetujui':'⏳ Menunggu'],
+    ['Total',rupiah(d.price)],
+    ['Status',d.paymentStatus==='approved'?'Disetujui':'Menunggu Verifikasi'],
     ['Tanggal',d.createdAt?new Date(d.createdAt.seconds*1000).toLocaleDateString('id-ID'):'–']
   ];
   let y=38;
   info.forEach(([l,v])=>{
     pdf.setFont('helvetica','normal'); pdf.setTextColor(100,90,80); pdf.text(l,10,y);
-    pdf.setFont('helvetica','bold'); pdf.setTextColor(26,23,20); pdf.text(String(v),70,y);
+    pdf.setFont('helvetica','bold');   pdf.setTextColor(26,23,20);  pdf.text(String(v),70,y);
     y+=10;
   });
   pdf.setFillColor(212,98,26); pdf.rect(0,185,148,15,'F');
@@ -1280,76 +1206,77 @@ window.downloadPDFFromData = async function(id){
   pdf.save(`kwitansi-${id}.pdf`);
 };
 
-window.showQR = function(id){
-  document.getElementById('modalBody').innerHTML=`
+window.showQR = function(id) {
+  document.getElementById('modalBody').innerHTML = `
     <div style="text-align:center;padding:20px">
       <div id="qrModal${id}" style="display:inline-block;padding:16px;background:#fff;border-radius:10px;border:1px solid var(--border)"></div>
       <div style="margin-top:16px;font-size:.85rem;color:var(--muted)">Tunjukkan QR ini saat check-in</div>
       <div style="font-weight:700;margin-top:6px">ID: ${id}</div>
     </div>`;
   document.getElementById('modalOverlay').classList.add('open');
-  setTimeout(()=>{ new QRCode(document.getElementById('qrModal'+id),{text:id,width:150,height:150}); },100);
+  setTimeout(() => new QRCode(document.getElementById('qrModal'+id),{text:id,width:150,height:150}), 100);
 };
 
-// ─── ADMIN ────────────────────────────────────────────────
-function loadAdminRealtime(){
-  onSnapshot(collection(db,'registrations'),snap=>{
-    allRegistrations=[];
-    snap.forEach(d=>allRegistrations.push({id:d.id,...d.data()}));
-    allRegistrations.sort((a,b)=>(b.createdAt?.seconds||0)-(a.createdAt?.seconds||0));
+// ── ADMIN ─────────────────────────────────────────────────
+function loadAdminRealtime() {
+  onSnapshot(collection(db,'registrations'), snap => {
+    allRegistrations = [];
+    snap.forEach(d => allRegistrations.push({id:d.id,...d.data()}));
+    allRegistrations.sort((a,b) => (b.createdAt?.seconds||0)-(a.createdAt?.seconds||0));
     renderAdmin();
     updateStats();
-    // update booked stands
-    bookedStands={};
-    allRegistrations.forEach(r=>{ if(r.boothNumber) bookedStands[r.boothNumber]=r.paymentStatus; });
-    if(document.getElementById('step2').classList.contains('active')) buildDenahMap();
+    bookedStands = {};
+    allRegistrations.forEach(r => { if(r.boothNumber) bookedStands[r.boothNumber] = r.paymentStatus; });
+    if (document.getElementById('step2').classList.contains('active')) buildDenahMap();
   });
 }
 
-function updateStats(){
-  const total=allRegistrations.length;
-  const approved=allRegistrations.filter(r=>r.paymentStatus==='approved').length;
-  const pending=allRegistrations.filter(r=>r.paymentStatus==='pending').length;
-  const rejected=allRegistrations.filter(r=>r.paymentStatus==='rejected').length;
-  const multi=allRegistrations.filter(r=>r.category==='Multi Produk').length;
-  const food=allRegistrations.filter(r=>r.category==='Makanan').length;
-  const revenue=allRegistrations.filter(r=>r.paymentStatus==='approved').reduce((s,r)=>s+(r.price||0),0);
-  document.getElementById('statTotal').textContent=total;
-  document.getElementById('statApproved').textContent=approved;
-  document.getElementById('statPending').textContent=pending;
-  document.getElementById('statRejected').textContent=rejected;
-  document.getElementById('statMulti').textContent=multi;
-  document.getElementById('statFood').textContent=food;
-  document.getElementById('statRevenue').textContent=rupiah(revenue);
+function updateStats() {
+  const total    = allRegistrations.length;
+  const approved = allRegistrations.filter(r=>r.paymentStatus==='approved').length;
+  const pending  = allRegistrations.filter(r=>r.paymentStatus==='pending').length;
+  const rejected = allRegistrations.filter(r=>r.paymentStatus==='rejected').length;
+  const multi    = allRegistrations.filter(r=>r.category==='Multi Produk').length;
+  const food     = allRegistrations.filter(r=>r.category==='Makanan').length;
+  const revenue  = allRegistrations.filter(r=>r.paymentStatus==='approved').reduce((s,r)=>s+(r.price||0),0);
+  document.getElementById('statTotal').textContent    = total;
+  document.getElementById('statApproved').textContent = approved;
+  document.getElementById('statPending').textContent  = pending;
+  document.getElementById('statRejected').textContent = rejected;
+  document.getElementById('statMulti').textContent    = multi;
+  document.getElementById('statFood').textContent     = food;
+  document.getElementById('statRevenue').textContent  = rupiah(revenue);
 }
 
-window.filterAdmin = function(f,el){
-  adminFilter=f;
-  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+window.filterAdmin = function(f, el) {
+  adminFilter = f;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
   el.classList.add('active');
   renderAdmin();
 };
 
-window.renderAdmin = function(){
-  const search=(document.getElementById('adminSearch')?.value||'').toLowerCase();
-  let list=[...allRegistrations];
-  if(adminFilter!=='all') list=list.filter(r=>r.paymentStatus===adminFilter);
-  if(search) list=list.filter(r=>
-    (r.standName||'').toLowerCase().includes(search)||
-    (r.ownerName||'').toLowerCase().includes(search)||
-    (r.boothNumber||'').toLowerCase().includes(search)||
+window.renderAdmin = function() {
+  const search = (document.getElementById('adminSearch')?.value||'').toLowerCase();
+  let list = [...allRegistrations];
+  if (adminFilter !== 'all') list = list.filter(r => r.paymentStatus===adminFilter);
+  if (search) list = list.filter(r =>
+    (r.standName||'').toLowerCase().includes(search) ||
+    (r.ownerName||'').toLowerCase().includes(search) ||
+    (r.boothNumber||'').toLowerCase().includes(search) ||
     (r.phone||'').includes(search)
   );
-  const container=document.getElementById('adminList');
-  container.innerHTML='';
-  if(!list.length){ container.innerHTML='<div style="color:var(--muted);padding:20px;font-size:.9rem">Tidak ada data.</div>'; return; }
-  list.forEach(r=>{
-    const statusBadge=r.paymentStatus==='approved'?'<span style="background:#D1FAE5;color:#065F46;padding:3px 10px;border-radius:5px;font-size:.75rem;font-weight:700">✅ Approved</span>':
-      r.paymentStatus==='rejected'?'<span style="background:#FEE2E2;color:#991B1B;padding:3px 10px;border-radius:5px;font-size:.75rem;font-weight:700">❌ Ditolak</span>':
-      '<span style="background:#FEF3C7;color:#92400E;padding:3px 10px;border-radius:5px;font-size:.75rem;font-weight:700">⏳ Pending</span>';
-    const div=document.createElement('div');
-    div.className='reg-card';
-    div.innerHTML=`
+  const container = document.getElementById('adminList');
+  container.innerHTML = '';
+  if (!list.length) { container.innerHTML='<div style="color:var(--muted);padding:20px;font-size:.9rem">Tidak ada data.</div>'; return; }
+  list.forEach(r => {
+    const statusBadge = r.paymentStatus==='approved'
+      ? '<span style="background:#D1FAE5;color:#065F46;padding:3px 10px;border-radius:5px;font-size:.75rem;font-weight:700">✅ Approved</span>'
+      : r.paymentStatus==='rejected'
+      ? '<span style="background:#FEE2E2;color:#991B1B;padding:3px 10px;border-radius:5px;font-size:.75rem;font-weight:700">❌ Ditolak</span>'
+      : '<span style="background:#FEF3C7;color:#92400E;padding:3px 10px;border-radius:5px;font-size:.75rem;font-weight:700">⏳ Pending</span>';
+    const div = document.createElement('div');
+    div.className = 'reg-card';
+    div.innerHTML = `
       <div class="reg-main">
         <div class="reg-stand">${r.boothNumber||'–'}</div>
         <div class="reg-info">
@@ -1364,18 +1291,18 @@ window.renderAdmin = function(){
         </div>
       </div>
       <div class="reg-actions">
-        <button class="btn-view" onclick="openDetail('${r.id}')">🔍 Detail</button>
-        ${r.paymentStatus!=='approved'?`<button class="btn-approve" onclick="approveReg('${r.id}')">✅ Approve</button>`:''}
-        ${r.paymentStatus!=='rejected'?`<button class="btn-reject" onclick="rejectReg('${r.id}')">❌ Tolak</button>`:''}
+        <button class="btn-view"    onclick="openDetail('${r.id}')">🔍 Detail</button>
+        ${r.paymentStatus!=='approved' ? `<button class="btn-approve" onclick="approveReg('${r.id}')">✅ Approve</button>`:''}
+        ${r.paymentStatus!=='rejected' ? `<button class="btn-reject"  onclick="rejectReg('${r.id}')">❌ Tolak</button>`:''}
       </div>`;
     container.appendChild(div);
   });
 };
 
-window.openDetail = function(id){
-  const r=allRegistrations.find(x=>x.id===id);
-  if(!r) return;
-  const fields=[
+window.openDetail = function(id) {
+  const r = allRegistrations.find(x => x.id===id);
+  if (!r) return;
+  const fields = [
     ['ID Registrasi',id],['Stand',r.boothNumber],['Nama UMKM',r.standName],
     ['Nama Pemilik',r.ownerName],['WhatsApp',r.phone],['Email',r.emailPeserta||r.email],
     ['Kategori',r.category],['Grade','Grade '+(r.grade||'–')],['Total',rupiah(r.price||0)],
@@ -1383,67 +1310,71 @@ window.openDetail = function(id){
     ['Tanggal Daftar',r.createdAt?new Date(r.createdAt.seconds*1000).toLocaleString('id-ID'):'–'],
     ['Status',r.paymentStatus]
   ];
-  document.getElementById('modalBody').innerHTML=`
-    ${r.ktpUrl?`<div style="margin-bottom:12px"><div style="font-size:.78rem;font-weight:700;color:var(--muted);margin-bottom:6px">FOTO KTP</div><img class="modal-img" src="${r.ktpUrl}" alt="KTP"></div>`:''}
-    ${r.transferUrl?`<div style="margin-bottom:16px"><div style="font-size:.78rem;font-weight:700;color:var(--muted);margin-bottom:6px">BUKTI TRANSFER</div><img class="modal-img" src="${r.transferUrl}" alt="Transfer"></div>`:''}
+  document.getElementById('modalBody').innerHTML = `
+    ${r.ktpUrl    ? `<div style="margin-bottom:12px"><div style="font-size:.78rem;font-weight:700;color:var(--muted);margin-bottom:6px">FOTO KTP</div><img class="modal-img" src="${r.ktpUrl}" alt="KTP"></div>`:'' }
+    ${r.transferUrl ? `<div style="margin-bottom:16px"><div style="font-size:.78rem;font-weight:700;color:var(--muted);margin-bottom:6px">BUKTI TRANSFER</div><img class="modal-img" src="${r.transferUrl}" alt="Transfer"></div>`:'' }
     <div class="modal-rows">${fields.map(([l,v])=>`<div><span>${l}</span><span>${v||'–'}</span></div>`).join('')}</div>
     <div class="modal-actions">
       ${r.paymentStatus!=='approved'?`<button class="btn-approve" onclick="approveReg('${id}');closeModalDirect()">✅ Approve</button>`:''}
-      ${r.paymentStatus!=='rejected'?`<button class="btn-reject" onclick="rejectReg('${id}');closeModalDirect()">❌ Tolak</button>`:''}
+      ${r.paymentStatus!=='rejected'?`<button class="btn-reject"  onclick="rejectReg('${id}');closeModalDirect()">❌ Tolak</button>`:''}
     </div>`;
   document.getElementById('modalOverlay').classList.add('open');
 };
 
-window.approveReg = async function(id){
-  if(!confirm('Approve pendaftaran ini?')) return;
+window.approveReg = async function(id) {
+  if (!confirm('Approve pendaftaran ini?')) return;
   showLoading('Menyetujui...');
-  await updateDoc(doc(db,'registrations',id),{paymentStatus:'approved'});
+  await updateDoc(doc(db,'registrations',id), {paymentStatus:'approved'});
   hideLoading();
 };
 
-window.rejectReg = async function(id){
-  const reason=prompt('Alasan penolakan (opsional):');
-  if(reason===null) return;
+window.rejectReg = async function(id) {
+  const reason = prompt('Alasan penolakan (opsional):');
+  if (reason===null) return;
   showLoading('Menolak...');
-  await updateDoc(doc(db,'registrations',id),{paymentStatus:'rejected',rejectReason:reason});
+  await updateDoc(doc(db,'registrations',id), {paymentStatus:'rejected', rejectReason:reason});
   hideLoading();
 };
 
-// ─── EXPORT CSV ───────────────────────────────────────────
-window.exportCSV = function(){
-  const snap=allRegistrations.filter(r=>r.paymentStatus==='approved');
-  let csv='Stand,Nama UMKM,Nama Pemilik,WhatsApp,Kategori,Grade,Total,Status,Tanggal\n';
-  snap.forEach(r=>{
-    csv+=`${r.boothNumber||''},${r.standName||''},${r.ownerName||''},${r.phone||''},${r.category||''},${r.grade||''},${r.price||0},${r.paymentStatus||''},${r.createdAt?new Date(r.createdAt.seconds*1000).toLocaleDateString('id-ID'):''}\n`;
+// ── EXPORT CSV ────────────────────────────────────────────
+window.exportCSV = function() {
+  const list = allRegistrations.filter(r => r.paymentStatus==='approved');
+  let csv = 'Stand,Nama UMKM,Nama Pemilik,WhatsApp,Kategori,Grade,Total,Status,Tanggal\n';
+  list.forEach(r => {
+    csv += `${r.boothNumber||''},${r.standName||''},${r.ownerName||''},${r.phone||''},${r.category||''},${r.grade||''},${r.price||0},${r.paymentStatus||''},${r.createdAt?new Date(r.createdAt.seconds*1000).toLocaleDateString('id-ID'):''}\n`;
   });
-  dlBlob(csv,'peserta-approved.csv');
+  dlBlob(csv, 'peserta-approved.csv');
 };
-window.exportCSVFull = function(){
-  let csv='ID,Stand,Nama UMKM,Nama Pemilik,WhatsApp,Email,Kategori,Grade,Total,Status,Tanggal\n';
-  allRegistrations.forEach(r=>{
-    csv+=`${r.id||''},${r.boothNumber||''},${r.standName||''},${r.ownerName||''},${r.phone||''},${r.emailPeserta||r.email||''},${r.category||''},${r.grade||''},${r.price||0},${r.paymentStatus||''},${r.createdAt?new Date(r.createdAt.seconds*1000).toLocaleDateString('id-ID'):''}\n`;
+
+window.exportCSVFull = function() {
+  let csv = 'ID,Stand,Nama UMKM,Nama Pemilik,WhatsApp,Email,Kategori,Grade,Total,Status,Tanggal\n';
+  allRegistrations.forEach(r => {
+    csv += `${r.id||''},${r.boothNumber||''},${r.standName||''},${r.ownerName||''},${r.phone||''},${r.emailPeserta||r.email||''},${r.category||''},${r.grade||''},${r.price||0},${r.paymentStatus||''},${r.createdAt?new Date(r.createdAt.seconds*1000).toLocaleDateString('id-ID'):''}\n`;
   });
-  dlBlob(csv,'semua-pendaftar.csv');
+  dlBlob(csv, 'semua-pendaftar.csv');
 };
-function dlBlob(csv,name){
-  const blob=new Blob([csv],{type:'text/csv;charset=utf-8;'});
-  const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=name; a.click();
+
+function dlBlob(csv, name) {
+  const blob = new Blob([csv],{type:'text/csv;charset=utf-8;'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = name;
+  a.click();
 }
 
-// ─── MODAL ────────────────────────────────────────────────
-window.closeModal = function(e){ if(e.target===document.getElementById('modalOverlay')) closeModalDirect(); };
-window.closeModalDirect = function(){ document.getElementById('modalOverlay').classList.remove('open'); };
+// ── MODAL ─────────────────────────────────────────────────
+window.closeModal = function(e) { if (e.target===document.getElementById('modalOverlay')) closeModalDirect(); };
+window.closeModalDirect = function() { document.getElementById('modalOverlay').classList.remove('open'); };
 
-// ─── BOOKED STANDS INIT ───────────────────────────────────
-async function initBookedStands(){
-  const snap=await getDocs(collection(db,'registrations'));
-  snap.forEach(d=>{ const r=d.data(); if(r.boothNumber) bookedStands[r.boothNumber]=r.paymentStatus; });
+// ── SCROLL ────────────────────────────────────────────────
+window.scrollToDaftar = function() { document.getElementById('topTabs').scrollIntoView({behavior:'smooth'}); };
+
+// ── INIT BOOKED STANDS ────────────────────────────────────
+async function initBookedStands() {
+  const snap = await getDocs(collection(db,'registrations'));
+  snap.forEach(d => { const r=d.data(); if(r.boothNumber) bookedStands[r.boothNumber]=r.paymentStatus; });
 }
 
-// ─── SCROLL ───────────────────────────────────────────────
-window.scrollToDaftar = function(){ document.getElementById('topTabs').scrollIntoView({behavior:'smooth'}); };
-
-// ─── INIT ─────────────────────────────────────────────────
 initBookedStands();
 </script>
 </body>

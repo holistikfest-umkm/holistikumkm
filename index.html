@@ -3,310 +3,274 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Holistik Fest UMKM 2026 – Pendaftaran Stand</title>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+<title>Holistik Fest UMKM 2026 – Daftar Stand</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;600;700&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-
 <style>
-:root{
-  --bg:#F5F3EF;
-  --card:#FFFFFF;
-  --ink:#1A1714;
-  --muted:#7A756E;
-  --accent:#D4621A;
-  --accent2:#2B7A4B;
-  --multi:#5B8DD9;
-  --food:#D4621A;
-  --pink:#C85C8A;
-  --border:#E5E0D8;
-  --selected:#1A1714;
-  --booked:#B0A99E;
-  --shadow:0 2px 16px rgba(26,23,20,.08);
-}
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh}
+body{font-family:'Noto Sans',sans-serif;background:#f0f0f0;color:#222;font-size:15px;line-height:1.6}
 
 /* NAV */
-nav{position:fixed;top:0;left:0;right:0;background:var(--ink);z-index:100;height:60px;display:flex;align-items:center;padding:0 32px;justify-content:space-between}
-.nav-logo{font-family:'Syne',sans-serif;font-size:1.1rem;color:#fff;letter-spacing:.02em}
-.nav-logo span{color:var(--food)}
-.nav-right{display:flex;align-items:center;gap:12px}
-.btn-login{background:var(--food);color:#fff;border:none;padding:8px 20px;border-radius:8px;font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:.85rem;cursor:pointer;transition:.2s}
-.btn-login:hover{opacity:.85}
-.user-chip{display:flex;align-items:center;gap:10px}
-.user-chip img{width:32px;height:32px;border-radius:50%;border:2px solid var(--food)}
-.user-chip .uname{color:#fff;font-size:.85rem;font-weight:600}
-.btn-logout{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.3);padding:6px 14px;border-radius:6px;font-size:.8rem;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif}
+nav{background:#1565C0;padding:0 16px;height:54px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+.nav-logo{color:#fff;font-size:1rem;font-weight:700}
+.nav-logo span{color:#FFD54F}
+.btn-login{background:#FFD54F;color:#1A237E;border:none;padding:7px 16px;border-radius:4px;font-weight:700;font-size:.85rem;cursor:pointer}
+.user-chip{display:flex;align-items:center;gap:8px}
+.user-chip img{width:28px;height:28px;border-radius:50%;border:2px solid #FFD54F}
+.user-chip .uname{color:#fff;font-size:.85rem}
+.btn-logout{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.5);padding:5px 12px;border-radius:4px;font-size:.8rem;cursor:pointer}
+.admin-badge{background:#FFD54F;color:#1A237E;font-size:.7rem;padding:2px 7px;border-radius:3px;font-weight:700}
 
 /* HERO */
-.hero{margin-top:60px;background:var(--ink);padding:64px 32px 48px;text-align:center;position:relative;overflow:hidden}
-.hero::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")}
-.hero h1{font-family:'Syne',sans-serif;font-size:clamp(2rem,5vw,3.5rem);color:#fff;line-height:1.1;margin-bottom:16px}
-.hero h1 span{color:var(--food)}
-.hero p{color:rgba(255,255,255,.6);font-size:1rem;max-width:520px;margin:0 auto 32px;line-height:1.7}
-.hero-badges{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:36px}
-.badge{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.8);padding:6px 14px;border-radius:20px;font-size:.8rem;font-weight:600}
-.btn-hero{background:var(--food);color:#fff;border:none;padding:14px 36px;border-radius:10px;font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:1rem;cursor:pointer;transition:.2s}
-.btn-hero:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(212,98,26,.4)}
+.hero{background:#1565C0;color:#fff;padding:32px 16px 28px;text-align:center}
+.hero h1{font-size:1.5rem;font-weight:700;margin-bottom:8px}
+.hero h1 span{color:#FFD54F}
+.hero p{color:rgba(255,255,255,.8);font-size:.9rem;max-width:480px;margin:0 auto 20px}
+.hero-badges{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:20px}
+.hero-badge{background:rgba(255,255,255,.15);color:#fff;padding:4px 12px;border-radius:20px;font-size:.78rem}
+.btn-hero{background:#FFD54F;color:#1A237E;border:none;padding:11px 28px;border-radius:4px;font-weight:700;cursor:pointer;font-size:.95rem}
 
-/* RULES STRIP */
-.rules-strip{background:var(--food);padding:20px 32px;display:flex;gap:32px;justify-content:center;flex-wrap:wrap}
-.rule-item{display:flex;align-items:center;gap:8px;color:#fff;font-size:.85rem;font-weight:600}
+/* MAIN */
+.main-wrap{max-width:960px;margin:0 auto;padding:20px 12px}
 
-/* MAIN LAYOUT */
-.main-wrap{max-width:1300px;margin:0 auto;padding:40px 24px}
+/* TABS */
+.top-tabs{display:flex;background:#fff;border:1px solid #ddd;border-radius:6px;overflow:hidden;margin-bottom:20px}
+.top-tab{flex:1;padding:12px 8px;text-align:center;font-weight:600;font-size:.83rem;cursor:pointer;color:#555;border-right:1px solid #ddd;transition:.15s}
+.top-tab:last-child{border-right:none}
+.top-tab.active{background:#1565C0;color:#fff}
+.tab-content{display:none}
+.tab-content.active{display:block}
 
-/* WIZARD STEPS */
-.wizard-bar{display:flex;align-items:center;gap:0;margin-bottom:40px;background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden}
-.wz-step{flex:1;padding:16px 12px;text-align:center;font-size:.8rem;font-weight:700;color:var(--muted);cursor:pointer;transition:.2s;border-right:1px solid var(--border);position:relative}
-.wz-step:last-child{border-right:none}
-.wz-step.active{background:var(--ink);color:#fff}
-.wz-step.done{background:var(--accent2);color:#fff}
-.wz-step .wz-num{display:block;font-size:1.2rem;font-family:'Syne',sans-serif;margin-bottom:2px}
+/* CARD */
+.card{background:#fff;border:1px solid #ddd;border-radius:6px;padding:20px;margin-bottom:16px}
+.card-title{font-size:1.1rem;font-weight:700;margin-bottom:6px;color:#1565C0}
+.card-sub{font-size:.83rem;color:#666;margin-bottom:16px}
+
+/* WIZARD */
+.wizard{display:flex;margin-bottom:20px;background:#fff;border:1px solid #ddd;border-radius:6px;overflow:hidden}
+.wz{flex:1;padding:10px 6px;text-align:center;font-size:.75rem;font-weight:600;color:#888;border-right:1px solid #ddd;cursor:pointer}
+.wz:last-child{border-right:none}
+.wz.active{background:#1565C0;color:#fff}
+.wz.done{background:#4CAF50;color:#fff}
+.wz-n{font-size:1.1rem;font-weight:700;display:block}
 
 /* PAGES */
 .page{display:none}
 .page.active{display:block}
 
-/* CARD */
-.card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:32px;box-shadow:var(--shadow)}
-.card-title{font-family:'Syne',sans-serif;font-size:1.5rem;margin-bottom:24px}
-.card-subtitle{color:var(--muted);font-size:.9rem;margin-top:-16px;margin-bottom:24px}
+/* CATEGORY CARDS */
+.cat-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px}
+.cat-card{border:2px solid #ddd;border-radius:6px;padding:16px;cursor:pointer;transition:.15s}
+.cat-card:hover{border-color:#1565C0}
+.cat-card.selected{border-color:#1565C0;background:#E3F2FD}
+.cat-icon{font-size:1.8rem;margin-bottom:8px}
+.cat-name{font-weight:700;margin-bottom:4px}
+.cat-desc{font-size:.8rem;color:#666;line-height:1.5}
+.cat-tag{display:inline-block;margin-top:8px;padding:3px 8px;border-radius:4px;font-size:.75rem;font-weight:700}
+.cat-multi .cat-tag{background:#E3F2FD;color:#1565C0}
+.cat-food .cat-tag{background:#FFF3E0;color:#E65100}
 
 /* FORM */
-.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
-@media(max-width:640px){.form-grid{grid-template-columns:1fr}}
-.field{display:flex;flex-direction:column;gap:8px}
-.field label{font-size:.85rem;font-weight:700;color:var(--ink)}
-.field input,.field select,.field textarea{border:1.5px solid var(--border);border-radius:10px;padding:12px 16px;font-family:'Plus Jakarta Sans',sans-serif;font-size:.95rem;background:#fff;transition:.2s;outline:none;color:var(--ink)}
-.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--ink);box-shadow:0 0 0 3px rgba(26,23,20,.08)}
-.field .hint{font-size:.78rem;color:var(--muted)}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px}
+@media(max-width:560px){.form-grid{grid-template-columns:1fr}.cat-grid{grid-template-columns:1fr}}
+.field{display:flex;flex-direction:column;gap:5px}
+.field label{font-size:.83rem;font-weight:700}
+.field input,.field select,.field textarea{border:1px solid #ccc;border-radius:4px;padding:9px 12px;font-family:'Noto Sans',sans-serif;font-size:.9rem;outline:none;transition:.15s}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:#1565C0;box-shadow:0 0 0 2px rgba(21,101,192,.15)}
+.field .hint{font-size:.75rem;color:#888}
 .field-full{grid-column:1/-1}
 
-/* CATEGORY CARDS */
-.cat-cards{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:0}
-.cat-card{border:2px solid var(--border);border-radius:14px;padding:24px;cursor:pointer;transition:.2s;position:relative}
-.cat-card:hover{border-color:var(--ink)}
-.cat-card.selected{border-color:var(--ink);background:#fafaf8}
-.cat-card.selected::after{content:'✓';position:absolute;top:12px;right:14px;font-weight:900;font-size:1rem;color:var(--ink)}
-.cat-icon{font-size:2rem;margin-bottom:10px}
-.cat-name{font-weight:800;font-size:1rem;margin-bottom:4px}
-.cat-desc{font-size:.8rem;color:var(--muted);line-height:1.5}
-.cat-stands{font-size:.78rem;font-weight:700;margin-top:8px;padding:4px 10px;border-radius:6px;display:inline-block}
-.cat-multi .cat-stands{background:#EBF1FB;color:var(--multi)}
-.cat-food .cat-stands{background:#FDF0E8;color:var(--food)}
-
 /* GRADE TABS */
-.grade-tabs{display:flex;gap:0;border:1.5px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:24px}
-.grade-tab{flex:1;padding:12px;text-align:center;cursor:pointer;font-weight:700;font-size:.88rem;transition:.2s;background:#fff}
-.grade-tab:not(:last-child){border-right:1.5px solid var(--border)}
-.grade-tab.active{background:var(--ink);color:#fff}
-.grade-tab .price{font-size:.78rem;font-weight:500;margin-top:2px}
-
-/* STAND MAP */
-.map-section{margin-bottom:32px}
-.map-container{overflow-x:auto;padding-bottom:8px}
-.denah{display:flex;gap:0;min-width:700px;border:2px solid var(--ink);border-radius:12px;overflow:hidden}
-.blok{flex:1;border-right:2px solid var(--ink)}
-.blok:last-child{border-right:none}
-.blok-header{background:var(--ink);color:#fff;text-align:center;padding:6px 4px;font-size:.72rem;font-weight:800;font-family:'Syne',sans-serif}
-.blok-inner{padding:6px}
-.stand-row{display:grid;grid-template-columns:1fr 1fr;gap:4px;margin-bottom:4px}
-.stand-cell{border-radius:6px;padding:7px 4px;text-align:center;font-size:.7rem;font-weight:800;cursor:pointer;transition:.15s;user-select:none;border:1.5px solid transparent}
-.stand-cell.type-multi{background:#D9E8FA;color:#2563EB;border-color:#BFDBFE}
-.stand-cell.type-food{background:#FDE8D5;color:#C2410C;border-color:#FCD9BD}
-.stand-cell.available:hover{transform:scale(1.06);box-shadow:0 2px 8px rgba(0,0,0,.15)}
-.stand-cell.selected-stand{background:var(--ink)!important;color:#fff!important;border-color:var(--ink)!important;transform:scale(1.06)}
-.stand-cell.booked-stand{background:#E5E0D8!important;color:#A09890!important;cursor:not-allowed;border-color:#D5CFC7!important}
-.stand-cell.hidden-stand{visibility:hidden;pointer-events:none}
-.map-legend{display:flex;gap:20px;flex-wrap:wrap;margin-top:12px;font-size:.78rem}
-.legend-item{display:flex;align-items:center;gap:6px;font-weight:600}
-.legend-dot{width:14px;height:14px;border-radius:4px;flex-shrink:0}
-
-/* STAND INFO BOX */
-.stand-info-box{background:#F0EDE8;border:1.5px solid var(--border);border-radius:10px;padding:16px;font-size:.85rem;margin-bottom:20px;display:none}
-.stand-info-box.show{display:block}
-.sib-row{display:flex;justify-content:space-between;margin-bottom:6px}
-.sib-row:last-child{margin-bottom:0;padding-top:8px;border-top:1px solid var(--border);font-weight:700}
-
-/* UPLOAD */
-.upload-area{border:2px dashed var(--border);border-radius:10px;padding:24px;text-align:center;cursor:pointer;transition:.2s;position:relative}
-.upload-area:hover{border-color:var(--ink);background:#fafaf9}
-.upload-area input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
-.upload-area .up-icon{font-size:2rem;margin-bottom:8px}
-.upload-area .up-text{font-size:.85rem;font-weight:600}
-.upload-area .up-hint{font-size:.75rem;color:var(--muted);margin-top:4px}
-.upload-preview{display:none;margin-top:12px}
-.upload-preview.show{display:flex;gap:10px;align-items:center;font-size:.82rem;font-weight:600;color:var(--accent2)}
-
-/* PRICE SUMMARY */
-.price-summary{background:var(--ink);border-radius:12px;padding:24px;color:#fff;margin-bottom:24px}
-.ps-row{display:flex;justify-content:space-between;margin-bottom:10px;font-size:.9rem;opacity:.75}
-.ps-row:last-child{margin-bottom:0;padding-top:12px;border-top:1px solid rgba(255,255,255,.15);font-size:1.1rem;font-weight:800;opacity:1}
-
-/* BUTTONS */
-.btn-primary{background:var(--food);color:#fff;border:none;padding:14px 28px;border-radius:10px;font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:.95rem;cursor:pointer;transition:.2s;width:100%}
-.btn-primary:hover{opacity:.87;transform:translateY(-1px)}
-.btn-primary:disabled{background:var(--border);color:var(--muted);cursor:not-allowed;transform:none}
-.btn-secondary{background:transparent;color:var(--ink);border:1.5px solid var(--border);padding:13px 28px;border-radius:10px;font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:.9rem;cursor:pointer;transition:.2s;width:100%}
-.btn-secondary:hover{background:#f0ede8}
-.btn-nav{display:flex;gap:12px;margin-top:32px}
-.btn-nav .btn-secondary{width:auto;flex:1}
-.btn-nav .btn-primary{flex:2}
-
-/* SUCCESS PAGE */
-.success-wrap{text-align:center;padding:40px 24px}
-.success-icon{font-size:4rem;margin-bottom:16px}
-.success-title{font-family:'Syne',sans-serif;font-size:2rem;margin-bottom:12px}
-.success-sub{color:var(--muted);font-size:.95rem;max-width:400px;margin:0 auto 32px;line-height:1.7}
-.ticket-card{background:var(--ink);border-radius:16px;padding:28px;color:#fff;max-width:400px;margin:0 auto 24px;text-align:left}
-.tc-stand{font-family:'Syne',sans-serif;font-size:2rem;margin-bottom:4px}
-.tc-row{display:flex;justify-content:space-between;font-size:.85rem;margin-bottom:8px;opacity:.75}
-.tc-status{display:inline-block;background:rgba(255,255,255,.1);padding:4px 12px;border-radius:20px;font-size:.78rem;font-weight:700;margin-bottom:20px}
-#qr-display{margin:0 auto 0;display:flex;justify-content:center}
-#qr-display canvas,#qr-display img{border-radius:8px;border:4px solid rgba(255,255,255,.1)}
-
-/* MY TICKETS */
-.tickets-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px}
-.tkt{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:24px;transition:.2s}
-.tkt:hover{box-shadow:var(--shadow)}
-.tkt-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px}
-.tkt-stand{font-family:'Syne',sans-serif;font-size:1.6rem}
-.tkt-badge{padding:4px 12px;border-radius:20px;font-size:.75rem;font-weight:700}
-.tkt-badge.approved{background:#D1FAE5;color:#065F46}
-.tkt-badge.pending{background:#FEF3C7;color:#92400E}
-.tkt-badge.rejected{background:#FEE2E2;color:#991B1B}
-.tkt-rows{font-size:.83rem;margin-bottom:16px;color:var(--muted)}
-.tkt-rows div{display:flex;justify-content:space-between;margin-bottom:6px}
-.tkt-rows span{font-weight:600;color:var(--ink)}
-.btn-dl{background:#F0EDE8;color:var(--ink);border:none;padding:10px 20px;border-radius:8px;font-weight:700;font-size:.82rem;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;transition:.2s}
-.btn-dl:hover{background:#E5E0D8}
-
-/* ADMIN PANEL */
-.admin-header{background:var(--ink);color:#fff;border-radius:14px;padding:24px;margin-bottom:24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
-.admin-title{font-family:'Syne',sans-serif;font-size:1.5rem}
-.admin-sub{color:rgba(255,255,255,.5);font-size:.85rem;margin-top:4px}
-.stats-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:16px;margin-bottom:24px}
-.stat-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px}
-.stat-label{font-size:.78rem;color:var(--muted);margin-bottom:6px;font-weight:600}
-.stat-val{font-family:'Syne',sans-serif;font-size:2rem;font-weight:700}
-.stat-val.green{color:#059669}
-.stat-val.amber{color:#D97706}
-.stat-val.blue{color:#2563EB}
-.stat-val.red{color:#DC2626}
-
-/* ADMIN TABLE */
-.admin-filters{display:flex;gap:12px;margin-bottom:20px;flex-wrap:wrap}
-.filter-btn{padding:8px 16px;border-radius:20px;border:1.5px solid var(--border);font-size:.82rem;font-weight:700;cursor:pointer;background:#fff;transition:.2s;font-family:'Plus Jakarta Sans',sans-serif}
-.filter-btn.active{background:var(--ink);color:#fff;border-color:var(--ink)}
-.filter-search{border:1.5px solid var(--border);border-radius:8px;padding:9px 14px;font-size:.85rem;font-family:'Plus Jakarta Sans',sans-serif;outline:none;min-width:200px;transition:.2s}
-.filter-search:focus{border-color:var(--ink)}
-.reg-list{display:grid;gap:12px}
-.reg-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px;display:grid;grid-template-columns:1fr auto;gap:16px;align-items:center;transition:.2s}
-.reg-card:hover{border-color:#C5BFB8}
-.reg-main{display:flex;gap:24px;flex-wrap:wrap;align-items:center}
-.reg-stand{font-family:'Syne',sans-serif;font-size:1.5rem;min-width:60px}
-.reg-info{font-size:.85rem;color:var(--muted)}
-.reg-name{font-weight:800;font-size:.95rem;color:var(--ink);margin-bottom:2px}
-.reg-meta{display:flex;gap:12px;margin-top:6px;flex-wrap:wrap}
-.reg-meta span{font-size:.78rem;background:#F0EDE8;padding:3px 8px;border-radius:5px;font-weight:600}
-.reg-meta span.food{background:#FDE8D5;color:#C2410C}
-.reg-meta span.multi{background:#EBF1FB;color:#2563EB}
-.reg-actions{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
-.btn-approve{background:var(--accent2);color:#fff;border:none;padding:9px 18px;border-radius:8px;font-weight:700;font-size:.82rem;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;transition:.2s}
-.btn-approve:hover{opacity:.85}
-.btn-reject{background:#FEE2E2;color:#991B1B;border:none;padding:9px 18px;border-radius:8px;font-weight:700;font-size:.82rem;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;transition:.2s}
-.btn-reject:hover{background:#FECACA}
-.btn-view{background:#F0EDE8;color:var(--ink);border:none;padding:9px 14px;border-radius:8px;font-weight:700;font-size:.82rem;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;transition:.2s}
-.btn-csv{background:#fff;color:var(--ink);border:1.5px solid var(--border);padding:10px 20px;border-radius:8px;font-weight:700;font-size:.85rem;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;transition:.2s}
-.btn-csv:hover{background:#F0EDE8}
-
-/* MODAL */
-.modal-overlay{display:none;position:fixed;inset:0;background:rgba(26,23,20,.6);z-index:200;align-items:center;justify-content:center;padding:24px}
-.modal-overlay.open{display:flex}
-.modal{background:#fff;border-radius:16px;max-width:560px;width:100%;max-height:90vh;overflow-y:auto;padding:32px}
-.modal-title{font-family:'Syne',sans-serif;font-size:1.4rem;margin-bottom:20px;display:flex;justify-content:space-between;align-items:center}
-.modal-close{cursor:pointer;font-size:1.5rem;color:var(--muted);background:none;border:none;line-height:1}
-.modal-img{width:100%;border-radius:10px;border:1px solid var(--border);margin-bottom:12px;max-height:400px;object-fit:contain}
-.modal-rows{font-size:.88rem}
-.modal-rows div{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border)}
-.modal-rows div:last-child{border-bottom:none}
-.modal-rows div span:last-child{font-weight:700}
-.modal-actions{display:flex;gap:10px;margin-top:24px}
-.modal-actions button{flex:1}
-
-/* RULES PAGE */
-.rules-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:28px;margin-bottom:16px}
-.rules-card h3{font-family:'Syne',sans-serif;font-size:1.1rem;margin-bottom:14px;display:flex;align-items:center;gap:10px}
-.rules-list{list-style:none;padding:0}
-.rules-list li{padding:8px 0;border-bottom:1px solid var(--border);font-size:.88rem;line-height:1.6;padding-left:20px;position:relative;color:#3D3831}
-.rules-list li::before{content:'—';position:absolute;left:0;color:var(--food);font-weight:700}
-.rules-list li:last-child{border-bottom:none}
-.price-table{width:100%;border-collapse:collapse;font-size:.88rem;margin-top:4px}
-.price-table th{background:#F0EDE8;padding:10px 14px;text-align:left;font-weight:700;font-size:.8rem}
-.price-table td{padding:10px 14px;border-bottom:1px solid var(--border)}
-.price-table tr:last-child td{border-bottom:none}
-.grade-badge{display:inline-block;padding:2px 10px;border-radius:5px;font-weight:800;font-size:.78rem}
-.grade-A{background:#FDE8D5;color:#C2410C}
-.grade-B{background:#EBF1FB;color:#2563EB}
-.grade-C{background:#F0EDE8;color:#5C4D3C}
-
-/* TOP TABS */
-.top-tabs{display:flex;gap:0;margin-bottom:32px;background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden}
-.top-tab{flex:1;padding:14px 10px;text-align:center;font-weight:700;font-size:.85rem;cursor:pointer;transition:.2s;color:var(--muted)}
-.top-tab:not(:last-child){border-right:1px solid var(--border)}
-.top-tab.active{background:var(--ink);color:#fff}
-.tab-content{display:none}
-.tab-content.active{display:block}
-
-/* NOTICE */
-.notice{padding:14px 18px;border-radius:10px;font-size:.85rem;font-weight:600;display:flex;gap:10px;align-items:flex-start;margin-bottom:20px;line-height:1.5}
-.notice.info{background:#EBF1FB;color:#1E3A6E;border:1px solid #BFDBFE}
-.notice.warn{background:#FEF3C7;color:#78350F;border:1px solid #FCD34D}
-.notice.success{background:#D1FAE5;color:#064E3B;border:1px solid #6EE7B7}
-.notice.err{background:#FEE2E2;color:#7F1D1D;border:1px solid #FCA5A5}
-
-/* LOADING */
-.loading-overlay{display:none;position:fixed;inset:0;background:rgba(26,23,20,.7);z-index:300;align-items:center;justify-content:center;flex-direction:column;gap:16px}
-.loading-overlay.open{display:flex}
-.spinner{width:48px;height:48px;border:4px solid rgba(255,255,255,.2);border-top-color:#fff;border-radius:50%;animation:spin .8s linear infinite}
-.loading-text{color:#fff;font-weight:700}
-@keyframes spin{to{transform:rotate(360deg)}}
+.grade-tabs{display:flex;border:1px solid #ddd;border-radius:4px;overflow:hidden;margin-bottom:16px}
+.gtab{flex:1;padding:10px;text-align:center;cursor:pointer;font-weight:600;font-size:.83rem;background:#fff;border-right:1px solid #ddd;transition:.15s}
+.gtab:last-child{border-right:none}
+.gtab.active{background:#1565C0;color:#fff}
+.gtab .price{font-size:.75rem;font-weight:400;margin-top:2px}
 
 /* DENAH */
-.denah-top{background:var(--ink);color:#fff;border-radius:12px 12px 0 0;padding:10px;text-align:center;font-family:'Syne',sans-serif;letter-spacing:.05em;font-size:.9rem}
-.bottom-area{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-bottom:16px}
-.bottom-cell{padding:8px 14px;border-radius:8px;font-size:.73rem;font-weight:700;border:1.5px solid var(--border)}
-.bottom-cell.toilet-c{background:#EBF1FB;color:#2563EB;border-color:#BFDBFE}
-.bottom-cell.food-c{background:#FDE8D5;color:#C2410C;border-color:#FCD9BD}
-.bottom-cell.play-c{background:#F3E8FF;color:#7C3AED;border-color:#DDD6FE}
-.bottom-cell.gsm-c{background:#D1FAE5;color:#065F46;border-color:#6EE7B7}
-.zone-header{background:#F0EDE8;border-bottom:1px solid var(--border);padding:4px;text-align:center;font-size:.65rem;font-weight:800;color:var(--muted);letter-spacing:.05em}
-.zone-header.food-zone{background:#FDE8D5;color:#C2410C}
-.zone-header.multi-zone{background:#EBF1FB;color:#2563EB}
+.denah-wrap{overflow-x:auto;margin-bottom:12px}
+.denah{display:flex;border:2px solid #333;border-radius:6px;overflow:hidden;min-width:560px}
+.blok{flex:1;border-right:2px solid #333}
+.blok:last-child{border-right:none}
+.blok-head{background:#1565C0;color:#fff;text-align:center;padding:5px 4px;font-size:.68rem;font-weight:700}
+.zone-head{padding:3px;text-align:center;font-size:.62rem;font-weight:700}
+.zone-head.multi{background:#BBDEFB;color:#0D47A1}
+.zone-head.food{background:#FFE0B2;color:#BF360C}
+.blok-inner{padding:4px}
+.stand-row{display:grid;grid-template-columns:1fr 1fr;gap:3px;margin-bottom:3px}
+.stand-cell{border-radius:4px;padding:6px 3px;text-align:center;font-size:.67rem;font-weight:700;cursor:pointer;border:1.5px solid transparent;transition:.1s;user-select:none}
+.stand-cell.type-multi{background:#BBDEFB;color:#0D47A1;border-color:#90CAF9}
+.stand-cell.type-food{background:#FFE0B2;color:#BF360C;border-color:#FFCC80}
+.stand-cell.available:hover{outline:2px solid #1565C0}
+.stand-cell.selected-stand{background:#1565C0!important;color:#fff!important;border-color:#1565C0!important}
+.stand-cell.booked-stand{background:#E0E0E0!important;color:#9E9E9E!important;cursor:not-allowed;border-color:#BDBDBD!important}
+.stand-cell.hidden-stand{visibility:hidden;pointer-events:none}
+.denah-top{background:#222;color:#fff;border-radius:4px 4px 0 0;text-align:center;padding:7px;font-size:.8rem;font-weight:700}
+.denah-bottom{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;margin-top:6px}
+.denah-bottom span{padding:5px 12px;border-radius:4px;font-size:.75rem;font-weight:700;border:1px solid #ddd}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:.77rem;margin-top:8px}
+.legend-item{display:flex;align-items:center;gap:5px;font-weight:600}
+.legend-dot{width:12px;height:12px;border-radius:3px;flex-shrink:0}
 
-.section-label{font-size:.75rem;font-weight:800;letter-spacing:.1em;color:var(--muted);text-transform:uppercase;margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid var(--border)}
+/* STAND INFO */
+.stand-info{background:#E3F2FD;border:1px solid #90CAF9;border-radius:4px;padding:12px;font-size:.84rem;margin-bottom:14px;display:none}
+.stand-info.show{display:block}
+.si-row{display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px solid #BBDEFB}
+.si-row:last-child{border-bottom:none;font-weight:700;padding-top:6px}
 
-.float-help{position:fixed;bottom:24px;right:24px;width:48px;height:48px;background:var(--food);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.4rem;cursor:pointer;box-shadow:0 4px 16px rgba(212,98,26,.4);z-index:50;border:none;font-family:'Plus Jakarta Sans',sans-serif;transition:.2s}
-.float-help:hover{transform:scale(1.1)}
+/* UPLOAD */
+.upload-box{border:2px dashed #ccc;border-radius:4px;padding:20px;text-align:center;cursor:pointer;transition:.15s;position:relative}
+.upload-box:hover{border-color:#1565C0;background:#f5f9ff}
+.upload-box input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+.upload-box .up-icon{font-size:1.8rem;margin-bottom:6px}
+.upload-box .up-text{font-size:.84rem;font-weight:600}
+.upload-box .up-hint{font-size:.73rem;color:#888;margin-top:3px}
+.upload-preview{display:none;margin-top:10px;font-size:.8rem;font-weight:600;color:#2E7D32;align-items:center;gap:8px}
+.upload-preview.show{display:flex}
 
-.admin-badge{background:var(--food);color:#fff;font-size:.7rem;padding:3px 8px;border-radius:5px;font-weight:800}
+/* PRICE BOX */
+.price-box{background:#1565C0;border-radius:4px;padding:16px;color:#fff;margin-bottom:16px}
+.pb-row{display:flex;justify-content:space-between;font-size:.87rem;opacity:.8;margin-bottom:8px}
+.pb-row:last-child{border-top:1px solid rgba(255,255,255,.2);padding-top:10px;margin-bottom:0;font-weight:700;font-size:1rem;opacity:1}
 
-/* ── FIX: Tab admin hidden/show menggunakan inline style, bukan class ── */
-#adminTabBtn { display: none; } /* default tersembunyi via CSS biasa */
+/* BUTTONS */
+.btn{padding:11px 20px;border-radius:4px;font-family:'Noto Sans',sans-serif;font-weight:700;font-size:.9rem;cursor:pointer;transition:.15s;border:none}
+.btn-primary{background:#1565C0;color:#fff;width:100%}
+.btn-primary:hover{background:#0D47A1}
+.btn-primary:disabled{background:#BDBDBD;color:#fff;cursor:not-allowed}
+.btn-secondary{background:#fff;color:#333;border:1px solid #ccc;width:100%}
+.btn-secondary:hover{background:#f5f5f5}
+.btn-nav{display:flex;gap:10px;margin-top:20px}
+.btn-nav .btn-secondary{flex:1;width:auto}
+.btn-nav .btn-primary{flex:2;width:auto}
 
-@media(max-width:768px){
+/* NOTICE */
+.notice{padding:12px 14px;border-radius:4px;font-size:.83rem;display:flex;gap:8px;align-items:flex-start;margin-bottom:14px;line-height:1.5}
+.notice.info{background:#E3F2FD;color:#0D47A1;border:1px solid #90CAF9}
+.notice.warn{background:#FFF8E1;color:#F57F17;border:1px solid #FFE082}
+.notice.ok{background:#E8F5E9;color:#1B5E20;border:1px solid #A5D6A7}
+.notice.err{background:#FFEBEE;color:#B71C1C;border:1px solid #EF9A9A}
+
+/* SECTION LABEL */
+.slabel{font-size:.73rem;font-weight:700;letter-spacing:.08em;color:#888;text-transform:uppercase;margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid #eee}
+
+/* SUCCESS */
+.success-wrap{text-align:center;padding:28px 16px}
+.success-icon{font-size:3rem;margin-bottom:12px}
+.success-title{font-size:1.3rem;font-weight:700;margin-bottom:10px;color:#1565C0}
+.success-sub{color:#666;font-size:.88rem;max-width:380px;margin:0 auto 20px;line-height:1.7}
+.ticket-card{background:#1565C0;border-radius:6px;padding:20px;color:#fff;max-width:340px;margin:0 auto 20px;text-align:left}
+.tc-stand{font-size:1.8rem;font-weight:700;margin-bottom:4px}
+.tc-row{display:flex;justify-content:space-between;font-size:.83rem;margin-bottom:6px;opacity:.8}
+.tc-status{display:inline-block;background:rgba(255,255,255,.15);padding:3px 10px;border-radius:12px;font-size:.75rem;font-weight:700;margin-bottom:14px}
+
+/* MY TICKETS */
+.tickets-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.tkt{background:#fff;border:1px solid #ddd;border-radius:6px;padding:16px}
+.tkt-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px}
+.tkt-stand{font-size:1.4rem;font-weight:700;color:#1565C0}
+.tkt-badge{padding:3px 10px;border-radius:12px;font-size:.73rem;font-weight:700}
+.tkt-badge.approved{background:#E8F5E9;color:#1B5E20}
+.tkt-badge.pending{background:#FFF8E1;color:#F57F17}
+.tkt-badge.rejected{background:#FFEBEE;color:#B71C1C}
+.tkt-rows{font-size:.82rem;margin-bottom:12px;color:#555}
+.tkt-rows div{display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid #f0f0f0}
+.tkt-rows div:last-child{border-bottom:none}
+.tkt-rows span{font-weight:600;color:#222}
+.btn-dl{background:#f0f0f0;color:#333;border:none;padding:8px 14px;border-radius:4px;font-weight:700;font-size:.8rem;cursor:pointer;font-family:'Noto Sans',sans-serif}
+.btn-dl:hover{background:#e0e0e0}
+
+/* ADMIN */
+.admin-header{background:#1565C0;color:#fff;border-radius:6px;padding:16px 20px;margin-bottom:16px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+.admin-title{font-size:1.1rem;font-weight:700}
+.admin-sub{font-size:.8rem;color:rgba(255,255,255,.6);margin-top:2px}
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px;margin-bottom:16px}
+.stat-card{background:#fff;border:1px solid #ddd;border-radius:6px;padding:14px}
+.stat-label{font-size:.73rem;color:#888;margin-bottom:4px;font-weight:600}
+.stat-val{font-size:1.8rem;font-weight:700;color:#222}
+.stat-val.green{color:#2E7D32}
+.stat-val.amber{color:#E65100}
+.stat-val.blue{color:#1565C0}
+.stat-val.red{color:#C62828}
+
+/* ADMIN FILTER */
+.admin-filters{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap}
+.filter-btn{padding:7px 14px;border-radius:4px;border:1px solid #ccc;font-size:.8rem;font-weight:700;cursor:pointer;background:#fff}
+.filter-btn.active{background:#1565C0;color:#fff;border-color:#1565C0}
+.filter-search{border:1px solid #ccc;border-radius:4px;padding:8px 12px;font-size:.84rem;font-family:'Noto Sans',sans-serif;outline:none;min-width:180px}
+.filter-search:focus{border-color:#1565C0}
+
+.reg-list{display:grid;gap:10px}
+.reg-card{background:#fff;border:1px solid #ddd;border-radius:6px;padding:14px 16px;display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center}
+.reg-main{display:flex;gap:16px;flex-wrap:wrap;align-items:center}
+.reg-stand{font-size:1.3rem;font-weight:700;color:#1565C0;min-width:48px}
+.reg-name{font-weight:700;font-size:.9rem;margin-bottom:2px}
+.reg-info{font-size:.8rem;color:#666}
+.reg-meta{display:flex;gap:6px;margin-top:5px;flex-wrap:wrap}
+.reg-meta span{font-size:.73rem;background:#f0f0f0;padding:2px 7px;border-radius:3px;font-weight:600}
+.reg-meta span.food{background:#FFF3E0;color:#E65100}
+.reg-meta span.multi{background:#E3F2FD;color:#1565C0}
+.reg-actions{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+
+.btn-approve{background:#4CAF50;color:#fff;border:none;padding:7px 14px;border-radius:4px;font-weight:700;font-size:.8rem;cursor:pointer;font-family:'Noto Sans',sans-serif}
+.btn-approve:hover{background:#388E3C}
+.btn-reject{background:#FFEBEE;color:#C62828;border:none;padding:7px 14px;border-radius:4px;font-weight:700;font-size:.8rem;cursor:pointer;font-family:'Noto Sans',sans-serif}
+.btn-reject:hover{background:#FFCDD2}
+.btn-view{background:#f0f0f0;color:#333;border:none;padding:7px 10px;border-radius:4px;font-weight:700;font-size:.8rem;cursor:pointer;font-family:'Noto Sans',sans-serif}
+.btn-csv{background:#fff;color:#333;border:1px solid #ccc;padding:8px 16px;border-radius:4px;font-weight:700;font-size:.82rem;cursor:pointer;font-family:'Noto Sans',sans-serif}
+.btn-csv:hover{background:#f5f5f5}
+
+/* MODAL */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:200;align-items:center;justify-content:center;padding:16px}
+.modal-overlay.open{display:flex}
+.modal{background:#fff;border-radius:6px;max-width:520px;width:100%;max-height:90vh;overflow-y:auto;padding:24px}
+.modal-title{font-size:1.1rem;font-weight:700;margin-bottom:16px;display:flex;justify-content:space-between;align-items:center;color:#1565C0}
+.modal-close{cursor:pointer;font-size:1.4rem;color:#888;background:none;border:none;line-height:1}
+.modal-img{width:100%;border-radius:4px;border:1px solid #ddd;margin-bottom:10px;max-height:360px;object-fit:contain}
+.modal-rows{font-size:.85rem}
+.modal-rows div{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid #eee}
+.modal-rows div:last-child{border-bottom:none}
+.modal-rows div span:last-child{font-weight:700}
+.modal-actions{display:flex;gap:8px;margin-top:16px}
+.modal-actions button{flex:1}
+
+/* RULES */
+.rules-card{background:#fff;border:1px solid #ddd;border-radius:6px;padding:20px;margin-bottom:12px}
+.rules-card h3{font-size:.95rem;font-weight:700;margin-bottom:12px;color:#1565C0}
+.rules-list{list-style:none;padding:0}
+.rules-list li{padding:7px 0;border-bottom:1px solid #f0f0f0;font-size:.84rem;line-height:1.6;padding-left:18px;position:relative;color:#333}
+.rules-list li::before{content:'•';position:absolute;left:0;color:#1565C0;font-weight:700}
+.rules-list li:last-child{border-bottom:none}
+.price-table{width:100%;border-collapse:collapse;font-size:.84rem}
+.price-table th{background:#E3F2FD;padding:8px 12px;text-align:left;font-weight:700;font-size:.78rem;color:#1565C0}
+.price-table td{padding:8px 12px;border-bottom:1px solid #eee}
+.price-table tr:last-child td{border-bottom:none}
+.grade-pill{display:inline-block;padding:2px 8px;border-radius:3px;font-weight:700;font-size:.75rem}
+.grade-A{background:#FFF3E0;color:#E65100}
+.grade-B{background:#E3F2FD;color:#1565C0}
+.grade-C{background:#F3E5F5;color:#6A1B9A}
+
+/* LOADING */
+.loading-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:300;align-items:center;justify-content:center;flex-direction:column;gap:14px}
+.loading-overlay.open{display:flex}
+.spinner{width:40px;height:40px;border:4px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .8s linear infinite}
+.loading-text{color:#fff;font-weight:700;font-size:.9rem}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* FLOAT HELP */
+.float-help{position:fixed;bottom:20px;right:20px;width:44px;height:44px;background:#1565C0;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.3rem;cursor:pointer;box-shadow:0 2px 10px rgba(0,0,0,.3);z-index:50;border:none;font-family:'Noto Sans',sans-serif}
+
+/* ADMIN TAB hidden by default */
+#adminTabBtn{display:none}
+
+@media(max-width:640px){
   .form-grid{grid-template-columns:1fr}
-  .cat-cards{grid-template-columns:1fr 1fr}
-  .admin-header{flex-direction:column;align-items:flex-start;gap:12px}
-  .reg-card{grid-template-columns:1fr;gap:12px}
-  .modal{padding:24px}
-  .wizard-bar{overflow-x:auto}
-  .wz-step{min-width:80px;font-size:.7rem}
-}
-@media(max-width:480px){
-  .cat-cards{grid-template-columns:1fr}
+  .reg-card{grid-template-columns:1fr}
+  .modal{padding:16px}
+  .wizard{overflow-x:auto}
+  .wz{min-width:70px}
+  .admin-header{flex-direction:column;align-items:flex-start}
 }
 </style>
 </head>
@@ -315,42 +279,22 @@ nav{position:fixed;top:0;left:0;right:0;background:var(--ink);z-index:100;height
 <!-- NAV -->
 <nav>
   <div class="nav-logo">HOLISTIK FEST <span>UMKM</span> 2026</div>
-  <div class="nav-right" id="navRight">
+  <div id="navRight">
     <button class="btn-login" onclick="loginGoogle()">🔐 Login Google</button>
   </div>
 </nav>
 
 <!-- HERO -->
 <div class="hero">
-  <h1>Daftar Stand UMKM<br><span>Holistik Fest 2026</span></h1>
-  <p>Pilih, booking, dan konfirmasi stand Anda dalam hitungan menit. Sistem real-time — langsung terkonfirmasi.</p>
+  <h1>Daftar Stand <span>Holistik Fest 2026</span></h1>
+  <p>Booking stand UMKM Anda dengan mudah dan cepat. Langsung terkonfirmasi setelah admin verifikasi.</p>
   <div class="hero-badges">
-    <span class="badge">📍 Multi Produk & Makanan</span>
-    <span class="badge">⚡ Booking Real-time</span>
-    <span class="badge">📄 Kwitansi PDF Otomatis</span>
-    <span class="badge">✅ Verifikasi Admin</span>
+    <span class="hero-badge">📍 Multi Produk & Makanan</span>
+    <span class="hero-badge">⚡ Real-time</span>
+    <span class="hero-badge">📄 Kwitansi PDF</span>
+    <span class="hero-badge">✅ Verifikasi Admin</span>
   </div>
-  <button class="btn-hero" onclick="scrollToDaftar()">Mulai Pendaftaran →</button>
-</div>
-
-<!-- RULES STRIP -->
-<div class="rules-strip">
-  <div class="rule-item">
-    <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="white" stroke-width="1.5"/><path d="M5 8l2 2 4-4" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    1 peserta = 1 stand
-  </div>
-  <div class="rule-item">
-    <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="white" stroke-width="1.5"/><path d="M5 8l2 2 4-4" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    Upload KTP + bukti transfer wajib
-  </div>
-  <div class="rule-item">
-    <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="white" stroke-width="1.5"/><path d="M5 8l2 2 4-4" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    Multi Produk: A1–C27 | Makanan: A5–C33
-  </div>
-  <div class="rule-item">
-    <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="white" stroke-width="1.5"/><path d="M5 8l2 2 4-4" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    Stand final setelah admin approve
-  </div>
+  <button class="btn-hero" onclick="document.getElementById('topTabs').scrollIntoView({behavior:'smooth'})">Daftar Sekarang</button>
 </div>
 
 <!-- LOADING -->
@@ -359,10 +303,10 @@ nav{position:fixed;top:0;left:0;right:0;background:var(--ink);z-index:100;height
   <div class="loading-text" id="loadingText">Memproses...</div>
 </div>
 
-<!-- MODAL DETAIL -->
-<div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
-  <div class="modal" id="modalContent">
-    <div class="modal-title">Detail Pendaftaran <button class="modal-close" onclick="closeModalDirect()">×</button></div>
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay" onclick="if(event.target===this)closeModalDirect()">
+  <div class="modal">
+    <div class="modal-title">Detail Pendaftaran <button class="modal-close" onclick="closeModalDirect()">✕</button></div>
     <div id="modalBody"></div>
   </div>
 </div>
@@ -370,97 +314,93 @@ nav{position:fixed;top:0;left:0;right:0;background:var(--ink);z-index:100;height
 <!-- MAIN -->
 <div class="main-wrap">
 
-  <!-- TOP TABS -->
   <div class="top-tabs" id="topTabs">
-    <div class="top-tab active" onclick="switchTab('daftar')">📝 Pendaftaran</div>
+    <div class="top-tab active" onclick="switchTab('daftar')">📝 Daftar Stand</div>
     <div class="top-tab" onclick="switchTab('tiket')">🎫 Tiket Saya</div>
-    <div class="top-tab" onclick="switchTab('rules')">📋 Ketentuan</div>
-    <!-- Tab admin: hidden by default via CSS, shown via JS style.display -->
+    <div class="top-tab" onclick="switchTab('rules')">📋 Peraturan</div>
     <div class="top-tab" id="adminTabBtn" onclick="switchTab('admin')">⚙️ Admin</div>
   </div>
 
   <!-- TAB: DAFTAR -->
   <div class="tab-content active" id="tab-daftar">
-    <div class="wizard-bar" id="wizardBar">
-      <div class="wz-step active" id="wz1" onclick="goStep(1)"><span class="wz-num">1</span>Kategori</div>
-      <div class="wz-step" id="wz2" onclick="goStep(2)"><span class="wz-num">2</span>Pilih Stand</div>
-      <div class="wz-step" id="wz3" onclick="goStep(3)"><span class="wz-num">3</span>Data Diri</div>
-      <div class="wz-step" id="wz4" onclick="goStep(4)"><span class="wz-num">4</span>Dokumen</div>
-      <div class="wz-step" id="wz5" onclick="goStep(5)"><span class="wz-num">5</span>Konfirmasi</div>
+
+    <div class="wizard" id="wizardBar">
+      <div class="wz active" id="wz1" onclick="goStep(1)"><span class="wz-n">1</span>Kategori</div>
+      <div class="wz" id="wz2" onclick="goStep(2)"><span class="wz-n">2</span>Pilih Stand</div>
+      <div class="wz" id="wz3" onclick="goStep(3)"><span class="wz-n">3</span>Data Diri</div>
+      <div class="wz" id="wz4" onclick="goStep(4)"><span class="wz-n">4</span>Dokumen</div>
+      <div class="wz" id="wz5" onclick="goStep(5)"><span class="wz-n">5</span>Konfirmasi</div>
     </div>
 
     <!-- STEP 1 -->
     <div class="page active" id="step1">
       <div class="card">
         <div class="card-title">Pilih Kategori Stand</div>
-        <div class="card-subtitle">Tentukan jenis usaha Anda untuk memfilter lokasi stand yang sesuai</div>
-        <div class="cat-cards">
+        <div class="card-sub">Pilih jenis usaha Anda terlebih dahulu</div>
+        <div class="cat-grid">
           <div class="cat-card cat-multi" id="cat-multi" onclick="selectCategory('multi')">
             <div class="cat-icon">🛍️</div>
             <div class="cat-name">Multi Produk</div>
-            <div class="cat-desc">Fashion, kerajinan, kosmetik, elektronik, tanaman, dan produk non-makanan lainnya.</div>
-            <div class="cat-stands multi">Stand A1–C27 · Zona Kiri & Tengah</div>
+            <div class="cat-desc">Fashion, kerajinan, kosmetik, dan produk non-makanan.</div>
+            <span class="cat-tag">Stand A1–C27</span>
           </div>
           <div class="cat-card cat-food" id="cat-food" onclick="selectCategory('food')">
             <div class="cat-icon">🍜</div>
             <div class="cat-name">Makanan & Minuman</div>
-            <div class="cat-desc">Kuliner, jajanan, minuman, makanan kemasan, dan semua produk pangan.</div>
-            <div class="cat-stands food">Stand A5–C33 · Zona Tengah & Kanan</div>
+            <div class="cat-desc">Kuliner, jajanan, minuman, dan makanan kemasan.</div>
+            <span class="cat-tag">Stand A5–C33</span>
           </div>
         </div>
-        <div class="btn-nav">
-          <button class="btn-primary" onclick="nextStep1()" id="btnStep1" disabled>Lanjut → Pilih Stand</button>
-        </div>
+        <button class="btn btn-primary" onclick="nextStep1()" id="btnStep1" disabled>Lanjut &rarr; Pilih Stand</button>
       </div>
     </div>
 
     <!-- STEP 2 -->
     <div class="page" id="step2">
       <div class="card">
-        <div class="card-title">Pilih Stand & Grade</div>
-        <div class="card-subtitle">Klik stand yang ingin Anda booking. Stand berwarna abu-abu sudah terisi.</div>
+        <div class="card-title">Pilih Stand</div>
+        <div class="card-sub">Klik stand yang tersedia. Abu-abu = sudah terisi.</div>
+
         <div class="notice info">
           <span>ℹ️</span>
-          <div>Anda memilih kategori <strong id="noticeCategory">–</strong>. Hanya stand yang sesuai kategori yang bisa dipilih.</div>
+          <div>Kategori dipilih: <strong id="noticeCategory">–</strong>. Stand yang tidak sesuai kategori diarsir.</div>
         </div>
-        <div class="section-label">Pilih Grade</div>
+
+        <div class="slabel">Grade & Harga</div>
         <div class="grade-tabs">
-          <div class="grade-tab active" onclick="selectGrade('A')" id="gtab-A">
-            <div>Grade A</div><div class="price">Rp 1.250.000</div>
-          </div>
-          <div class="grade-tab" onclick="selectGrade('B')" id="gtab-B">
-            <div>Grade B</div><div class="price">Rp 1.100.000</div>
-          </div>
-          <div class="grade-tab" onclick="selectGrade('C')" id="gtab-C">
-            <div>Grade C</div><div class="price">Rp 1.000.000</div>
-          </div>
+          <div class="gtab active" onclick="selectGrade('A')" id="gtab-A">Grade A<div class="price">Rp 1.250.000</div></div>
+          <div class="gtab" onclick="selectGrade('B')" id="gtab-B">Grade B<div class="price">Rp 1.100.000</div></div>
+          <div class="gtab" onclick="selectGrade('C')" id="gtab-C">Grade C<div class="price">Rp 1.000.000</div></div>
         </div>
-        <div class="section-label">Denah Stand</div>
+
+        <div class="slabel">Denah Stand</div>
         <div class="denah-top">▲ PINTU MASUK UTAMA</div>
-        <div class="map-container">
+        <div class="denah-wrap">
           <div class="denah" id="denahMap"></div>
         </div>
-        <div class="bottom-area">
-          <div class="bottom-cell toilet-c">🚻 Toilet Portabel</div>
-          <div class="bottom-cell gsm-c">🚪 Pintu GSM</div>
-          <div class="bottom-cell food-c">🍽️ Zona Makanan</div>
-          <div class="bottom-cell play-c">🎠 Arena Bermain</div>
+        <div class="denah-bottom">
+          <span style="background:#E3F2FD;color:#1565C0;border-color:#90CAF9">🚻 Toilet</span>
+          <span style="background:#E8F5E9;color:#2E7D32;border-color:#A5D6A7">🚪 Pintu GSM</span>
+          <span style="background:#FFF3E0;color:#E65100;border-color:#FFCC80">🍽️ Zona Makanan</span>
+          <span style="background:#F3E5F5;color:#6A1B9A;border-color:#CE93D8">🎠 Area Bermain</span>
         </div>
-        <div class="map-legend">
-          <div class="legend-item"><div class="legend-dot" style="background:#D9E8FA;border:1.5px solid #BFDBFE"></div>Multi Produk</div>
-          <div class="legend-item"><div class="legend-dot" style="background:#FDE8D5;border:1.5px solid #FCD9BD"></div>Makanan</div>
-          <div class="legend-item"><div class="legend-dot" style="background:#1A1714"></div>Dipilih</div>
-          <div class="legend-item"><div class="legend-dot" style="background:#E5E0D8;border:1.5px solid #D5CFC7"></div>Terisi</div>
+        <div class="legend">
+          <div class="legend-item"><div class="legend-dot" style="background:#BBDEFB;border:1.5px solid #90CAF9"></div>Multi Produk</div>
+          <div class="legend-item"><div class="legend-dot" style="background:#FFE0B2;border:1.5px solid #FFCC80"></div>Makanan</div>
+          <div class="legend-item"><div class="legend-dot" style="background:#1565C0"></div>Dipilih</div>
+          <div class="legend-item"><div class="legend-dot" style="background:#E0E0E0;border:1.5px solid #BDBDBD"></div>Terisi</div>
         </div>
-        <div class="stand-info-box" id="standInfoBox">
-          <div class="sib-row"><span>Stand dipilih</span><strong id="sibStand">–</strong></div>
-          <div class="sib-row"><span>Tipe</span><strong id="sibType">–</strong></div>
-          <div class="sib-row"><span>Grade</span><strong id="sibGrade">–</strong></div>
-          <div class="sib-row"><span>Harga</span><strong id="sibPrice">–</strong></div>
+
+        <div class="stand-info" id="standInfoBox" style="margin-top:12px">
+          <div class="si-row"><span>Stand dipilih</span><strong id="sibStand">–</strong></div>
+          <div class="si-row"><span>Tipe</span><strong id="sibType">–</strong></div>
+          <div class="si-row"><span>Grade</span><strong id="sibGrade">–</strong></div>
+          <div class="si-row"><span>Harga</span><strong id="sibPrice">–</strong></div>
         </div>
+
         <div class="btn-nav">
-          <button class="btn-secondary" onclick="goStep(1)">← Kembali</button>
-          <button class="btn-primary" onclick="nextStep2()" id="btnStep2" disabled>Lanjut → Data Diri</button>
+          <button class="btn btn-secondary" onclick="goStep(1)">← Kembali</button>
+          <button class="btn btn-primary" onclick="nextStep2()" id="btnStep2" disabled>Lanjut &rarr; Data Diri</button>
         </div>
       </div>
     </div>
@@ -468,40 +408,39 @@ nav{position:fixed;top:0;left:0;right:0;background:var(--ink);z-index:100;height
     <!-- STEP 3 -->
     <div class="page" id="step3">
       <div class="card">
-        <div class="card-title">Data Diri Peserta</div>
-        <div class="card-subtitle">Pastikan data sesuai KTP dan nomor WhatsApp aktif untuk konfirmasi.</div>
+        <div class="card-title">Isi Data Diri</div>
+        <div class="card-sub">Pastikan data sesuai KTP dan nomor WhatsApp aktif</div>
         <div class="form-grid">
           <div class="field">
-            <label>Nama UMKM / Brand <span style="color:var(--food)">*</span></label>
+            <label>Nama UMKM / Brand *</label>
             <input type="text" id="standName" placeholder="Contoh: Batik Nusantara">
-            <div class="hint">Nama yang akan tertera di stand Anda</div>
+            <div class="hint">Nama yang tampil di stand Anda</div>
           </div>
           <div class="field">
-            <label>Nama Pemilik (sesuai KTP) <span style="color:var(--food)">*</span></label>
-            <input type="text" id="ownerName" placeholder="Nama lengkap sesuai KTP">
+            <label>Nama Pemilik (sesuai KTP) *</label>
+            <input type="text" id="ownerName" placeholder="Nama lengkap">
           </div>
           <div class="field">
-            <label>Nomor WhatsApp <span style="color:var(--food)">*</span></label>
+            <label>Nomor WhatsApp *</label>
             <input type="tel" id="phone" placeholder="Contoh: 08123456789">
-            <div class="hint">Aktif untuk menerima notifikasi konfirmasi</div>
+            <div class="hint">Untuk notifikasi konfirmasi</div>
           </div>
           <div class="field">
-            <label>Email <span style="color:var(--food)">*</span></label>
+            <label>Email *</label>
             <input type="email" id="emailInput" placeholder="email@domain.com">
           </div>
           <div class="field field-full">
-            <label>Jenis Produk yang Dijual <span style="color:var(--food)">*</span></label>
-            <input type="text" id="productType" placeholder="Contoh: Batik, aksesoris, dompet kulit">
-            <div class="hint">Deskripsi singkat produk yang akan dijual di stand</div>
+            <label>Jenis Produk yang Dijual *</label>
+            <input type="text" id="productType" placeholder="Contoh: Batik, aksesoris, dompet">
           </div>
           <div class="field field-full">
-            <label>Alamat Lengkap</label>
-            <textarea id="address" rows="2" placeholder="Alamat usaha / domisili Anda"></textarea>
+            <label>Alamat</label>
+            <textarea id="address" rows="2" placeholder="Alamat usaha / domisili"></textarea>
           </div>
         </div>
         <div class="btn-nav">
-          <button class="btn-secondary" onclick="goStep(2)">← Kembali</button>
-          <button class="btn-primary" onclick="nextStep3()">Lanjut → Upload Dokumen</button>
+          <button class="btn btn-secondary" onclick="goStep(2)">← Kembali</button>
+          <button class="btn btn-primary" onclick="nextStep3()">Lanjut &rarr; Upload Dokumen</button>
         </div>
       </div>
     </div>
@@ -510,46 +449,49 @@ nav{position:fixed;top:0;left:0;right:0;background:var(--ink);z-index:100;height
     <div class="page" id="step4">
       <div class="card">
         <div class="card-title">Upload Dokumen</div>
-        <div class="card-subtitle">Semua dokumen wajib diupload untuk proses verifikasi oleh admin.</div>
+        <div class="card-sub">Foto KTP dan bukti transfer wajib diupload</div>
+
         <div class="notice warn">
           <span>⚠️</span>
-          <div>Pastikan foto <strong>KTP jelas terbaca</strong> dan bukti transfer menampilkan <strong>nama pengirim, nominal, dan tanggal</strong>. Format JPG/PNG, maks. 32MB. File akan diupload ke <strong>ImgBB</strong>.</div>
+          <div>Pastikan KTP <strong>terbaca jelas</strong> dan bukti transfer menampilkan <strong>nama, nominal, dan tanggal</strong>. Format JPG/PNG, maks. 32MB.</div>
         </div>
-        <div class="section-label">Dokumen Identitas</div>
+
         <div class="form-grid">
           <div class="field">
-            <label>Foto KTP <span style="color:var(--food)">*</span></label>
-            <div class="upload-area">
+            <label>Foto KTP *</label>
+            <div class="upload-box">
               <input type="file" id="ktpFile" accept="image/*" onchange="previewUpload('ktpFile','ktpPreview')">
               <div class="up-icon">🪪</div>
-              <div class="up-text">Klik atau drag KTP ke sini</div>
-              <div class="up-hint">JPG atau PNG · Maks 32MB</div>
+              <div class="up-text">Klik untuk pilih foto KTP</div>
+              <div class="up-hint">JPG / PNG · Maks 32MB</div>
             </div>
             <div class="upload-preview" id="ktpPreview"></div>
           </div>
           <div class="field">
-            <label>Bukti Transfer Pembayaran <span style="color:var(--food)">*</span></label>
-            <div class="upload-area">
+            <label>Bukti Transfer *</label>
+            <div class="upload-box">
               <input type="file" id="transferFile" accept="image/*" onchange="previewUpload('transferFile','transferPreview')">
               <div class="up-icon">🏦</div>
-              <div class="up-text">Klik atau drag bukti transfer</div>
-              <div class="up-hint">JPG atau PNG · Maks 32MB</div>
+              <div class="up-text">Klik untuk pilih bukti transfer</div>
+              <div class="up-hint">JPG / PNG · Maks 32MB</div>
             </div>
             <div class="upload-preview" id="transferPreview"></div>
           </div>
         </div>
-        <div class="section-label" style="margin-top:24px">Info Rekening Tujuan Transfer</div>
-        <div class="rules-card" style="margin-bottom:0">
-          <table class="price-table">
-            <tr><td style="width:120px;color:var(--muted)">Bank</td><td><strong>BRI</strong></td></tr>
-            <tr><td style="color:var(--muted)">No. Rekening</td><td><strong>1234-5678-9012-3456</strong></td></tr>
-            <tr><td style="color:var(--muted)">Atas Nama</td><td><strong>Panitia Holistik Fest UMKM</strong></td></tr>
-            <tr><td style="color:var(--muted)">Nominal</td><td><strong id="transferAmount">–</strong></td></tr>
+
+        <div class="slabel" style="margin-top:16px">Rekening Tujuan Transfer</div>
+        <div style="background:#f8f8f8;border:1px solid #ddd;border-radius:4px;padding:14px;font-size:.86rem">
+          <table style="width:100%;border-collapse:collapse">
+            <tr><td style="color:#888;padding:4px 0;width:110px">Bank</td><td><strong>BRI</strong></td></tr>
+            <tr><td style="color:#888;padding:4px 0">No. Rekening</td><td><strong>1234-5678-9012-3456</strong></td></tr>
+            <tr><td style="color:#888;padding:4px 0">Atas Nama</td><td><strong>Panitia Holistik Fest UMKM</strong></td></tr>
+            <tr><td style="color:#888;padding:4px 0">Nominal</td><td><strong id="transferAmount" style="color:#1565C0">–</strong></td></tr>
           </table>
         </div>
+
         <div class="btn-nav">
-          <button class="btn-secondary" onclick="goStep(3)">← Kembali</button>
-          <button class="btn-primary" onclick="nextStep4()">Lanjut → Konfirmasi</button>
+          <button class="btn btn-secondary" onclick="goStep(3)">← Kembali</button>
+          <button class="btn btn-primary" onclick="nextStep4()">Lanjut &rarr; Konfirmasi</button>
         </div>
       </div>
     </div>
@@ -557,123 +499,116 @@ nav{position:fixed;top:0;left:0;right:0;background:var(--ink);z-index:100;height
     <!-- STEP 5 -->
     <div class="page" id="step5">
       <div class="card">
-        <div class="card-title">Konfirmasi Pendaftaran</div>
-        <div class="card-subtitle">Periksa kembali seluruh data sebelum mengirim pendaftaran.</div>
-        <div class="section-label">Ringkasan Data</div>
-        <div id="summaryContent" style="margin-bottom:24px"></div>
-        <div class="price-summary">
-          <div class="ps-row"><span>Stand</span><span id="sumStand">–</span></div>
-          <div class="ps-row"><span>Kategori</span><span id="sumCategory">–</span></div>
-          <div class="ps-row"><span>Grade</span><span id="sumGrade">–</span></div>
-          <div class="ps-row"><span>Total Pembayaran</span><span id="sumPrice">–</span></div>
+        <div class="card-title">Periksa & Konfirmasi</div>
+        <div class="card-sub">Cek kembali semua data sebelum mengirim</div>
+
+        <div id="summaryContent" style="margin-bottom:16px"></div>
+
+        <div class="price-box">
+          <div class="pb-row"><span>Stand</span><span id="sumStand">–</span></div>
+          <div class="pb-row"><span>Kategori</span><span id="sumCategory">–</span></div>
+          <div class="pb-row"><span>Grade</span><span id="sumGrade">–</span></div>
+          <div class="pb-row"><span>Total Bayar</span><span id="sumPrice">–</span></div>
         </div>
-        <div class="notice info">
+
+        <div class="notice info" style="margin-bottom:14px">
           <span>ℹ️</span>
-          <div>Setelah mendaftar, status Anda akan <strong>Menunggu Verifikasi</strong> hingga admin memeriksa bukti transfer. Anda akan dihubungi via WhatsApp.</div>
+          <div>Setelah dikirim, status Anda <strong>Menunggu Verifikasi</strong> hingga admin memeriksa bukti transfer. Anda akan dihubungi via WhatsApp.</div>
         </div>
-        <div style="display:flex;align-items:flex-start;gap:10px;margin-bottom:20px;font-size:.85rem">
-          <input type="checkbox" id="agreeCheck" style="margin-top:2px;width:16px;height:16px;flex-shrink:0;accent-color:var(--food)">
-          <label for="agreeCheck" style="cursor:pointer">Saya menyatakan data yang diisi adalah benar dan menyetujui <a href="#" onclick="switchTab('rules');return false" style="color:var(--food);font-weight:700">Ketentuan & Peraturan</a> Holistik Fest UMKM 2026.</label>
+
+        <div style="display:flex;align-items:flex-start;gap:8px;margin-bottom:16px;font-size:.84rem">
+          <input type="checkbox" id="agreeCheck" style="margin-top:3px;width:15px;height:15px;flex-shrink:0;accent-color:#1565C0">
+          <label for="agreeCheck" style="cursor:pointer">Saya menyatakan data benar dan setuju dengan <a href="#" onclick="switchTab('rules');return false" style="color:#1565C0;font-weight:700">Peraturan Holistik Fest UMKM 2026</a>.</label>
         </div>
+
         <div class="btn-nav">
-          <button class="btn-secondary" onclick="goStep(4)">← Kembali</button>
-          <button class="btn-primary" onclick="submitRegistration()" id="btnSubmit">🚀 Kirim Pendaftaran</button>
+          <button class="btn btn-secondary" onclick="goStep(4)">← Kembali</button>
+          <button class="btn btn-primary" onclick="submitRegistration()">🚀 Kirim Pendaftaran</button>
         </div>
       </div>
     </div>
 
-    <!-- STEP 6: SUCCESS -->
+    <!-- STEP 6 SUCCESS -->
     <div class="page" id="step6">
       <div class="card">
         <div class="success-wrap">
           <div class="success-icon">🎉</div>
-          <div class="success-title">Pendaftaran Terkirim!</div>
-          <div class="success-sub">Data Anda telah kami terima. Admin akan memverifikasi dalam <strong>1×24 jam</strong>. Pantau status di tab <strong>Tiket Saya</strong>.</div>
+          <div class="success-title">Pendaftaran Berhasil Dikirim!</div>
+          <div class="success-sub">Admin akan memverifikasi dalam <strong>1×24 jam</strong>. Pantau status di tab <strong>Tiket Saya</strong>.</div>
           <div class="ticket-card">
             <div class="tc-status">⏳ Menunggu Verifikasi</div>
             <div class="tc-stand" id="tcStand">–</div>
             <div class="tc-row"><span>Nama UMKM</span><span id="tcName">–</span></div>
             <div class="tc-row"><span>Kategori</span><span id="tcCategory">–</span></div>
-            <div class="tc-row"><span>Harga</span><span id="tcPrice">–</span></div>
-            <div id="qr-display" style="margin-top:20px"></div>
+            <div class="tc-row"><span>Total</span><span id="tcPrice">–</span></div>
+            <div id="qr-display" style="margin-top:16px;display:flex;justify-content:center"></div>
           </div>
-          <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
-            <button class="btn-primary" style="width:auto;padding:12px 28px" onclick="downloadPDF()">📄 Download Kwitansi</button>
-            <button class="btn-secondary" style="width:auto;padding:12px 28px" onclick="switchTab('tiket')">🎫 Lihat Tiket Saya</button>
+          <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+            <button class="btn btn-primary" style="width:auto;padding:10px 22px" onclick="downloadPDF()">📄 Download Kwitansi</button>
+            <button class="btn btn-secondary" style="width:auto;padding:10px 22px;border:1px solid #ccc" onclick="switchTab('tiket')">🎫 Lihat Tiket</button>
           </div>
         </div>
       </div>
     </div>
+
   </div><!-- /tab-daftar -->
 
   <!-- TAB: TIKET -->
   <div class="tab-content" id="tab-tiket">
     <div id="loginNotice" class="notice info">
-      <span>🔐</span><div>Silakan <strong>Login Google</strong> untuk melihat tiket pendaftaran Anda.</div>
+      <span>🔐</span><div>Silakan <strong>Login Google</strong> untuk melihat tiket Anda.</div>
     </div>
-    <div id="ticketsWrap">
-      <div class="section-label">Pendaftaran Saya</div>
-      <div class="tickets-grid" id="ticketsGrid">
-        <div style="color:var(--muted);font-size:.9rem">Belum ada pendaftaran.</div>
-      </div>
+    <div class="slabel">Pendaftaran Saya</div>
+    <div class="tickets-grid" id="ticketsGrid">
+      <div style="color:#888;font-size:.88rem">Belum ada pendaftaran.</div>
     </div>
   </div>
 
   <!-- TAB: RULES -->
   <div class="tab-content" id="tab-rules">
-    <div class="card-title" style="margin-bottom:24px">📋 Ketentuan & Peraturan</div>
+    <div class="card-title" style="margin-bottom:16px">📋 Peraturan & Ketentuan</div>
+
     <div class="rules-card">
       <h3>💰 Harga Stand</h3>
       <table class="price-table">
-        <tr><th>Grade</th><th>Deskripsi</th><th>Harga</th></tr>
-        <tr><td><span class="grade-badge grade-A">Grade A</span></td><td>Baris pertama, posisi strategis dekat pintu masuk</td><td><strong>Rp 1.250.000</strong></td></tr>
-        <tr><td><span class="grade-badge grade-B">Grade B</span></td><td>Baris tengah, ramai lalu lintas pengunjung</td><td><strong>Rp 1.100.000</strong></td></tr>
-        <tr><td><span class="grade-badge grade-C">Grade C</span></td><td>Baris belakang, harga terjangkau</td><td><strong>Rp 1.000.000</strong></td></tr>
+        <tr><th>Grade</th><th>Keterangan</th><th>Harga</th></tr>
+        <tr><td><span class="grade-pill grade-A">Grade A</span></td><td>Baris depan, dekat pintu masuk</td><td><strong>Rp 1.250.000</strong></td></tr>
+        <tr><td><span class="grade-pill grade-B">Grade B</span></td><td>Baris tengah</td><td><strong>Rp 1.100.000</strong></td></tr>
+        <tr><td><span class="grade-pill grade-C">Grade C</span></td><td>Baris belakang</td><td><strong>Rp 1.000.000</strong></td></tr>
       </table>
     </div>
     <div class="rules-card">
       <h3>🗺️ Zona Stand</h3>
       <table class="price-table">
-        <tr><th>Kategori</th><th>Nomor Stand</th><th>Keterangan</th></tr>
-        <tr><td>🛍️ Multi Produk</td><td>A1 – C27</td><td>Zona kiri dan tengah, 5 blok kolom kiri</td></tr>
-        <tr><td>🍜 Makanan & Minuman</td><td>A5 – C33</td><td>Zona tengah dan kanan, 5 blok kolom kanan</td></tr>
+        <tr><th>Kategori</th><th>Nomor Stand</th></tr>
+        <tr><td>🛍️ Multi Produk</td><td>A1 – C27 (Zona kiri & tengah)</td></tr>
+        <tr><td>🍜 Makanan & Minuman</td><td>A5 – C33 (Zona tengah & kanan)</td></tr>
       </table>
     </div>
     <div class="rules-card">
       <h3>📜 Peraturan Umum</h3>
       <ul class="rules-list">
-        <li>Satu peserta hanya diperbolehkan mendaftar <strong>satu stand</strong>.</li>
-        <li>Stand yang telah dibooking tidak dapat dibatalkan setelah admin melakukan approval.</li>
-        <li>Peserta wajib hadir minimal <strong>30 menit sebelum</strong> acara dimulai untuk check-in.</li>
-        <li>Ukuran stand adalah <strong>2×2 meter</strong>. Peserta tidak boleh melebihi batas stand.</li>
-        <li>Panitia berhak membatalkan booking apabila bukti transfer tidak valid atau palsu.</li>
-        <li>Stand yang sudah di-approve tidak dapat diganti lokasi kecuali atas kebijakan panitia.</li>
-        <li>Peserta bertanggung jawab penuh atas kebersihan dan keamanan barang di stand masing-masing.</li>
-      </ul>
-    </div>
-    <div class="rules-card">
-      <h3>📦 Ketentuan Produk</h3>
-      <ul class="rules-list">
-        <li>Peserta zona <strong>Multi Produk</strong> dilarang menjual produk makanan/minuman tanpa izin khusus.</li>
-        <li>Peserta zona <strong>Makanan</strong> wajib memiliki izin usaha pangan atau sertifikat halal (opsional, namun diutamakan).</li>
-        <li>Dilarang menjual produk yang melanggar hukum, produk bajakan, atau produk berbahaya.</li>
-        <li>Panitia berhak menghentikan aktivitas stand yang melanggar ketentuan tanpa pengembalian uang.</li>
+        <li>Satu peserta hanya boleh mendaftar <strong>satu stand</strong>.</li>
+        <li>Stand yang sudah di-approve tidak bisa dibatalkan.</li>
+        <li>Peserta wajib hadir <strong>30 menit sebelum</strong> acara untuk check-in.</li>
+        <li>Ukuran stand <strong>2×2 meter</strong>. Tidak boleh melebihi batas.</li>
+        <li>Panitia berhak membatalkan booking jika bukti transfer tidak valid.</li>
+        <li>Peserta bertanggung jawab atas kebersihan dan keamanan barang di standnya.</li>
       </ul>
     </div>
     <div class="rules-card">
       <h3>💳 Ketentuan Pembayaran</h3>
       <ul class="rules-list">
-        <li>Pembayaran dilakukan melalui transfer bank ke rekening panitia yang tertera.</li>
-        <li>Bukti transfer harus jelas menampilkan: nama pengirim, nominal, dan tanggal transaksi.</li>
-        <li>Konfirmasi pendaftaran diberikan setelah admin memverifikasi bukti transfer (maks. 1×24 jam).</li>
-        <li>Tidak ada biaya tambahan di luar harga stand yang telah ditetapkan.</li>
-        <li>Pembayaran yang sudah masuk <strong>tidak dapat dikembalikan</strong> kecuali pembatalan dari pihak panitia.</li>
+        <li>Pembayaran via transfer bank ke rekening panitia.</li>
+        <li>Bukti transfer harus jelas: nama pengirim, nominal, dan tanggal.</li>
+        <li>Konfirmasi diberikan setelah admin verifikasi (maks. 1×24 jam).</li>
+        <li>Pembayaran yang masuk <strong>tidak dapat dikembalikan</strong> kecuali pembatalan dari panitia.</li>
       </ul>
     </div>
     <div class="rules-card">
       <h3>📞 Kontak Panitia</h3>
       <ul class="rules-list">
-        <li>WhatsApp: <strong>0812-XXXX-XXXX</strong> (admin aktif Senin–Sabtu, 08.00–17.00 WIB)</li>
+        <li>WhatsApp: <strong>0812-XXXX-XXXX</strong> (Senin–Sabtu, 08.00–17.00 WIB)</li>
         <li>Email: <strong>info@holistikfest.id</strong></li>
         <li>Instagram: <strong>@holistikfestumkm</strong></li>
       </ul>
@@ -685,35 +620,38 @@ nav{position:fixed;top:0;left:0;right:0;background:var(--ink);z-index:100;height
     <div class="admin-header">
       <div>
         <div class="admin-title">Admin Dashboard</div>
-        <div class="admin-sub">Kelola seluruh pendaftaran stand UMKM 2026</div>
+        <div class="admin-sub">Kelola pendaftaran stand UMKM 2026</div>
       </div>
-      <div style="display:flex;gap:10px;flex-wrap:wrap">
-        <button class="btn-csv" onclick="exportCSV()">📥 Export CSV (Approved)</button>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <button class="btn-csv" onclick="exportCSV()">📥 Export Approved</button>
         <button class="btn-csv" onclick="exportCSVFull()">📊 Export Semua</button>
       </div>
     </div>
+
     <div class="stats-grid">
-      <div class="stat-card"><div class="stat-label">Total Pendaftar</div><div class="stat-val" id="statTotal">0</div></div>
+      <div class="stat-card"><div class="stat-label">Total</div><div class="stat-val" id="statTotal">0</div></div>
       <div class="stat-card"><div class="stat-label">Approved</div><div class="stat-val green" id="statApproved">0</div></div>
       <div class="stat-card"><div class="stat-label">Pending</div><div class="stat-val amber" id="statPending">0</div></div>
       <div class="stat-card"><div class="stat-label">Ditolak</div><div class="stat-val red" id="statRejected">0</div></div>
       <div class="stat-card"><div class="stat-label">Multi Produk</div><div class="stat-val blue" id="statMulti">0</div></div>
-      <div class="stat-card"><div class="stat-label">Makanan</div><div class="stat-val" style="color:var(--food)" id="statFood">0</div></div>
-      <div class="stat-card"><div class="stat-label">Total Pendapatan</div><div class="stat-val green" id="statRevenue" style="font-size:1.2rem">Rp 0</div></div>
+      <div class="stat-card"><div class="stat-label">Makanan</div><div class="stat-val amber" id="statFood">0</div></div>
+      <div class="stat-card" style="grid-column:span 2"><div class="stat-label">Total Pendapatan (Approved)</div><div class="stat-val green" style="font-size:1.3rem" id="statRevenue">Rp 0</div></div>
     </div>
+
     <div class="admin-filters">
       <button class="filter-btn active" onclick="filterAdmin('all',this)">Semua</button>
       <button class="filter-btn" onclick="filterAdmin('pending',this)">⏳ Pending</button>
       <button class="filter-btn" onclick="filterAdmin('approved',this)">✅ Approved</button>
       <button class="filter-btn" onclick="filterAdmin('rejected',this)">❌ Ditolak</button>
-      <input class="filter-search" type="text" id="adminSearch" placeholder="🔍 Cari nama/stand..." oninput="renderAdmin()">
+      <input class="filter-search" type="text" id="adminSearch" placeholder="🔍 Cari nama / stand..." oninput="renderAdmin()">
     </div>
+
     <div class="reg-list" id="adminList"></div>
   </div>
 
 </div><!-- /main-wrap -->
 
-<button class="float-help" onclick="switchTab('rules')" title="Ketentuan">?</button>
+<button class="float-help" onclick="switchTab('rules')" title="Peraturan">?</button>
 
 <script type="module">
 import { initializeApp }          from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
@@ -723,7 +661,6 @@ import { getFirestore, collection, addDoc, getDocs, doc, updateDoc,
          query, where, onSnapshot, serverTimestamp }
   from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
 
-// ── FIREBASE CONFIG ───────────────────────────────────────
 const firebaseConfig = {
   apiKey:            "AIzaSyDRUD_rNBVhADEeLDihluv5UuXkdYoSJlY",
   authDomain:        "holistikfestumkm-ccb4b.firebaseapp.com",
@@ -739,46 +676,38 @@ const auth     = getAuth(app);
 const db       = getFirestore(app);
 const provider = new GoogleAuthProvider();
 
-// ── IMGBB ─────────────────────────────────────────────────
-const IMGBB_API_KEY = '76b51317391c38c2f5a78c131c3b66c9';
+const IMGBB_API_KEY  = '76b51317391c38c2f5a78c131c3b66c9';
+const ADMIN_EMAILS   = ['sobatambyar1990@gmail.com','holistikfestumkm@gmail.com'];
+const PRICES         = { A:1250000, B:1100000, C:1000000 };
 
 async function uploadToImgBB(file, label) {
-  showLoading(`Mengupload ${label}...`);
-  const formData = new FormData();
-  formData.append('image', file);
-  formData.append('key', IMGBB_API_KEY);
-  const res  = await fetch('https://api.imgbb.com/1/upload', { method:'POST', body:formData });
+  showLoading('Mengupload ' + label + '...');
+  const fd = new FormData();
+  fd.append('image', file);
+  fd.append('key', IMGBB_API_KEY);
+  const res  = await fetch('https://api.imgbb.com/1/upload', {method:'POST',body:fd});
   const json = await res.json();
-  if (!json.success) throw new Error('Upload ' + label + ' gagal: ' + (json.error?.message || 'Unknown'));
+  if (!json.success) throw new Error('Upload ' + label + ' gagal: ' + (json.error?.message||'Unknown'));
   return json.data.url;
 }
 
-// ── ADMIN EMAILS ─────────────────────────────────────────
-// Simpan dalam lowercase agar perbandingan case-insensitive
-const ADMIN_EMAILS = ['sobatambyar1990@gmail.com', 'holistikfestumkm@gmail.com'];
-
-// ── PRICES ───────────────────────────────────────────────
-const PRICES = { A:1250000, B:1100000, C:1000000 };
-
-// ── STANDS ───────────────────────────────────────────────
 function buildStands() {
   const stands = [];
-  const blok1Multi = [['A1','A2'],['A11','A12'],['A21','A22'],['B1','B2'],['B11','B12'],['B21','B22'],['C1','C2'],['C11','C12'],['C24','C25']];
-  const blok2Multi = [['A3','A4'],['A13','A14'],['A23','A24'],['B3','B4'],['B13','B14'],['B23','B24'],['C3','C4'],['C13','C14'],['C26','C27']];
-  const blok3Food  = [['A5','A6'],['A15','A16'],['A25','A26'],['B5','B6'],['B15','B16'],['B25','B26'],['C5','C6'],['C15','C16'],['C28','C29']];
-  const blok4Food  = [['A7','A8'],['A17','A18'],['A27','A28'],['B7','B8'],['B17','B18'],['B27','B28'],['C7','C8'],['C20','C21'],['C30','C31']];
-  const blok5Food  = [['A9','A10'],['A19','A20'],['A29','A30'],['B9','B10'],['B19','B20'],['B29','B30'],['C9','C10'],['C22','C23'],['C32','C33']];
-  const addBlok = (pairs, type, blok) => pairs.forEach(([l,r]) => {
+  const blok1Multi=[['A1','A2'],['A11','A12'],['A21','A22'],['B1','B2'],['B11','B12'],['B21','B22'],['C1','C2'],['C11','C12'],['C24','C25']];
+  const blok2Multi=[['A3','A4'],['A13','A14'],['A23','A24'],['B3','B4'],['B13','B14'],['B23','B24'],['C3','C4'],['C13','C14'],['C26','C27']];
+  const blok3Food =[['A5','A6'],['A15','A16'],['A25','A26'],['B5','B6'],['B15','B16'],['B25','B26'],['C5','C6'],['C15','C16'],['C28','C29']];
+  const blok4Food =[['A7','A8'],['A17','A18'],['A27','A28'],['B7','B8'],['B17','B18'],['B27','B28'],['C7','C8'],['C20','C21'],['C30','C31']];
+  const blok5Food =[['A9','A10'],['A19','A20'],['A29','A30'],['B9','B10'],['B19','B20'],['B29','B30'],['C9','C10'],['C22','C23'],['C32','C33']];
+  const add = (pairs, type, blok) => pairs.forEach(([l,r]) => {
     stands.push({id:l, type, blok, grade:l[0]});
     stands.push({id:r, type, blok, grade:r[0]});
   });
-  addBlok(blok1Multi,'multi',1); addBlok(blok2Multi,'multi',2);
-  addBlok(blok3Food,'food',3);   addBlok(blok4Food,'food',4); addBlok(blok5Food,'food',5);
+  add(blok1Multi,'multi',1); add(blok2Multi,'multi',2);
+  add(blok3Food,'food',3);   add(blok4Food,'food',4); add(blok5Food,'food',5);
   return stands;
 }
 const ALL_STANDS = buildStands();
 
-// ── STATE ─────────────────────────────────────────────────
 let currentUser          = null;
 let selectedStand        = null;
 let selectedCategory     = null;
@@ -789,31 +718,24 @@ let currentRegistrationId = null;
 let adminFilter          = 'all';
 let adminListenerStarted = false;
 
-// ── UTIL ─────────────────────────────────────────────────
-const rupiah     = n => new Intl.NumberFormat('id-ID',{style:'currency',currency:'IDR',minimumFractionDigits:0}).format(n);
-const showLoading = t => { document.getElementById('loadingText').textContent = t||'Memproses...'; document.getElementById('loadingOverlay').classList.add('open'); };
+const rupiah      = n => new Intl.NumberFormat('id-ID',{style:'currency',currency:'IDR',minimumFractionDigits:0}).format(n);
+const showLoading = t => { document.getElementById('loadingText').textContent=t||'Memproses...'; document.getElementById('loadingOverlay').classList.add('open'); };
 const hideLoading = () => document.getElementById('loadingOverlay').classList.remove('open');
 
-// ── FUNGSI KUNCI: cek admin ───────────────────────────────
-// Dibuat terpisah agar mudah di-debug
 function checkIsAdmin(user) {
   if (!user) return false;
-  const email = (user.email || '').toLowerCase().trim();
-  const result = ADMIN_EMAILS.includes(email);
-  // Log ke console untuk verifikasi — boleh dihapus setelah confirmed OK
-  console.log(`[Admin Check] email="${email}" → isAdmin=${result}`);
-  return result;
+  const email = (user.email||'').toLowerCase().trim();
+  const ok    = ADMIN_EMAILS.includes(email);
+  console.log('[Admin Check] email="'+email+'" → isAdmin='+ok);
+  return ok;
 }
 
-// ── AUTH ─────────────────────────────────────────────────
 window.loginGoogle = async function() {
   try {
-    provider.setCustomParameters({ prompt: 'select_account' });
-    const r = await signInWithPopup(auth, provider);
-    // onAuthStateChanged akan otomatis ter-trigger, tidak perlu renderNav() di sini
-    console.log('[Login] Berhasil:', r.user.email);
+    provider.setCustomParameters({prompt:'select_account'});
+    await signInWithPopup(auth, provider);
   } catch(e) {
-    console.error('[Login] Error:', e);
+    console.error(e);
     alert('Login gagal: ' + e.message);
   }
 };
@@ -823,74 +745,54 @@ window.logout = async function() {
   location.reload();
 };
 
-// ── renderNav: SATU-SATUNYA tempat yang mengatur tampilan admin tab ──
 function renderNav(user) {
-  const isAdmin = checkIsAdmin(user);
+  const isAdmin  = checkIsAdmin(user);
   const adminTab = document.getElementById('adminTabBtn');
-
   if (!user) {
     document.getElementById('navRight').innerHTML =
       '<button class="btn-login" onclick="loginGoogle()">🔐 Login Google</button>';
-    // Sembunyikan tab admin — gunakan style.display agar tidak konflik dengan CSS
     adminTab.style.display = 'none';
     document.getElementById('loginNotice').style.display = 'flex';
     return;
   }
-
-  // User sudah login
   document.getElementById('navRight').innerHTML = `
     <div class="user-chip">
       <img src="${user.photoURL||''}" onerror="this.style.display='none'" alt="">
-      <div class="uname">${user.displayName || user.email}</div>
+      <span class="uname">${user.displayName||user.email}</span>
       ${isAdmin ? '<span class="admin-badge">ADMIN</span>' : ''}
       <button class="btn-logout" onclick="logout()">Keluar</button>
     </div>`;
-
-  // ── FIX UTAMA: tampilkan/sembunyikan tab admin ──
   if (isAdmin) {
-    adminTab.style.display = 'block'; // tampilkan tab
-    // Mulai listener realtime hanya sekali
-    if (!adminListenerStarted) {
-      adminListenerStarted = true;
-      loadAdminRealtime();
-    }
+    adminTab.style.display = 'block';
+    if (!adminListenerStarted) { adminListenerStarted=true; loadAdminRealtime(); }
   } else {
-    adminTab.style.display = 'none'; // sembunyikan tab
+    adminTab.style.display = 'none';
   }
-
   document.getElementById('loginNotice').style.display = 'none';
   loadMyTickets();
-
-  const emailInput = document.getElementById('emailInput');
-  if (emailInput && !emailInput.value) emailInput.value = user.email || '';
+  const ei = document.getElementById('emailInput');
+  if (ei && !ei.value) ei.value = user.email||'';
 }
 
-// ── onAuthStateChanged: satu-satunya trigger ─────────────
-onAuthStateChanged(auth, user => {
-  currentUser = user;
-  renderNav(user);
-});
+onAuthStateChanged(auth, user => { currentUser=user; renderNav(user); });
 
-// ── TABS ─────────────────────────────────────────────────
 window.switchTab = function(tab) {
   const tabs = ['daftar','tiket','rules','admin'];
   document.querySelectorAll('.top-tab').forEach((t,i) => t.classList.toggle('active', tabs[i]===tab));
   document.querySelectorAll('.tab-content').forEach(tc => tc.classList.toggle('active', tc.id==='tab-'+tab));
 };
 
-// ── WIZARD ───────────────────────────────────────────────
 window.goStep = function(n) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.getElementById('step'+n).classList.add('active');
-  document.querySelectorAll('.wz-step').forEach((s,i) => {
+  document.querySelectorAll('.wz').forEach((s,i) => {
     s.classList.remove('active','done');
     if (i+1===n) s.classList.add('active');
     if (i+1<n)  s.classList.add('done');
   });
-  window.scrollTo({top:200,behavior:'smooth'});
+  window.scrollTo({top:180,behavior:'smooth'});
 };
 
-// ── STEP 1 ───────────────────────────────────────────────
 window.selectCategory = function(cat) {
   selectedCategory = cat;
   selectedStand    = null;
@@ -901,16 +803,14 @@ window.selectCategory = function(cat) {
 
 window.nextStep1 = function() {
   if (!selectedCategory) { alert('Pilih kategori terlebih dahulu.'); return; }
-  document.getElementById('noticeCategory').textContent =
-    selectedCategory==='multi' ? 'Multi Produk' : 'Makanan & Minuman';
+  document.getElementById('noticeCategory').textContent = selectedCategory==='multi'?'Multi Produk':'Makanan & Minuman';
   buildDenahMap();
   goStep(2);
 };
 
-// ── STEP 2 ───────────────────────────────────────────────
 window.selectGrade = function(g) {
   selectedGrade = g;
-  document.querySelectorAll('.grade-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.gtab').forEach(t => t.classList.remove('active'));
   document.getElementById('gtab-'+g).classList.add('active');
   buildDenahMap();
 };
@@ -918,49 +818,42 @@ window.selectGrade = function(g) {
 function buildDenahMap() {
   const map = document.getElementById('denahMap');
   map.innerHTML = '';
-  const BLOK_NAMES = ['Blok I','Blok II','Blok III','Blok IV','Blok V'];
   for (let b=1; b<=5; b++) {
     const blokStands = ALL_STANDS.filter(s => s.blok===b);
     const isFood     = b >= 3;
     const div        = document.createElement('div');
     div.className    = 'blok';
     div.innerHTML    = `
-      <div class="blok-header">${BLOK_NAMES[b-1]}</div>
-      <div class="${isFood?'zone-header food-zone':'zone-header multi-zone'}">${isFood?'MAKANAN':'MULTI PRODUK'}</div>
-      <div class="blok-inner" id="blok-inner-${b}"></div>`;
+      <div class="blok-head">Blok ${['I','II','III','IV','V'][b-1]}</div>
+      <div class="zone-head ${isFood?'food':'multi'}">${isFood?'MAKANAN':'MULTI'}</div>
+      <div class="blok-inner" id="bi-${b}"></div>`;
     map.appendChild(div);
     const inner = div.querySelector('.blok-inner');
     for (let i=0; i<blokStands.length; i+=2) {
-      const rowDiv = document.createElement('div');
-      rowDiv.className = 'stand-row';
+      const row = document.createElement('div');
+      row.className = 'stand-row';
       [blokStands[i], blokStands[i+1]].forEach(s => {
-        if (!s) {
-          const ph = document.createElement('div');
-          ph.className = 'stand-cell hidden-stand';
-          rowDiv.appendChild(ph);
-          return;
-        }
+        if (!s) { const ph=document.createElement('div'); ph.className='stand-cell hidden-stand'; row.appendChild(ph); return; }
         const cell       = document.createElement('div');
         const isBooked   = bookedStands[s.id];
         const isFiltered = selectedCategory && s.type !== selectedCategory;
-        cell.className   = `stand-cell type-${s.type}`;
-        cell.dataset.id  = s.id;
+        cell.className   = 'stand-cell type-' + s.type;
         cell.textContent = s.id;
         if (isBooked) {
           cell.classList.add('booked-stand');
-          cell.title = 'Stand sudah terisi';
+          cell.title = 'Sudah terisi';
         } else if (isFiltered) {
-          cell.style.opacity = '.25';
+          cell.style.opacity = '.2';
           cell.style.cursor  = 'not-allowed';
-          cell.title         = 'Tidak sesuai kategori Anda';
+          cell.title         = 'Tidak sesuai kategori';
         } else {
           cell.classList.add('available');
           cell.onclick = () => handleSelectStand(s, cell);
         }
-        if (s.id === selectedStand && !isBooked && !isFiltered) cell.classList.add('selected-stand');
-        rowDiv.appendChild(cell);
+        if (s.id===selectedStand && !isBooked && !isFiltered) cell.classList.add('selected-stand');
+        row.appendChild(cell);
       });
-      inner.appendChild(rowDiv);
+      inner.appendChild(row);
     }
   }
   document.getElementById('transferAmount').textContent = rupiah(PRICES[selectedGrade]);
@@ -969,8 +862,7 @@ function buildDenahMap() {
 function handleSelectStand(s, el) {
   if (bookedStands[s.id]) return;
   if (selectedCategory && s.type !== selectedCategory) {
-    alert(`Stand ${s.id} adalah zona ${s.type==='food'?'Makanan':'Multi Produk'}, tidak sesuai kategori Anda.`);
-    return;
+    alert('Stand ini tidak sesuai kategori Anda.'); return;
   }
   selectedStand = s.id;
   document.querySelectorAll('.stand-cell').forEach(c => c.classList.remove('selected-stand'));
@@ -978,7 +870,7 @@ function handleSelectStand(s, el) {
   const box = document.getElementById('standInfoBox');
   box.classList.add('show');
   document.getElementById('sibStand').textContent = s.id;
-  document.getElementById('sibType').textContent  = s.type==='food' ? 'Makanan' : 'Multi Produk';
+  document.getElementById('sibType').textContent  = s.type==='food'?'Makanan':'Multi Produk';
   document.getElementById('sibGrade').textContent = 'Grade ' + selectedGrade;
   document.getElementById('sibPrice').textContent = rupiah(PRICES[selectedGrade]);
   document.getElementById('btnStep2').disabled    = false;
@@ -989,78 +881,71 @@ window.nextStep2 = function() {
   goStep(3);
 };
 
-// ── STEP 3 ───────────────────────────────────────────────
 window.nextStep3 = function() {
-  const sn = document.getElementById('standName').value.trim();
-  const on = document.getElementById('ownerName').value.trim();
-  const ph = document.getElementById('phone').value.trim();
-  const em = document.getElementById('emailInput').value.trim();
-  const pt = document.getElementById('productType').value.trim();
+  const sn=document.getElementById('standName').value.trim();
+  const on=document.getElementById('ownerName').value.trim();
+  const ph=document.getElementById('phone').value.trim();
+  const em=document.getElementById('emailInput').value.trim();
+  const pt=document.getElementById('productType').value.trim();
   if (!sn||!on||!ph||!em||!pt) { alert('Lengkapi semua field yang wajib (*).'); return; }
   if (!/^08[0-9]{8,11}$/.test(ph.replace(/[-\s]/g,''))) {
-    alert('Format nomor WhatsApp tidak valid (contoh: 081234567890)'); return;
+    alert('Format nomor WhatsApp tidak valid. Contoh: 081234567890'); return;
   }
   goStep(4);
 };
 
-// ── STEP 4 ───────────────────────────────────────────────
 window.previewUpload = function(inputId, previewId) {
   const f    = document.getElementById(inputId).files[0];
   const prev = document.getElementById(previewId);
   if (!f) { prev.classList.remove('show'); prev.innerHTML=''; return; }
   prev.classList.add('show');
-  if (f.type.startsWith('image/')) {
-    const url = URL.createObjectURL(f);
-    prev.innerHTML = `<img src="${url}" style="max-height:80px;border-radius:6px;border:1px solid var(--border)"><span>✅ ${f.name}</span>`;
-  } else {
-    prev.innerHTML = `<span>📄 ${f.name}</span>`;
-  }
+  const url = URL.createObjectURL(f);
+  prev.innerHTML = `<img src="${url}" style="max-height:70px;border-radius:3px;border:1px solid #ddd"><span>✅ ${f.name}</span>`;
 };
 
 window.nextStep4 = function() {
   const ktp = document.getElementById('ktpFile').files[0];
   const tr  = document.getElementById('transferFile').files[0];
   if (!ktp||!tr) { alert('Upload KTP dan bukti transfer terlebih dahulu.'); return; }
-  if (ktp.size>32*1024*1024 || tr.size>32*1024*1024) { alert('Ukuran file maksimal 32MB.'); return; }
-  if (!ktp.type.startsWith('image/') || !tr.type.startsWith('image/')) {
+  if (ktp.size>32*1024*1024||tr.size>32*1024*1024) { alert('Ukuran file maksimal 32MB.'); return; }
+  if (!ktp.type.startsWith('image/')||!tr.type.startsWith('image/')) {
     alert('File harus berupa gambar (JPG, PNG).'); return;
   }
-  buildSummary();
-  goStep(5);
+  buildSummary(); goStep(5);
 };
 
-// ── STEP 5 ───────────────────────────────────────────────
 function buildSummary() {
-  const sn = document.getElementById('standName').value;
-  const on = document.getElementById('ownerName').value;
-  const ph = document.getElementById('phone').value;
-  const em = document.getElementById('emailInput').value;
-  const pt = document.getElementById('productType').value;
-  const ad = document.getElementById('address').value;
+  const rows = [
+    ['Nama UMKM', document.getElementById('standName').value],
+    ['Nama Pemilik', document.getElementById('ownerName').value],
+    ['WhatsApp', document.getElementById('phone').value],
+    ['Email', document.getElementById('emailInput').value],
+    ['Jenis Produk', document.getElementById('productType').value],
+    ['Alamat', document.getElementById('address').value||'–'],
+  ];
   document.getElementById('sumStand').textContent    = selectedStand;
-  document.getElementById('sumCategory').textContent = selectedCategory==='food' ? 'Makanan & Minuman' : 'Multi Produk';
-  document.getElementById('sumGrade').textContent    = 'Grade ' + selectedGrade + ' — ' + rupiah(PRICES[selectedGrade]);
+  document.getElementById('sumCategory').textContent = selectedCategory==='food'?'Makanan & Minuman':'Multi Produk';
+  document.getElementById('sumGrade').textContent    = 'Grade ' + selectedGrade;
   document.getElementById('sumPrice').textContent    = rupiah(PRICES[selectedGrade]);
   document.getElementById('summaryContent').innerHTML = `
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px 24px;font-size:.87rem">
-      ${[['Nama UMKM',sn],['Nama Pemilik',on],['WhatsApp',ph],['Email',em],['Jenis Produk',pt],['Alamat',ad||'–']]
-        .map(([l,v])=>`
-        <div style="padding:8px 0;border-bottom:1px solid var(--border)">
-          <div style="color:var(--muted);font-size:.78rem;margin-bottom:3px">${l}</div>
-          <div style="font-weight:700">${v}</div>
-        </div>`).join('')}
+    <div style="background:#f8f8f8;border:1px solid #ddd;border-radius:4px;padding:12px;font-size:.85rem">
+      <table style="width:100%;border-collapse:collapse">
+        ${rows.map(([l,v])=>`<tr>
+          <td style="color:#888;padding:5px 0;width:120px;vertical-align:top">${l}</td>
+          <td style="font-weight:700;padding:5px 0">${v}</td>
+        </tr>`).join('')}
+      </table>
     </div>`;
 }
 
-// ── SUBMIT ────────────────────────────────────────────────
 window.submitRegistration = async function() {
   if (!document.getElementById('agreeCheck').checked) {
-    alert('Centang persetujuan ketentuan terlebih dahulu.'); return;
+    alert('Centang persetujuan terlebih dahulu.'); return;
   }
   if (!currentUser) { alert('Silakan login Google terlebih dahulu.'); return; }
   try {
-    const ktp = document.getElementById('ktpFile').files[0];
-    const tr  = document.getElementById('transferFile').files[0];
+    const ktp    = document.getElementById('ktpFile').files[0];
+    const tr     = document.getElementById('transferFile').files[0];
     const ktpUrl = await uploadToImgBB(ktp, 'KTP');
     const trUrl  = await uploadToImgBB(tr,  'Bukti Transfer');
     showLoading('Menyimpan pendaftaran...');
@@ -1073,7 +958,7 @@ window.submitRegistration = async function() {
       emailPeserta: document.getElementById('emailInput').value,
       productType:  document.getElementById('productType').value,
       address:      document.getElementById('address').value,
-      category:     selectedCategory==='food' ? 'Makanan' : 'Multi Produk',
+      category:     selectedCategory==='food'?'Makanan':'Multi Produk',
       grade:        selectedGrade,
       boothNumber:  selectedStand,
       price:        PRICES[selectedGrade],
@@ -1086,7 +971,14 @@ window.submitRegistration = async function() {
     currentRegistrationId = docRef.id;
     bookedStands[selectedStand] = true;
     hideLoading();
-    showSuccessStep(data, docRef.id);
+    document.getElementById('tcStand').textContent    = data.boothNumber;
+    document.getElementById('tcName').textContent     = data.standName;
+    document.getElementById('tcCategory').textContent = data.category;
+    document.getElementById('tcPrice').textContent    = rupiah(data.price);
+    const qrDiv = document.getElementById('qr-display');
+    qrDiv.innerHTML = '';
+    new QRCode(qrDiv, {text:docRef.id, width:90, height:90});
+    goStep(6);
     loadMyTickets();
   } catch(e) {
     hideLoading();
@@ -1095,28 +987,16 @@ window.submitRegistration = async function() {
   }
 };
 
-function showSuccessStep(d, id) {
-  document.getElementById('tcStand').textContent    = d.boothNumber;
-  document.getElementById('tcName').textContent     = d.standName;
-  document.getElementById('tcCategory').textContent = d.category;
-  document.getElementById('tcPrice').textContent    = rupiah(d.price);
-  const qrDiv = document.getElementById('qr-display');
-  qrDiv.innerHTML = '';
-  new QRCode(qrDiv, {text:id, width:100, height:100});
-  goStep(6);
-}
-
-// ── PDF ───────────────────────────────────────────────────
 window.downloadPDF = function(id) {
   const {jsPDF} = window.jspdf;
   const pdf = new jsPDF({orientation:'portrait',unit:'mm',format:'a5'});
   const rid = id || currentRegistrationId || '—';
-  pdf.setFillColor(26,23,20); pdf.rect(0,0,148,28,'F');
-  pdf.setTextColor(255,255,255); pdf.setFontSize(14); pdf.setFont('helvetica','bold');
+  pdf.setFillColor(21,101,192); pdf.rect(0,0,148,26,'F');
+  pdf.setTextColor(255,255,255); pdf.setFontSize(13); pdf.setFont('helvetica','bold');
   pdf.text('HOLISTIK FEST UMKM 2026',10,12);
-  pdf.setFontSize(9); pdf.setFont('helvetica','normal');
+  pdf.setFontSize(8); pdf.setFont('helvetica','normal');
   pdf.text('KWITANSI PENDAFTARAN STAND',10,20);
-  pdf.setTextColor(26,23,20); pdf.setFontSize(10);
+  pdf.setTextColor(30,30,30); pdf.setFontSize(10);
   const info = [
     ['ID Registrasi', rid],
     ['Stand',         document.getElementById('tcStand')?.textContent||'–'],
@@ -1126,67 +1006,62 @@ window.downloadPDF = function(id) {
     ['Status',        'Menunggu Verifikasi'],
     ['Tanggal',       new Date().toLocaleDateString('id-ID',{day:'numeric',month:'long',year:'numeric'})],
   ];
-  let y=38;
+  let y=36;
   info.forEach(([l,v])=>{
-    pdf.setFont('helvetica','normal'); pdf.setTextColor(100,90,80); pdf.text(l,10,y);
-    pdf.setFont('helvetica','bold');   pdf.setTextColor(26,23,20);  pdf.text(v,70,y);
+    pdf.setFont('helvetica','normal'); pdf.setTextColor(120,120,120); pdf.text(l,10,y);
+    pdf.setFont('helvetica','bold');   pdf.setTextColor(30,30,30);   pdf.text(v,70,y);
     y+=10;
   });
-  pdf.setFillColor(212,98,26); pdf.rect(0,185,148,15,'F');
+  pdf.setFillColor(21,101,192); pdf.rect(0,183,148,15,'F');
   pdf.setTextColor(255,255,255); pdf.setFontSize(8);
-  pdf.text('Simpan kwitansi ini sebagai bukti pendaftaran stand Anda.',10,193);
-  pdf.save(`kwitansi-${rid}.pdf`);
+  pdf.text('Simpan kwitansi ini sebagai bukti pendaftaran stand Anda.',10,191);
+  pdf.save('kwitansi-'+rid+'.pdf');
 };
 
-// ── MY TICKETS ────────────────────────────────────────────
 async function loadMyTickets() {
   if (!currentUser) return;
-  const q    = query(collection(db,'registrations'), where('uid','==',currentUser.uid));
-  const snap = await getDocs(q);
+  const snap = await getDocs(query(collection(db,'registrations'), where('uid','==',currentUser.uid)));
   const grid = document.getElementById('ticketsGrid');
   grid.innerHTML = '';
-  if (snap.empty) {
-    grid.innerHTML='<div style="color:var(--muted);font-size:.9rem">Belum ada pendaftaran.</div>';
-    return;
-  }
+  if (snap.empty) { grid.innerHTML='<div style="color:#888;font-size:.88rem">Belum ada pendaftaran.</div>'; return; }
   snap.forEach(docu => {
-    const d           = docu.data();
-    const statusClass = d.paymentStatus==='approved'?'approved':d.paymentStatus==='rejected'?'rejected':'pending';
-    const statusLabel = d.paymentStatus==='approved'?'✅ Disetujui':d.paymentStatus==='rejected'?'❌ Ditolak':'⏳ Menunggu';
-    const tkt         = document.createElement('div');
-    tkt.className     = 'tkt';
-    tkt.innerHTML     = `
+    const d  = docu.data();
+    const sc = d.paymentStatus==='approved'?'approved':d.paymentStatus==='rejected'?'rejected':'pending';
+    const sl = d.paymentStatus==='approved'?'✅ Disetujui':d.paymentStatus==='rejected'?'❌ Ditolak':'⏳ Menunggu';
+    const tkt = document.createElement('div');
+    tkt.className = 'tkt';
+    tkt.innerHTML = `
       <div class="tkt-top">
         <div class="tkt-stand">${d.boothNumber||'–'}</div>
-        <div class="tkt-badge ${statusClass}">${statusLabel}</div>
+        <div class="tkt-badge ${sc}">${sl}</div>
       </div>
       <div class="tkt-rows">
         <div><span>Nama UMKM</span><span>${d.standName}</span></div>
         <div><span>Kategori</span><span>${d.category}</span></div>
         <div><span>Grade</span><span>${d.grade||'–'}</span></div>
         <div><span>Total</span><span>${rupiah(d.price)}</span></div>
-        <div><span>Tanggal Daftar</span><span>${d.createdAt?new Date(d.createdAt.seconds*1000).toLocaleDateString('id-ID'):'–'}</span></div>
+        <div><span>Tanggal</span><span>${d.createdAt?new Date(d.createdAt.seconds*1000).toLocaleDateString('id-ID'):'–'}</span></div>
       </div>
-      <div style="display:flex;gap:8px">
-        <button class="btn-dl" onclick="downloadPDFFromData('${docu.id}')">📄 Kwitansi</button>
-        ${d.paymentStatus==='approved'?`<button class="btn-dl" style="background:#D1FAE5;color:#065F46" onclick="showQR('${docu.id}')">🎫 QR Ticket</button>`:''}
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <button class="btn-dl" onclick="dlPDFFromData('${docu.id}')">📄 Kwitansi</button>
+        ${d.paymentStatus==='approved'?`<button class="btn-dl" style="background:#E8F5E9;color:#1B5E20" onclick="showQR('${docu.id}')">🎫 QR Ticket</button>`:''}
       </div>`;
     grid.appendChild(tkt);
   });
 }
 
-window.downloadPDFFromData = async function(id) {
+window.dlPDFFromData = async function(id) {
   const snap = await getDocs(query(collection(db,'registrations'), where('__name__','==',id)));
   if (snap.empty) return;
   const d = snap.docs[0].data();
   const {jsPDF} = window.jspdf;
   const pdf = new jsPDF({orientation:'portrait',unit:'mm',format:'a5'});
-  pdf.setFillColor(26,23,20); pdf.rect(0,0,148,28,'F');
-  pdf.setTextColor(255,255,255); pdf.setFontSize(14); pdf.setFont('helvetica','bold');
+  pdf.setFillColor(21,101,192); pdf.rect(0,0,148,26,'F');
+  pdf.setTextColor(255,255,255); pdf.setFontSize(13); pdf.setFont('helvetica','bold');
   pdf.text('HOLISTIK FEST UMKM 2026',10,12);
-  pdf.setFontSize(9); pdf.setFont('helvetica','normal');
+  pdf.setFontSize(8); pdf.setFont('helvetica','normal');
   pdf.text('KWITANSI PENDAFTARAN STAND',10,20);
-  pdf.setTextColor(26,23,20); pdf.setFontSize(10);
+  pdf.setTextColor(30,30,30); pdf.setFontSize(10);
   const info = [
     ['ID Registrasi',id],['Stand',d.boothNumber],['Nama UMKM',d.standName],
     ['Nama Pemilik',d.ownerName],['Kategori',d.category],['Grade',d.grade||'–'],
@@ -1194,30 +1069,29 @@ window.downloadPDFFromData = async function(id) {
     ['Status',d.paymentStatus==='approved'?'Disetujui':'Menunggu Verifikasi'],
     ['Tanggal',d.createdAt?new Date(d.createdAt.seconds*1000).toLocaleDateString('id-ID'):'–']
   ];
-  let y=38;
+  let y=36;
   info.forEach(([l,v])=>{
-    pdf.setFont('helvetica','normal'); pdf.setTextColor(100,90,80); pdf.text(l,10,y);
-    pdf.setFont('helvetica','bold');   pdf.setTextColor(26,23,20);  pdf.text(String(v),70,y);
+    pdf.setFont('helvetica','normal'); pdf.setTextColor(120,120,120); pdf.text(l,10,y);
+    pdf.setFont('helvetica','bold');   pdf.setTextColor(30,30,30);   pdf.text(String(v),70,y);
     y+=10;
   });
-  pdf.setFillColor(212,98,26); pdf.rect(0,185,148,15,'F');
+  pdf.setFillColor(21,101,192); pdf.rect(0,183,148,15,'F');
   pdf.setTextColor(255,255,255); pdf.setFontSize(8);
-  pdf.text('Simpan kwitansi ini sebagai bukti pendaftaran stand Anda.',10,193);
-  pdf.save(`kwitansi-${id}.pdf`);
+  pdf.text('Simpan kwitansi ini sebagai bukti pendaftaran stand Anda.',10,191);
+  pdf.save('kwitansi-'+id+'.pdf');
 };
 
 window.showQR = function(id) {
   document.getElementById('modalBody').innerHTML = `
-    <div style="text-align:center;padding:20px">
-      <div id="qrModal${id}" style="display:inline-block;padding:16px;background:#fff;border-radius:10px;border:1px solid var(--border)"></div>
-      <div style="margin-top:16px;font-size:.85rem;color:var(--muted)">Tunjukkan QR ini saat check-in</div>
-      <div style="font-weight:700;margin-top:6px">ID: ${id}</div>
+    <div style="text-align:center;padding:16px">
+      <div id="qrM${id}" style="display:inline-block;padding:12px;background:#fff;border-radius:4px;border:1px solid #ddd"></div>
+      <div style="margin-top:12px;font-size:.83rem;color:#888">Tunjukkan QR ini saat check-in</div>
+      <div style="font-weight:700;margin-top:6px;font-size:.85rem">ID: ${id}</div>
     </div>`;
   document.getElementById('modalOverlay').classList.add('open');
-  setTimeout(() => new QRCode(document.getElementById('qrModal'+id),{text:id,width:150,height:150}), 100);
+  setTimeout(() => new QRCode(document.getElementById('qrM'+id),{text:id,width:140,height:140}), 100);
 };
 
-// ── ADMIN ─────────────────────────────────────────────────
 function loadAdminRealtime() {
   onSnapshot(collection(db,'registrations'), snap => {
     allRegistrations = [];
@@ -1225,28 +1099,27 @@ function loadAdminRealtime() {
     allRegistrations.sort((a,b) => (b.createdAt?.seconds||0)-(a.createdAt?.seconds||0));
     renderAdmin();
     updateStats();
-    // Refresh bookedStands dari data terbaru
     bookedStands = {};
-    allRegistrations.forEach(r => { if(r.boothNumber) bookedStands[r.boothNumber] = r.paymentStatus; });
+    allRegistrations.forEach(r => { if(r.boothNumber) bookedStands[r.boothNumber]=r.paymentStatus; });
     if (document.getElementById('step2').classList.contains('active')) buildDenahMap();
   });
 }
 
 function updateStats() {
-  const total    = allRegistrations.length;
-  const approved = allRegistrations.filter(r=>r.paymentStatus==='approved').length;
-  const pending  = allRegistrations.filter(r=>r.paymentStatus==='pending').length;
-  const rejected = allRegistrations.filter(r=>r.paymentStatus==='rejected').length;
-  const multi    = allRegistrations.filter(r=>r.category==='Multi Produk').length;
-  const food     = allRegistrations.filter(r=>r.category==='Makanan').length;
-  const revenue  = allRegistrations.filter(r=>r.paymentStatus==='approved').reduce((s,r)=>s+(r.price||0),0);
-  document.getElementById('statTotal').textContent    = total;
-  document.getElementById('statApproved').textContent = approved;
-  document.getElementById('statPending').textContent  = pending;
-  document.getElementById('statRejected').textContent = rejected;
-  document.getElementById('statMulti').textContent    = multi;
-  document.getElementById('statFood').textContent     = food;
-  document.getElementById('statRevenue').textContent  = rupiah(revenue);
+  const tot  = allRegistrations.length;
+  const app  = allRegistrations.filter(r=>r.paymentStatus==='approved').length;
+  const pnd  = allRegistrations.filter(r=>r.paymentStatus==='pending').length;
+  const rej  = allRegistrations.filter(r=>r.paymentStatus==='rejected').length;
+  const mlt  = allRegistrations.filter(r=>r.category==='Multi Produk').length;
+  const fod  = allRegistrations.filter(r=>r.category==='Makanan').length;
+  const rev  = allRegistrations.filter(r=>r.paymentStatus==='approved').reduce((s,r)=>s+(r.price||0),0);
+  document.getElementById('statTotal').textContent    = tot;
+  document.getElementById('statApproved').textContent = app;
+  document.getElementById('statPending').textContent  = pnd;
+  document.getElementById('statRejected').textContent = rej;
+  document.getElementById('statMulti').textContent    = mlt;
+  document.getElementById('statFood').textContent     = fod;
+  document.getElementById('statRevenue').textContent  = rupiah(rev);
 }
 
 window.filterAdmin = function(f, el) {
@@ -1259,25 +1132,21 @@ window.filterAdmin = function(f, el) {
 window.renderAdmin = function() {
   const search = (document.getElementById('adminSearch')?.value||'').toLowerCase();
   let list = [...allRegistrations];
-  if (adminFilter !== 'all') list = list.filter(r => r.paymentStatus===adminFilter);
+  if (adminFilter!=='all') list = list.filter(r => r.paymentStatus===adminFilter);
   if (search) list = list.filter(r =>
-    (r.standName||'').toLowerCase().includes(search) ||
-    (r.ownerName||'').toLowerCase().includes(search) ||
-    (r.boothNumber||'').toLowerCase().includes(search) ||
-    (r.phone||'').includes(search)
-  );
+    (r.standName||'').toLowerCase().includes(search)||
+    (r.ownerName||'').toLowerCase().includes(search)||
+    (r.boothNumber||'').toLowerCase().includes(search)||
+    (r.phone||'').includes(search));
   const container = document.getElementById('adminList');
   container.innerHTML = '';
-  if (!list.length) {
-    container.innerHTML='<div style="color:var(--muted);padding:20px;font-size:.9rem">Tidak ada data.</div>';
-    return;
-  }
+  if (!list.length) { container.innerHTML='<div style="color:#888;padding:16px;font-size:.88rem">Tidak ada data.</div>'; return; }
   list.forEach(r => {
-    const statusBadge = r.paymentStatus==='approved'
-      ? '<span style="background:#D1FAE5;color:#065F46;padding:3px 10px;border-radius:5px;font-size:.75rem;font-weight:700">✅ Approved</span>'
+    const sb = r.paymentStatus==='approved'
+      ? '<span style="background:#E8F5E9;color:#1B5E20;padding:2px 8px;border-radius:3px;font-size:.73rem;font-weight:700">✅ Approved</span>'
       : r.paymentStatus==='rejected'
-      ? '<span style="background:#FEE2E2;color:#991B1B;padding:3px 10px;border-radius:5px;font-size:.75rem;font-weight:700">❌ Ditolak</span>'
-      : '<span style="background:#FEF3C7;color:#92400E;padding:3px 10px;border-radius:5px;font-size:.75rem;font-weight:700">⏳ Pending</span>';
+      ? '<span style="background:#FFEBEE;color:#B71C1C;padding:2px 8px;border-radius:3px;font-size:.73rem;font-weight:700">❌ Ditolak</span>'
+      : '<span style="background:#FFF8E1;color:#F57F17;padding:2px 8px;border-radius:3px;font-size:.73rem;font-weight:700">⏳ Pending</span>';
     const div = document.createElement('div');
     div.className = 'reg-card';
     div.innerHTML = `
@@ -1285,42 +1154,42 @@ window.renderAdmin = function() {
         <div class="reg-stand">${r.boothNumber||'–'}</div>
         <div class="reg-info">
           <div class="reg-name">${r.standName||'–'}</div>
-          <div style="color:var(--muted);font-size:.82rem">${r.ownerName||'–'} · ${r.phone||'–'}</div>
+          <div>${r.ownerName||'–'} · ${r.phone||'–'}</div>
           <div class="reg-meta">
             <span class="${r.category==='Makanan'?'food':'multi'}">${r.category||'–'}</span>
             <span>Grade ${r.grade||'–'}</span>
             <span>${rupiah(r.price||0)}</span>
-            ${statusBadge}
+            ${sb}
           </div>
         </div>
       </div>
       <div class="reg-actions">
-        <button class="btn-view"    onclick="openDetail('${r.id}')">🔍 Detail</button>
-        ${r.paymentStatus!=='approved' ? `<button class="btn-approve" onclick="approveReg('${r.id}')">✅ Approve</button>`:''}
-        ${r.paymentStatus!=='rejected' ? `<button class="btn-reject"  onclick="rejectReg('${r.id}')">❌ Tolak</button>`:''}
+        <button class="btn-view" onclick="openDetail('${r.id}')">🔍 Detail</button>
+        ${r.paymentStatus!=='approved'?`<button class="btn-approve" onclick="approveReg('${r.id}')">✅ Approve</button>`:''}
+        ${r.paymentStatus!=='rejected'?`<button class="btn-reject" onclick="rejectReg('${r.id}')">❌ Tolak</button>`:''}
       </div>`;
     container.appendChild(div);
   });
 };
 
 window.openDetail = function(id) {
-  const r = allRegistrations.find(x => x.id===id);
+  const r = allRegistrations.find(x=>x.id===id);
   if (!r) return;
   const fields = [
-    ['ID Registrasi',id],['Stand',r.boothNumber],['Nama UMKM',r.standName],
+    ['ID',id],['Stand',r.boothNumber],['Nama UMKM',r.standName],
     ['Nama Pemilik',r.ownerName],['WhatsApp',r.phone],['Email',r.emailPeserta||r.email],
     ['Kategori',r.category],['Grade','Grade '+(r.grade||'–')],['Total',rupiah(r.price||0)],
     ['Produk',r.productType||'–'],['Alamat',r.address||'–'],
-    ['Tanggal Daftar',r.createdAt?new Date(r.createdAt.seconds*1000).toLocaleString('id-ID'):'–'],
+    ['Tanggal',r.createdAt?new Date(r.createdAt.seconds*1000).toLocaleString('id-ID'):'–'],
     ['Status',r.paymentStatus]
   ];
   document.getElementById('modalBody').innerHTML = `
-    ${r.ktpUrl     ? `<div style="margin-bottom:12px"><div style="font-size:.78rem;font-weight:700;color:var(--muted);margin-bottom:6px">FOTO KTP</div><img class="modal-img" src="${r.ktpUrl}" alt="KTP"></div>` : ''}
-    ${r.transferUrl? `<div style="margin-bottom:16px"><div style="font-size:.78rem;font-weight:700;color:var(--muted);margin-bottom:6px">BUKTI TRANSFER</div><img class="modal-img" src="${r.transferUrl}" alt="Transfer"></div>` : ''}
+    ${r.ktpUrl?`<div style="margin-bottom:10px"><div style="font-size:.75rem;font-weight:700;color:#888;margin-bottom:5px">FOTO KTP</div><img class="modal-img" src="${r.ktpUrl}" alt="KTP"></div>`:''}
+    ${r.transferUrl?`<div style="margin-bottom:14px"><div style="font-size:.75rem;font-weight:700;color:#888;margin-bottom:5px">BUKTI TRANSFER</div><img class="modal-img" src="${r.transferUrl}" alt="Transfer"></div>`:''}
     <div class="modal-rows">${fields.map(([l,v])=>`<div><span>${l}</span><span>${v||'–'}</span></div>`).join('')}</div>
     <div class="modal-actions">
       ${r.paymentStatus!=='approved'?`<button class="btn-approve" onclick="approveReg('${id}');closeModalDirect()">✅ Approve</button>`:''}
-      ${r.paymentStatus!=='rejected'?`<button class="btn-reject"  onclick="rejectReg('${id}');closeModalDirect()">❌ Tolak</button>`:''}
+      ${r.paymentStatus!=='rejected'?`<button class="btn-reject" onclick="rejectReg('${id}');closeModalDirect()">❌ Tolak</button>`:''}
     </div>`;
   document.getElementById('modalOverlay').classList.add('open');
 };
@@ -1340,14 +1209,13 @@ window.rejectReg = async function(id) {
   hideLoading();
 };
 
-// ── EXPORT CSV ────────────────────────────────────────────
 window.exportCSV = function() {
-  const list = allRegistrations.filter(r => r.paymentStatus==='approved');
+  const list = allRegistrations.filter(r=>r.paymentStatus==='approved');
   let csv = 'Stand,Nama UMKM,Nama Pemilik,WhatsApp,Kategori,Grade,Total,Status,Tanggal\n';
   list.forEach(r => {
     csv += `${r.boothNumber||''},${r.standName||''},${r.ownerName||''},${r.phone||''},${r.category||''},${r.grade||''},${r.price||0},${r.paymentStatus||''},${r.createdAt?new Date(r.createdAt.seconds*1000).toLocaleDateString('id-ID'):''}\n`;
   });
-  dlBlob(csv, 'peserta-approved.csv');
+  dlBlob(csv,'peserta-approved.csv');
 };
 
 window.exportCSVFull = function() {
@@ -1355,7 +1223,7 @@ window.exportCSVFull = function() {
   allRegistrations.forEach(r => {
     csv += `${r.id||''},${r.boothNumber||''},${r.standName||''},${r.ownerName||''},${r.phone||''},${r.emailPeserta||r.email||''},${r.category||''},${r.grade||''},${r.price||0},${r.paymentStatus||''},${r.createdAt?new Date(r.createdAt.seconds*1000).toLocaleDateString('id-ID'):''}\n`;
   });
-  dlBlob(csv, 'semua-pendaftar.csv');
+  dlBlob(csv,'semua-pendaftar.csv');
 };
 
 function dlBlob(csv, name) {
@@ -1366,25 +1234,11 @@ function dlBlob(csv, name) {
   a.click();
 }
 
-// ── MODAL ────────────────────────────────────────────────
-window.closeModal = function(e) {
-  if (e.target===document.getElementById('modalOverlay')) closeModalDirect();
-};
-window.closeModalDirect = function() {
-  document.getElementById('modalOverlay').classList.remove('open');
-};
+window.closeModalDirect = function() { document.getElementById('modalOverlay').classList.remove('open'); };
 
-window.scrollToDaftar = function() {
-  document.getElementById('topTabs').scrollIntoView({behavior:'smooth'});
-};
-
-// ── INIT BOOKED STANDS (untuk user yang belum login) ──────
 async function initBookedStands() {
   const snap = await getDocs(collection(db,'registrations'));
-  snap.forEach(d => {
-    const r = d.data();
-    if (r.boothNumber) bookedStands[r.boothNumber] = r.paymentStatus;
-  });
+  snap.forEach(d => { const r=d.data(); if(r.boothNumber) bookedStands[r.boothNumber]=r.paymentStatus; });
 }
 initBookedStands();
 </script>

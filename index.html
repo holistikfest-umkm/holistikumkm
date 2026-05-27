@@ -38,11 +38,12 @@
 html{scroll-behavior:smooth}
 body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);min-height:100vh;font-size:15px}
 
+/* ── SCROLLBAR ── */
 ::-webkit-scrollbar{width:5px;height:5px}
 ::-webkit-scrollbar-track{background:var(--cream2)}
 ::-webkit-scrollbar-thumb{background:var(--cream3);border-radius:10px}
 
-/* NAV */
+/* ── NAV ── */
 nav{position:fixed;top:0;left:0;right:0;background:var(--ink);z-index:100;height:58px;display:flex;align-items:center;padding:0 28px;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,.06)}
 .nav-logo{font-family:'Fraunces',serif;font-size:1.05rem;color:#fff;letter-spacing:.01em;display:flex;align-items:center;gap:10px}
 .nav-logo span{color:var(--orange);font-style:italic}
@@ -57,11 +58,12 @@ nav{position:fixed;top:0;left:0;right:0;background:var(--ink);z-index:100;height
 .btn-logout{background:transparent;color:rgba(255,255,255,.6);border:1px solid rgba(255,255,255,.2);padding:5px 13px;border-radius:6px;font-size:.78rem;cursor:pointer;font-family:'DM Sans',sans-serif;transition:.15s}
 .btn-logout:hover{color:#fff;border-color:rgba(255,255,255,.4)}
 
-/* HERO */
+/* ── HERO ── */
 .hero{margin-top:58px;background:var(--ink);padding:52px 28px 44px;position:relative;overflow:hidden}
 .hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle at 20% 50%, rgba(194,65,12,.12) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(194,65,12,.08) 0%, transparent 40%)}
 .hero-inner{max-width:980px;margin:0 auto;display:grid;grid-template-columns:1fr auto;gap:32px;align-items:center}
 @media(max-width:700px){.hero-inner{grid-template-columns:1fr}}
+.hero-text{}
 .hero-eyebrow{display:inline-flex;align-items:center;gap:8px;background:rgba(194,65,12,.18);border:1px solid rgba(194,65,12,.3);color:rgba(255,255,255,.75);padding:5px 14px;border-radius:20px;font-size:.78rem;font-weight:500;margin-bottom:20px;letter-spacing:.03em}
 .hero h1{font-family:'Fraunces',serif;font-size:clamp(2rem,4.5vw,3.2rem);color:#fff;line-height:1.12;font-weight:700;margin-bottom:14px}
 .hero h1 em{color:var(--orange);font-style:italic}
@@ -83,16 +85,16 @@ nav{position:fixed;top:0;left:0;right:0;background:var(--ink);z-index:100;height
 .cd-sep{font-family:'Fraunces',serif;font-size:1.6rem;color:rgba(255,255,255,.2);padding-bottom:12px}
 .cd-deadline{margin-top:12px;font-size:.72rem;color:rgba(255,255,255,.35);border-top:1px solid rgba(255,255,255,.08);padding-top:10px}
 
-/* INFO STRIP */
+/* ── INFO STRIP ── */
 .info-strip{background:var(--orange);display:flex;justify-content:center;gap:0;flex-wrap:wrap}
 .is-item{padding:11px 20px;color:#fff;font-size:.8rem;font-weight:500;border-right:1px solid rgba(255,255,255,.2);display:flex;align-items:center;gap:6px}
 .is-item:last-child{border-right:none}
 .is-item svg{opacity:.8;flex-shrink:0}
 
-/* MAIN */
+/* ── MAIN ── */
 .main{max-width:980px;margin:0 auto;padding:32px 20px 60px}
 
-/* TOP TABS */
+/* ── TOP TABS ── */
 .top-tabs{display:flex;background:#fff;border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:28px;box-shadow:var(--shadow)}
 .ttab{flex:1;padding:13px 8px;text-align:center;font-size:.83rem;font-weight:600;cursor:pointer;color:var(--ink);opacity:.45;transition:.18s;border-right:1px solid var(--border);position:relative}
 .ttab:last-child{border-right:none}
@@ -102,11 +104,11 @@ nav{position:fixed;top:0;left:0;right:0;background:var(--ink);z-index:100;height
 .ttab-icon{font-size:1rem;display:block;margin-bottom:3px}
 #adminTabBtn{display:none}
 
-/* TAB CONTENT */
+/* ── TAB CONTENT ── */
 .tab-content{display:none}
 .tab-content.active{display:block}
 
-/* STEPPER */
+/* ── STEPPER ── */
 .stepper{display:flex;align-items:flex-start;margin-bottom:28px;background:#fff;border:1px solid var(--border);border-radius:12px;overflow:hidden;box-shadow:var(--shadow)}
 .wz{flex:1;padding:14px 10px;text-align:center;cursor:pointer;transition:.18s;border-right:1px solid var(--border);position:relative}
 .wz:last-child{border-right:none}
@@ -118,19 +120,20 @@ nav{position:fixed;top:0;left:0;right:0;background:var(--ink);z-index:100;height
 .wz.done .wz-lbl{opacity:.7;color:var(--green)}
 .wz.done .wz-num::before{content:'✓';font-size:.75rem}
 .wz.done .wz-num-txt{display:none}
+.wz::after{display:none}
 
-/* PANELS */
+/* ── PANELS ── */
 .panel{display:none}
 .panel.active{display:block}
 
-/* CARD */
+/* ── CARD ── */
 .card{background:#fff;border:1px solid var(--border);border-radius:14px;padding:26px;box-shadow:var(--shadow);margin-bottom:16px}
 .card-head{display:flex;align-items:center;gap:10px;margin-bottom:5px}
 .card-head-icon{width:34px;height:34px;background:var(--orange-light);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0}
 .card-title{font-family:'Fraunces',serif;font-size:1.25rem;font-weight:700;color:var(--ink)}
 .card-sub{font-size:.83rem;color:#7A6E60;margin-bottom:20px;margin-top:2px;padding-left:44px}
 
-/* CATEGORY SELECT */
+/* ── CATEGORY SELECT ── */
 .cat-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 @media(max-width:480px){.cat-grid{grid-template-columns:1fr}}
 .cat-card{border:2px solid var(--border);border-radius:12px;padding:20px;cursor:pointer;transition:.18s;position:relative;background:#fff}
@@ -145,10 +148,9 @@ nav{position:fixed;top:0;left:0;right:0;background:var(--ink);z-index:100;height
 .cat-zone.multi{background:var(--blue-light);color:var(--blue)}
 .cat-zone.food{background:var(--orange-light);color:var(--orange-dark)}
 
-/* DENAH */
-.denah-label-panggung{background:linear-gradient(135deg,#1A1510 0%,#2E2820 100%);color:#fff;text-align:center;padding:10px;border-radius:9px 9px 0 0;font-size:.8rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;display:flex;align-items:center;justify-content:center;gap:8px;border:1px solid rgba(255,255,255,.08)}
-.denah-label-pintu{background:linear-gradient(135deg,var(--green) 0%,#166534 100%);color:#fff;text-align:center;padding:10px;border-radius:0 0 9px 9px;font-size:.8rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;display:flex;align-items:center;justify-content:center;gap:8px;margin-top:0}
-.denah-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;background:#fff;border:1px solid var(--border);border-left:1px solid var(--border);border-right:1px solid var(--border);border-top:none;border-bottom:none;padding:10px 8px 12px}
+/* ── DENAH ── */
+.denah-top-label{background:var(--ink);color:#fff;text-align:center;padding:8px;border-radius:9px 9px 0 0;font-size:.8rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;margin-bottom:0}
+.denah-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;background:#fff;border:1px solid var(--border);border-radius:0 0 10px 10px;padding:10px 8px 12px}
 .denah{display:flex;gap:5px;min-width:580px}
 .blok{flex:1;border:1px solid var(--border);border-radius:8px;overflow:hidden}
 .blok-hdr{padding:6px 4px;text-align:center;font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;background:var(--ink2);color:#fff}
@@ -156,8 +158,11 @@ nav{position:fixed;top:0;left:0;right:0;background:var(--ink);z-index:100;height
 .grade-sep{height:1.5px;background:var(--cream2);margin:2px 1px;border-radius:2px}
 .stand-row-map{display:grid;grid-template-columns:1fr 1fr;gap:3px}
 .sc{border-radius:4px;padding:6px 2px;text-align:center;font-size:9.5px;font-weight:700;cursor:pointer;transition:.13s;border:1.5px solid transparent;user-select:none;line-height:1}
+/* Grade A = biru muda (atas) */
 .ga{background:var(--blue-light);color:var(--blue);border-color:#93C5FD}
+/* Grade B = ungu/pink (tengah) */
 .gb{background:var(--purple-light);color:var(--purple);border-color:#C084FC}
+/* Grade C = biru tua (bawah, dekat pintu) */
 .gc{background:var(--teal-blue-light);color:var(--teal-blue);border-color:#60A5FA}
 .sc:hover:not(.sc-booked):not(.sc-off){transform:scale(1.1);box-shadow:0 2px 8px rgba(0,0,0,.15)}
 .sc.sc-selected{background:var(--orange)!important;color:#fff!important;border-color:var(--orange-dark)!important;transform:scale(1.1)}
@@ -185,17 +190,15 @@ nav{position:fixed;top:0;left:0;right:0;background:var(--ink);z-index:100;height
 .ml-item{display:flex;align-items:center;gap:5px;font-size:.77rem;color:#7A6E60;font-weight:500}
 .ml-dot{width:12px;height:12px;border-radius:3px;flex-shrink:0}
 
-/* Bottom area rows */
+/* Bottom area */
 .map-bottom{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin-top:10px}
-.map-bottom-pintu{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin-top:8px;padding-top:8px;border-top:1.5px dashed var(--border)}
 .mb-cell{padding:6px 12px;border-radius:6px;font-size:.73rem;font-weight:600;border:1px solid var(--border)}
 .mb-toilet{background:var(--purple-light);color:var(--purple);border-color:#C084FC}
 .mb-pintu{background:var(--green-light);color:var(--green);border-color:#6EE7B7}
 .mb-makanan{background:var(--orange-light);color:var(--orange-dark);border-color:#FCD9BD}
 .mb-arena{background:var(--blue-light);color:var(--blue);border-color:#93C5FD}
-.mb-stage{background:var(--ink);color:#fff;border-color:var(--ink2)}
 
-/* FORM */
+/* ── FORM ── */
 .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 @media(max-width:560px){.form-grid{grid-template-columns:1fr}}
 .ff{display:flex;flex-direction:column;gap:6px}
@@ -206,7 +209,7 @@ nav{position:fixed;top:0;left:0;right:0;background:var(--ink);z-index:100;height
 .ff input:focus,.ff select:focus,.ff textarea:focus{border-color:var(--orange);box-shadow:0 0 0 3px rgba(194,65,12,.1)}
 .ff .fhint{font-size:.75rem;color:#9A8E82}
 
-/* PAYMENT */
+/* ── PAYMENT ── */
 .pay-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px}
 @media(max-width:480px){.pay-grid{grid-template-columns:1fr}}
 .pay-opt{border:2px solid var(--border);border-radius:12px;padding:16px;cursor:pointer;background:#fff;transition:.18s;position:relative}
@@ -227,7 +230,7 @@ nav{position:fixed;top:0;left:0;right:0;background:var(--ink);z-index:100;height
 .rek-row span:last-child{font-weight:600;color:#fff}
 .rek-row.rek-total span:last-child{color:var(--orange);font-size:1.15rem;font-family:'Fraunces',serif;font-weight:700}
 
-/* UPLOAD */
+/* ── UPLOAD ── */
 .upload-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 @media(max-width:480px){.upload-grid{grid-template-columns:1fr}}
 .upload-zone{border:2px dashed var(--border);border-radius:12px;padding:20px;text-align:center;cursor:pointer;position:relative;background:#fff;transition:.18s}
@@ -240,7 +243,7 @@ nav{position:fixed;top:0;left:0;right:0;background:var(--ink);z-index:100;height
 .upload-preview.show{display:flex}
 .upload-preview img{max-height:60px;border-radius:6px;border:1px solid var(--border)}
 
-/* NOTICES */
+/* ── NOTICES ── */
 .notice{border-radius:10px;padding:12px 16px;font-size:.82rem;font-weight:500;display:flex;gap:10px;align-items:flex-start;margin-bottom:16px;line-height:1.6}
 .notice.info{background:#EFF6FF;color:#1E3A6E;border:1px solid #BFDBFE}
 .notice.warn{background:var(--amber-light);color:#78350F;border:1px solid #FCD34D}
@@ -248,7 +251,7 @@ nav{position:fixed;top:0;left:0;right:0;background:var(--ink);z-index:100;height
 .notice.danger{background:var(--red-light);color:#7F1D1D;border:1px solid #FCA5A5}
 .notice-icon{font-size:1rem;flex-shrink:0;margin-top:.1rem}
 
-/* SUMMARY */
+/* ── SUMMARY ── */
 .summary-table{background:#fff;border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:20px}
 .sum-row{display:flex;justify-content:space-between;padding:12px 18px;border-bottom:1px solid var(--cream2);font-size:.85rem}
 .sum-row:last-child{border-bottom:none;background:var(--cream);font-size:1rem}
@@ -262,7 +265,7 @@ nav{position:fixed;top:0;left:0;right:0;background:var(--ink);z-index:100;height
 .agree-wrap input[type=checkbox]{flex-shrink:0;margin-top:3px;width:16px;height:16px;accent-color:var(--orange);cursor:pointer}
 .agree-link{color:var(--orange);font-weight:600;text-decoration:underline;cursor:pointer}
 
-/* BUTTONS */
+/* ── BUTTONS ── */
 .btn-row{display:flex;gap:10px;margin-top:6px}
 .btn-back{flex:1;background:#fff;color:var(--ink);border:1.5px solid var(--border);padding:12px 20px;border-radius:9px;font-family:'DM Sans',sans-serif;font-weight:600;font-size:.88rem;cursor:pointer;transition:.15s}
 .btn-back:hover{background:var(--cream2)}
@@ -271,7 +274,7 @@ nav{position:fixed;top:0;left:0;right:0;background:var(--ink);z-index:100;height
 .btn-next:disabled{background:var(--cream3);color:#9A8E82;cursor:not-allowed;transform:none;box-shadow:none}
 .btn-full{width:100%}
 
-/* SUCCESS */
+/* ── SUCCESS ── */
 .success-wrap{text-align:center;padding:28px 16px}
 .success-icon{width:64px;height:64px;border-radius:50%;background:var(--green-light);display:inline-flex;align-items:center;justify-content:center;font-size:1.8rem;margin-bottom:18px}
 .success-title{font-family:'Fraunces',serif;font-size:1.9rem;font-weight:700;color:var(--ink);margin-bottom:10px}
@@ -300,7 +303,7 @@ nav{position:fixed;top:0;left:0;right:0;background:var(--ink);z-index:100;height
 .btn-sec-sm{background:#fff;color:var(--ink);border:1.5px solid var(--border);padding:12px 20px;border-radius:9px;font-family:'DM Sans',sans-serif;font-weight:600;font-size:.88rem;cursor:pointer;transition:.15s}
 .btn-sec-sm:hover{background:var(--cream2)}
 
-/* MY TICKETS */
+/* ── MY TICKETS ── */
 .tickets-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:16px}
 .tkt{background:#fff;border:1px solid var(--border);border-radius:14px;padding:20px;transition:.18s;box-shadow:var(--shadow)}
 .tkt:hover{box-shadow:var(--shadow-md);transform:translateY(-2px)}
@@ -322,7 +325,8 @@ nav{position:fixed;top:0;left:0;right:0;background:var(--ink);z-index:100;height
 .btn-tkt.qr{background:var(--green-light);color:var(--green)}
 .btn-tkt.wa{background:#DCFCE7;color:#166534;text-decoration:none}
 
-/* RULES */
+/* ── RULES ── */
+.rules-section{margin-bottom:20px}
 .rs-card{background:#fff;border:1px solid var(--border);border-radius:14px;padding:24px;margin-bottom:14px;box-shadow:var(--shadow)}
 .rs-head{font-family:'Fraunces',serif;font-size:1.15rem;font-weight:700;margin-bottom:16px;display:flex;align-items:center;gap:10px}
 .rs-head-icon{font-size:1.3rem}
@@ -347,7 +351,7 @@ nav{position:fixed;top:0;left:0;right:0;background:var(--ink);z-index:100;height
 .wa-btn{display:inline-flex;align-items:center;gap:7px;background:var(--green);color:#fff;padding:9px 16px;border-radius:8px;font-size:.82rem;font-weight:700;text-decoration:none;margin-top:10px;transition:.15s}
 .wa-btn:hover{background:#166534}
 
-/* ADMIN */
+/* ── ADMIN ── */
 .admin-hero{background:var(--ink);border-radius:14px;padding:22px 24px;margin-bottom:20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;box-shadow:var(--shadow-md)}
 .admin-title{font-family:'Fraunces',serif;font-size:1.5rem;color:#fff;font-weight:700;margin-bottom:3px}
 .admin-sub{color:rgba(255,255,255,.45);font-size:.82rem}
@@ -369,6 +373,7 @@ nav{position:fixed;top:0;left:0;right:0;background:var(--ink);z-index:100;height
 .reg-card:hover{border-color:var(--cream3);box-shadow:var(--shadow-md)}
 .reg-main{display:flex;gap:18px;align-items:center;flex-wrap:wrap;flex:1}
 .reg-stand{font-family:'Fraunces',serif;font-size:1.6rem;font-weight:700;min-width:56px}
+.reg-info{}
 .reg-name{font-weight:700;font-size:.92rem;margin-bottom:2px}
 .reg-meta{display:flex;gap:7px;margin-top:5px;flex-wrap:wrap}
 .reg-meta span{font-size:.73rem;padding:2px 9px;border-radius:5px;font-weight:700}
@@ -389,7 +394,7 @@ nav{position:fixed;top:0;left:0;right:0;background:var(--ink);z-index:100;height
 .btn-reject-sm{background:var(--red-light);color:var(--red);border:none;padding:8px 16px;border-radius:7px;font-size:.78rem;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;transition:.15s}
 .btn-reject-sm:hover{background:#FEE2E2}
 
-/* MODAL */
+/* ── MODAL ── */
 .modal-overlay{display:none;position:fixed;inset:0;background:rgba(26,21,16,.55);z-index:200;align-items:center;justify-content:center;padding:24px;backdrop-filter:blur(3px)}
 .modal-overlay.open{display:flex}
 .modal-box{background:#fff;border-radius:16px;max-width:540px;width:100%;max-height:90vh;overflow-y:auto;padding:28px;box-shadow:0 24px 64px rgba(0,0,0,.2)}
@@ -402,14 +407,14 @@ nav{position:fixed;top:0;left:0;right:0;background:var(--ink);z-index:100;height
 .modal-actions{display:flex;gap:10px;margin-top:20px}
 .modal-actions button{flex:1}
 
-/* LOADING */
+/* ── LOADING ── */
 .loading-overlay{display:none;position:fixed;inset:0;background:rgba(26,21,16,.65);z-index:300;align-items:center;justify-content:center;flex-direction:column;gap:14px;backdrop-filter:blur(4px)}
 .loading-overlay.open{display:flex}
 .spinner{width:44px;height:44px;border:3px solid rgba(255,255,255,.2);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite}
 .loading-text{color:#fff;font-weight:600;font-size:.9rem}
 @keyframes spin{to{transform:rotate(360deg)}}
 
-/* MISC */
+/* ── MISC ── */
 .sec-label{font-size:.71rem;font-weight:700;letter-spacing:.1em;color:#9A8E82;text-transform:uppercase;margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--cream2);display:block}
 .float-help{position:fixed;bottom:22px;right:22px;width:46px;height:46px;background:var(--orange);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.2rem;cursor:pointer;box-shadow:0 4px 16px rgba(194,65,12,.4);z-index:50;border:none;font-family:'Fraunces',serif;font-weight:700;transition:.18s}
 .float-help:hover{transform:scale(1.1)}
@@ -449,7 +454,7 @@ nav{position:fixed;top:0;left:0;right:0;background:var(--ink);z-index:100;height
         <span class="htag">✅ QR Check-in</span>
         <span class="htag">🔌 Listrik termasuk</span>
       </div>
-      <button class="btn-hero" onclick="document.getElementById('mainArea').scrollIntoView({behavior:'smooth'})">
+      <button class="btn-hero" id="btnMulaiDaftar">
         Mulai Pendaftaran
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 3l5 5-5 5M3 8h10" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </button>
@@ -525,7 +530,7 @@ nav{position:fixed;top:0;left:0;right:0;background:var(--ink);z-index:100;height
     </div>
   </div>
 
-  <!-- TAB DAFTAR -->
+  <!-- ═══ TAB DAFTAR ═══ -->
   <div class="tab-content active" id="tab-daftar">
 
     <!-- STEPPER -->
@@ -537,6 +542,7 @@ nav{position:fixed;top:0;left:0;right:0;background:var(--ink);z-index:100;height
 
     <!-- PANEL 1 -->
     <div class="panel active" id="p1">
+      <!-- Kategori -->
       <div class="card">
         <div class="card-head">
           <div class="card-head-icon">🏪</div>
@@ -586,33 +592,25 @@ nav{position:fixed;top:0;left:0;right:0;background:var(--ink);z-index:100;height
           </div>
         </div>
 
-        <!-- PANGGUNG di atas (depan Grade A) -->
-        <div class="denah-label-panggung">🎭 PANGGUNG UTAMA &amp; AREA PENONTON</div>
+        <div class="denah-top-label">▲ PINTU MASUK UTAMA</div>
         <div class="denah-wrap">
           <div class="denah" id="denahMap"></div>
         </div>
-        <!-- PINTU di bawah (depan Grade C) -->
-        <div class="denah-label-pintu">▼ PINTU MASUK UTAMA (GSM)</div>
 
         <div class="map-legend">
-          <div class="ml-item"><div class="ml-dot" style="background:var(--blue-light);border:1px solid #93C5FD"></div>Grade A (hadap panggung)</div>
-          <div class="ml-item"><div class="ml-dot" style="background:var(--purple-light);border:1px solid #C084FC"></div>Grade B (tengah)</div>
-          <div class="ml-item"><div class="ml-dot" style="background:var(--teal-blue-light);border:1px solid #60A5FA"></div>Grade C (dekat pintu masuk)</div>
+          <div class="ml-item"><div class="ml-dot" style="background:var(--blue-light);border:1px solid #93C5FD"></div>Grade A (baris atas)</div>
+          <div class="ml-item"><div class="ml-dot" style="background:var(--purple-light);border:1px solid #C084FC"></div>Grade B (baris tengah)</div>
+          <div class="ml-item"><div class="ml-dot" style="background:var(--teal-blue-light);border:1px solid #60A5FA"></div>Grade C (baris bawah)</div>
           <div class="ml-item"><div class="ml-dot" style="background:var(--orange)"></div>Dipilih</div>
           <div class="ml-item"><div class="ml-dot" style="background:var(--cream2);border:1px solid var(--border)"></div>Sudah terisi</div>
         </div>
 
-        <!-- Fasilitas atas (dekat panggung) -->
         <div class="map-bottom">
-          <div class="mb-cell mb-stage">🎤 Panggung Utama</div>
-          <div class="mb-cell mb-arena">🎠 Area Penonton</div>
-        </div>
-        <!-- Fasilitas bawah (dekat pintu masuk) -->
-        <div class="map-bottom-pintu">
           <div class="mb-cell mb-toilet">🚻 Toilet × 2</div>
           <div class="mb-cell mb-toilet">🚽 Toilet Portabel</div>
           <div class="mb-cell mb-pintu">🚪 Pintu / GSM</div>
           <div class="mb-cell mb-makanan">🍽️ Area Makanan</div>
+          <div class="mb-cell mb-arena">🎠 Arena Bermain</div>
         </div>
 
         <div class="stand-info" id="standInfo">
@@ -637,6 +635,7 @@ nav{position:fixed;top:0;left:0;right:0;background:var(--ink);z-index:100;height
 
     <!-- PANEL 2 -->
     <div class="panel" id="p2">
+      <!-- Data Diri -->
       <div class="card">
         <div class="card-head">
           <div class="card-head-icon">👤</div>
@@ -672,12 +671,14 @@ nav{position:fixed;top:0;left:0;right:0;background:var(--ink);z-index:100;height
         </div>
       </div>
 
+      <!-- Metode Bayar -->
       <div class="card">
         <div class="card-head">
           <div class="card-head-icon">💳</div>
           <div class="card-title">Metode Pembayaran</div>
         </div>
         <div class="card-sub">Pilih metode, lalu transfer ke rekening di bawah sebelum upload bukti.</div>
+
         <div class="pay-grid">
           <div class="pay-opt selected" id="payLunas" onclick="selectPay('lunas')">
             <div class="pay-check">✓</div>
@@ -692,6 +693,7 @@ nav{position:fixed;top:0;left:0;right:0;background:var(--ink);z-index:100;height
             <div class="pay-opt-amount" id="amtDP">–</div>
           </div>
         </div>
+
         <div class="rek-box">
           <div class="rek-title">Rekening Resmi Panitia</div>
           <div class="rek-row"><span>Bank</span><span>Bank BPD Jateng</span></div>
@@ -705,6 +707,7 @@ nav{position:fixed;top:0;left:0;right:0;background:var(--ink);z-index:100;height
         </div>
       </div>
 
+      <!-- Upload -->
       <div class="card">
         <div class="card-head">
           <div class="card-head-icon">📎</div>
@@ -719,7 +722,7 @@ nav{position:fixed;top:0;left:0;right:0;background:var(--ink);z-index:100;height
           <div class="ff">
             <label>Foto KTP <span style="color:var(--orange)">*</span></label>
             <div class="upload-zone">
-              <input type="file" id="ktpFile" accept="image/*" onchange="handleUpload('ktpFile','ktpPreview','ktpImg','ktpName')">
+              <input type="file" id="ktpFile" accept="image/*" onchange="handleUpload('ktpFile','ktpPreview','ktpImg')">
               <span class="uz-icon">🪪</span>
               <div class="uz-label">Klik untuk upload KTP</div>
               <div class="uz-hint">JPG / PNG · Maks 32MB</div>
@@ -732,7 +735,7 @@ nav{position:fixed;top:0;left:0;right:0;background:var(--ink);z-index:100;height
           <div class="ff">
             <label>Bukti Transfer <span style="color:var(--orange)">*</span></label>
             <div class="upload-zone">
-              <input type="file" id="trFile" accept="image/*" onchange="handleUpload('trFile','trPreview','trImg','trName')">
+              <input type="file" id="trFile" accept="image/*" onchange="handleUpload('trFile','trPreview','trImg')">
               <span class="uz-icon">🧾</span>
               <div class="uz-label">Klik untuk upload bukti bayar</div>
               <div class="uz-hint">JPG / PNG · Maks 32MB</div>
@@ -760,6 +763,7 @@ nav{position:fixed;top:0;left:0;right:0;background:var(--ink);z-index:100;height
         <span class="notice-icon">ℹ️</span>
         <div>Periksa semua data di bawah sebelum mengirim. Setelah terkirim, <strong>stand langsung terkunci</strong> untuk Anda.</div>
       </div>
+
       <div class="card">
         <div class="card-head">
           <div class="card-head-icon">📋</div>
@@ -777,10 +781,12 @@ nav{position:fixed;top:0;left:0;right:0;background:var(--ink);z-index:100;height
           <div class="sum-row"><span>Metode Bayar</span><span id="sumMethod">–</span></div>
           <div class="sum-row total"><span>Total Dibayar Sekarang</span><span id="sumTotal">–</span></div>
         </div>
+
         <div class="agree-wrap">
           <input type="checkbox" id="agreeChk">
           <label for="agreeChk">Saya menyatakan data di atas benar, bersedia menjaga kebersihan stand, mematuhi jam buka sebelum 08.00 WIB, menjaga kehalalan dagangan, dan menyetujui seluruh <span class="agree-link" onclick="switchTab('rules')">Ketentuan Holistik Fest UMKM 2026</span>.</label>
         </div>
+
         <div class="btn-row">
           <button class="btn-back" onclick="goPanel(2)">← Kembali</button>
           <button class="btn-next" id="btnSubmit" onclick="submitRegistration()">
@@ -797,6 +803,7 @@ nav{position:fixed;top:0;left:0;right:0;background:var(--ink);z-index:100;height
           <div class="success-icon">🎉</div>
           <div class="success-title">Pendaftaran Terkirim!</div>
           <div class="success-sub">Data Anda sudah kami terima. Admin akan memverifikasi dalam <strong>1×24 jam</strong>. Anda akan dihubungi via WhatsApp setelah disetujui.</div>
+
           <div class="ticket-box">
             <div class="tb-stand" id="tbStand">–</div>
             <div class="tb-status">⏳ Menunggu Verifikasi</div>
@@ -808,6 +815,7 @@ nav{position:fixed;top:0;left:0;right:0;background:var(--ink);z-index:100;height
             <div class="tb-row"><span>Terbayar</span><span id="tbTotal">–</span></div>
             <div id="qr-display"></div>
           </div>
+
           <div class="benefits-box">
             <div class="bx-title">Yang Anda dapatkan</div>
             <div class="bx-item"><span class="bx-icon">📄</span><div><strong>Kwitansi PDF + Denah Lokasi</strong>Bukti resmi dengan posisi stand Anda di peta Lapangan Garnisun.</div></div>
@@ -815,6 +823,7 @@ nav{position:fixed;top:0;left:0;right:0;background:var(--ink);z-index:100;height
             <div class="bx-item"><span class="bx-icon">🔌</span><div><strong>Instalasi listrik 1 titik</strong>Sudah termasuk dalam harga sewa stand.</div></div>
             <div class="bx-item"><span class="bx-icon">📍</span><div><strong>Akses loading 18 Juni 2026, 20.00 WIB</strong>Persiapkan stand Anda sehari sebelum acara.</div></div>
           </div>
+
           <div class="success-btns">
             <button class="btn-dl" onclick="downloadPDF()">📄 Download Kwitansi + Denah</button>
             <button class="btn-sec-sm" onclick="switchTab('tiket')">🎫 Tiket Saya</button>
@@ -825,7 +834,7 @@ nav{position:fixed;top:0;left:0;right:0;background:var(--ink);z-index:100;height
 
   </div><!-- /tab-daftar -->
 
-  <!-- TAB TIKET -->
+  <!-- ═══ TAB TIKET ═══ -->
   <div class="tab-content" id="tab-tiket">
     <div class="login-notice" id="loginNotice" style="display:none">
       🔐 Silakan <strong style="margin:0 4px">Login Google</strong> untuk melihat tiket Anda.
@@ -836,7 +845,7 @@ nav{position:fixed;top:0;left:0;right:0;background:var(--ink);z-index:100;height
     </div>
   </div>
 
-  <!-- TAB RULES -->
+  <!-- ═══ TAB RULES ═══ -->
   <div class="tab-content" id="tab-rules">
     <div class="rs-card">
       <div class="rs-head"><span class="rs-head-icon">💰</span> Harga Stand</div>
@@ -845,7 +854,7 @@ nav{position:fixed;top:0;left:0;right:0;background:var(--ink);z-index:100;height
         <tbody>
           <tr>
             <td><span class="grade-badge gb-a">Grade A</span></td>
-            <td>Baris depan (A1–A30) — langsung menghadap panggung & area penonton, eksposur tertinggi</td>
+            <td>Baris atas (A1–A30) — paling dekat pintu masuk utama, lalu lintas pengunjung terbanyak</td>
             <td><strong>Rp 1.250.000</strong></td>
           </tr>
           <tr>
@@ -855,11 +864,11 @@ nav{position:fixed;top:0;left:0;right:0;background:var(--ink);z-index:100;height
           </tr>
           <tr>
             <td><span class="grade-badge gb-c">Grade C</span></td>
-            <td>Baris belakang (C1–C33) — dekat pintu masuk utama / GSM, pertama dilihat pengunjung saat masuk</td>
+            <td>Baris bawah (C1–C33) — dekat pintu GSM dan area bermain</td>
             <td><strong>Rp 1.000.000</strong></td>
           </tr>
         </tbody>
-      </table>
+       </table>
     </div>
 
     <div class="rs-card">
@@ -925,7 +934,7 @@ nav{position:fixed;top:0;left:0;right:0;background:var(--ink);z-index:100;height
     </div>
   </div>
 
-  <!-- TAB ADMIN -->
+  <!-- ═══ TAB ADMIN ═══ -->
   <div class="tab-content" id="tab-admin">
     <div class="admin-hero">
       <div>
@@ -937,6 +946,7 @@ nav{position:fixed;top:0;left:0;right:0;background:var(--ink);z-index:100;height
         <button class="btn-export" onclick="exportCSV(true)">📊 Export Semua</button>
       </div>
     </div>
+
     <div class="stats-grid">
       <div class="stat"><div class="stat-lbl">Total Pendaftar</div><div class="stat-val" id="statTotal">0</div></div>
       <div class="stat"><div class="stat-lbl">Approved</div><div class="stat-val g" id="statApproved">0</div></div>
@@ -946,6 +956,7 @@ nav{position:fixed;top:0;left:0;right:0;background:var(--ink);z-index:100;height
       <div class="stat"><div class="stat-lbl">Makanan</div><div class="stat-val o" id="statFood">0</div></div>
       <div class="stat"><div class="stat-lbl">Total Pendapatan</div><div class="stat-val g" id="statRevenue" style="font-size:1.1rem">Rp 0</div></div>
     </div>
+
     <div class="admin-controls">
       <button class="filter-pill active" onclick="setFilter('all',this)">Semua</button>
       <button class="filter-pill" onclick="setFilter('pending',this)">⏳ Pending</button>
@@ -953,6 +964,7 @@ nav{position:fixed;top:0;left:0;right:0;background:var(--ink);z-index:100;height
       <button class="filter-pill" onclick="setFilter('rejected',this)">❌ Ditolak</button>
       <input class="search-box" type="text" id="adminSearch" placeholder="🔍 Cari nama / stand..." oninput="renderAdmin()">
     </div>
+
     <div class="admin-list" id="adminList">
       <div class="empty-state">Memuat data...</div>
     </div>
@@ -962,7 +974,9 @@ nav{position:fixed;top:0;left:0;right:0;background:var(--ink);z-index:100;height
 
 <button class="float-help" onclick="switchTab('rules')" title="Lihat Ketentuan">?</button>
 
-<!-- FIREBASE + LOGIC -->
+<!-- ══════════════════════════════════════════════
+     FIREBASE + LOGIC
+═══════════════════════════════════════════════ -->
 <script type="module">
 import { initializeApp }   from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
 import { getAnalytics }    from "https://www.gstatic.com/firebasejs/11.0.1/firebase-analytics.js";
@@ -982,25 +996,19 @@ const firebaseConfig = {
   appId:             "1:539848946942:web:6c02c5631321de179da1af",
   measurementId:     "G-4J081P8LQN"
 };
-
-const app = initializeApp(firebaseConfig);
-
-// ── FIX: Bungkus analytics dalam try-catch agar tidak blokir eksekusi ──
-let analytics;
-try { analytics = getAnalytics(app); } catch(e) { console.warn('Analytics skip:', e); }
-
+const app      = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
 const auth     = getAuth(app);
 const db       = getFirestore(app);
 const provider = new GoogleAuthProvider();
 
-// ── CONSTANTS ─────────────────────────────────────────
+// ── CONSTANTS ────────────────────────────────────────
 const IMGBB_KEY    = '76b51317391c38c2f5a78c131c3b66c9';
 const ADMIN_EMAILS = ['sobatambyar1990@gmail.com','holistikfestumkm@gmail.com'];
 const PRICES       = {A:1250000, B:1100000, C:1000000};
 const WA_PANITIA   = '6282322069665';
 
-// ── STANDS DATA ───────────────────────────────────────
-// Orientasi: Grade A = baris atas (hadap panggung) | Grade C = baris bawah (dekat pintu masuk)
+// ── STANDS DATA (sesuai foto denah asli) ────────────
 const BLOKS_DATA = [
   { name:'Blok I',   type:'multi', sections:[
     { grade:'A', pairs:[['A1','A2'],['A11','A12'],['A21','A22']] },
@@ -1029,18 +1037,35 @@ const BLOKS_DATA = [
   ]}
 ];
 
-// ── STATE ─────────────────────────────────────────────
+// ── STATE ──
 let currentUser = null, selCat = null, selStand = null, selGrade = null;
 let payType = 'lunas', bookedStands = {}, allRegs = [];
 let adminFilter = 'all', gradeFilter = 'all', adminListenerOn = false;
 let currentRegId = null;
 
-// ── UTIL ──────────────────────────────────────────────
+// ── UTIL ──
 const rupiah = n => 'Rp '+n.toLocaleString('id-ID');
 const showLoading = t => { document.getElementById('loadingText').textContent = t||'Memproses...'; document.getElementById('loadingOverlay').classList.add('open'); };
 const hideLoading = () => document.getElementById('loadingOverlay').classList.remove('open');
 
-// ── COUNTDOWN ─────────────────────────────────────────
+// ── PERBAIKAN UTAMA: TOMBOL MULAI PENDAFTARAN ──
+document.addEventListener('DOMContentLoaded', function() {
+  const btnMulai = document.getElementById('btnMulaiDaftar');
+  if (btnMulai) {
+    btnMulai.addEventListener('click', function(e) {
+      e.preventDefault();
+      const mainArea = document.getElementById('mainArea');
+      if (mainArea) {
+        mainArea.scrollIntoView({ 
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
+    });
+  }
+});
+
+// ── COUNTDOWN ──
 (function tick(){
   const diff = new Date('2026-06-10T23:59:59+07:00').getTime() - Date.now();
   if(diff <= 0){ document.getElementById('cdD').textContent='00'; return; }
@@ -1052,7 +1077,7 @@ const hideLoading = () => document.getElementById('loadingOverlay').classList.re
   setTimeout(tick,1000);
 })();
 
-// ── AUTH ──────────────────────────────────────────────
+// ── AUTH ──
 window.loginGoogle = async () => {
   try { provider.setCustomParameters({prompt:'select_account'}); await signInWithPopup(auth,provider); }
   catch(e){ alert('Login gagal: '+e.message); }
@@ -1083,16 +1108,15 @@ function renderNav(user){
   </div>`;
 }
 
-// ── TABS ──────────────────────────────────────────────
+// ── TABS ──
 window.switchTab = function(tab){
   ['daftar','tiket','rules','admin'].forEach(t=>{
-    const tabId = 'tt' + t.charAt(0).toUpperCase() + t.slice(1);
-    document.getElementById(tabId)?.classList.toggle('active', t===tab);
-    document.getElementById('tab-'+t)?.classList.toggle('active', t===tab);
+    document.getElementById('tt'+t.charAt(0).toUpperCase()+t.slice(1))?.classList.toggle('active',t===tab);
+    document.getElementById('tab-'+t)?.classList.toggle('active',t===tab);
   });
 };
 
-// ── STEPPER ───────────────────────────────────────────
+// ── STEPPER ──
 window.goPanel = function(n){
   [1,2,3,4].forEach(i=>document.getElementById('p'+i)?.classList.toggle('active',i===n));
   [1,2,3].forEach(i=>{
@@ -1105,7 +1129,7 @@ window.goPanel = function(n){
   document.getElementById('mainArea').scrollIntoView({behavior:'smooth'});
 };
 
-// ── STEP 1: KATEGORI ──────────────────────────────────
+// ── STEP 1: KATEGORI ──
 window.selectCat = function(cat){
   selCat=cat; selStand=null;
   document.getElementById('catMulti').classList.toggle('selected',cat==='multi');
@@ -1129,7 +1153,7 @@ function buildDenah(){
   BLOKS_DATA.forEach(blok=>{
     const div=document.createElement('div');
     div.className='blok';
-    div.innerHTML=`<div class="blok-hdr">${blok.name}</div><div class="blok-body"></div>`;
+    div.innerHTML=`<div class="blok-hdr">${blok.name}</div><div class="blok-body" id="bb_${blok.name.replace(/\s/g,'')}"></div>`;
     map.appendChild(div);
     const body=div.querySelector('.blok-body');
     blok.sections.forEach((sec,si)=>{
@@ -1165,19 +1189,14 @@ function pickStand(id,grade,type){
   const info=document.getElementById('standInfo');
   info.classList.add('show');
   document.getElementById('siStand').textContent=id;
-  // ── FIX: Deskripsi grade sesuai orientasi denah yang benar ──
-  document.getElementById('siGrade').textContent=`Grade ${grade} — ${
-    grade==='A' ? 'baris depan (langsung hadap panggung & area penonton)' :
-    grade==='B' ? 'baris tengah lapangan' :
-                  'baris belakang (dekat pintu masuk utama / GSM)'
-  }`;
+  document.getElementById('siGrade').textContent=`Grade ${grade} — ${grade==='A'?'baris depan (dekat pintu masuk)':grade==='B'?'baris tengah':'baris belakang (dekat GSM & arena bermain)'}`;
   document.getElementById('siType').textContent=type==='food'?'Makanan & Minuman':'Multi Produk';
   document.getElementById('siPrice').textContent=rupiah(PRICES[grade]);
   document.getElementById('btnP1').disabled=false;
   updatePayAmounts();
 }
 
-// ── STEP 2: DATA & BAYAR ──────────────────────────────
+// ── STEP 2: DATA & BAYAR ──
 window.selectPay = function(type){
   payType=type;
   document.getElementById('payLunas').classList.toggle('selected',type==='lunas');
@@ -1194,14 +1213,14 @@ function updatePayAmounts(){
   document.getElementById('nominalTransfer').textContent=payType==='dp'?rupiah(dp):rupiah(p);
 }
 
-// ── FIX: handleUpload dengan parameter nameId eksplisit ──
-window.handleUpload = function(inputId, previewId, imgId, nameId){
+window.handleUpload = function(inputId,previewId,imgId){
   const f=document.getElementById(inputId).files[0];
   const prev=document.getElementById(previewId);
   if(!f){prev.classList.remove('show');return;}
   prev.classList.add('show');
-  document.getElementById(imgId).src=URL.createObjectURL(f);
-  const nameEl=document.getElementById(nameId);
+  const img=document.getElementById(imgId);
+  img.src=URL.createObjectURL(f);
+  const nameEl=document.getElementById(inputId.replace('File','Name').replace('tr','tr'));
   if(nameEl) nameEl.textContent='✅ '+f.name;
 };
 
@@ -1233,7 +1252,7 @@ function buildSummary(){
   document.getElementById('sumTotal').textContent=rupiah(paid);
 }
 
-// ── SUBMIT ────────────────────────────────────────────
+// ── SUBMIT ──
 window.submitRegistration = async function(){
   if(!document.getElementById('agreeChk').checked){alert('Centang persetujuan ketentuan terlebih dahulu.');return;}
   if(!currentUser){alert('Silakan login Google terlebih dahulu.');return;}
@@ -1294,12 +1313,17 @@ function showSuccess(d,id){
   goPanel(4);
 }
 
-// ── PDF ───────────────────────────────────────────────
+// ── PDF ──
 window.downloadPDF = function(extId,extData){
   const {jsPDF}=window.jspdf;
   const pdf=new jsPDF({orientation:'portrait',unit:'mm',format:'a5'});
   const rid=extId||currentRegId||'—';
 
+  const get=key=>{
+    if(extData&&extData[key]!==undefined)return extData[key];
+    const el=document.getElementById('tb'+key.charAt(0).toUpperCase()+key.slice(1));
+    return el?el.textContent:'–';
+  };
   const boothNum=extData?.boothNumber||document.getElementById('tbStand')?.textContent||'–';
   const umkmName=extData?.standName||document.getElementById('tbUmkm')?.textContent||'–';
   const category=extData?.category||document.getElementById('tbCat')?.textContent||'–';
@@ -1309,7 +1333,6 @@ window.downloadPDF = function(extId,extData){
   const priceTotal=extData?rupiah(extData.price||0):rupiah(PRICES[gradeVal]||0);
   const status=extData?.paymentStatus==='approved'?'✓ Disetujui':'Menunggu Verifikasi';
 
-  // Header
   pdf.setFillColor(26,21,16); pdf.rect(0,0,148,26,'F');
   pdf.setTextColor(255,255,255);
   pdf.setFontSize(13); pdf.setFont('helvetica','bold');
@@ -1317,10 +1340,8 @@ window.downloadPDF = function(extId,extData){
   pdf.setFontSize(8); pdf.setFont('helvetica','normal');
   pdf.text('KWITANSI PENDAFTARAN STAND',10,19);
 
-  // Orange bar
   pdf.setFillColor(194,65,12); pdf.rect(0,26,148,2.5,'F');
 
-  // Info rows
   pdf.setTextColor(26,21,16); pdf.setFontSize(8.5);
   const rows=[
     ['ID Pendaftaran',rid],['Nomor Stand',boothNum],['Nama UMKM',umkmName],
@@ -1339,17 +1360,14 @@ window.downloadPDF = function(extId,extData){
     y+=7.5;
   });
 
-  // Divider
   pdf.setDrawColor(194,65,12); pdf.setLineWidth(0.6); pdf.line(10,y+2,138,y+2); y+=8;
 
-  // Mini Denah
   pdf.setFontSize(7); pdf.setFont('helvetica','bold'); pdf.setTextColor(120,106,92);
   pdf.text('DENAH POSISI STAND',10,y); y+=5;
 
-  // Panggung label (atas)
   pdf.setFillColor(26,21,16); pdf.rect(10,y,128,6,'F');
   pdf.setTextColor(255,255,255); pdf.setFontSize(5.5);
-  pdf.text('▲ PANGGUNG UTAMA & AREA PENONTON',30,y+4); y+=7;
+  pdf.text('▲ PINTU MASUK UTAMA',42,y+4); y+=7;
 
   const BLOK_NAMES=['I','II','III','IV','V'];
   const blokW=23.5, blokH=52, gap=3;
@@ -1386,13 +1404,7 @@ window.downloadPDF = function(extId,extData){
     });
   });
 
-  // Pintu masuk label (bawah) — FIX orientasi
-  const pintuY = y + blokH + 1;
-  pdf.setFillColor(21,128,61); pdf.rect(10,pintuY,128,6,'F');
-  pdf.setTextColor(255,255,255); pdf.setFontSize(5.5);
-  pdf.text('▼ PINTU MASUK UTAMA (GSM)',38,pintuY+4);
-
-  const legendY=pintuY+9;
+  const legendY=y+blokH+5;
   pdf.setFontSize(5.5); pdf.setFont('helvetica','bold'); pdf.setTextColor(120,106,92);
   pdf.text('Keterangan:',10,legendY);
   pdf.setFillColor(194,65,12); pdf.rect(10,legendY+2.5,5,3.5,'F');
@@ -1404,7 +1416,6 @@ window.downloadPDF = function(extId,extData){
   pdf.setFillColor(191,219,254); pdf.rect(120,legendY+2.5,5,3.5,'F');
   pdf.text('Grade C',127,legendY+5.5);
 
-  // Footer
   pdf.setFillColor(26,21,16); pdf.rect(0,196,148,12,'F');
   pdf.setTextColor(255,255,255); pdf.setFontSize(6);
   pdf.text('Simpan sebagai bukti resmi. Tunjukkan saat registrasi ulang di lokasi.',10,202);
@@ -1424,7 +1435,7 @@ window.downloadPDFById = async function(id){
   }catch(e){hideLoading();alert('Gagal memuat: '+e.message);}
 };
 
-// ── MY TICKETS ────────────────────────────────────────
+// ── MY TICKETS ──
 async function loadMyTickets(){
   if(!currentUser)return;
   const snap=await getDocs(query(collection(db,'registrations'),where('uid','==',currentUser.uid)));
@@ -1474,7 +1485,7 @@ window.showQR = function(id){
   setTimeout(()=>new QRCode(document.getElementById('qrModal'+id),{text:id,width:150,height:150}),80);
 };
 
-// ── ADMIN ─────────────────────────────────────────────
+// ── ADMIN ──
 function startAdminListener(){
   onSnapshot(collection(db,'registrations'),snap=>{
     allRegs=[];
@@ -1603,16 +1614,16 @@ window.exportCSV = function(full=false){
   a.download=full?'semua-pendaftar.csv':'peserta-approved.csv'; a.click();
 };
 
-// ── MODAL ─────────────────────────────────────────────
+// ── MODAL ──
 window.closeModalOutside = e=>{ if(e.target===document.getElementById('modalOverlay'))closeModal(); };
 window.closeModal = ()=>document.getElementById('modalOverlay').classList.remove('open');
 
-// ── INIT BOOKED STANDS ────────────────────────────────
+// ── INIT BOOKED STANDS ──
 (async()=>{
   try{
     const snap=await getDocs(collection(db,'registrations'));
     snap.forEach(d=>{const r=d.data();if(r.boothNumber)bookedStands[r.boothNumber]=r.paymentStatus;});
-  }catch(e){ console.warn('Init booked stands error:', e); }
+  }catch(e){}
 })();
 </script>
 </body>

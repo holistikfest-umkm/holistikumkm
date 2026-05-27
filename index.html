@@ -534,7 +534,7 @@ nav{position:fixed;top:0;left:0;right:0;background:var(--ink);z-index:100;height
 
         <div class="notice warn">
           <span>⚠️</span>
-          <div>Pastikan foto <strong>KTP jelas terbaca</strong> dan bukti transfer menampilkan <strong>nama pengirim, nominal, dan tanggal</strong>. Format JPG/PNG/PDF, maks. 5MB.</div>
+          <div>Pastikan foto <strong>KTP jelas terbaca</strong> dan bukti transfer menampilkan <strong>nama pengirim, nominal, dan tanggal</strong>. Format JPG/PNG, maks. 32MB. File akan diupload ke <strong>ImgBB</strong> (hosting gambar gratis).</div>
         </div>
 
         <div class="section-label">Dokumen Identitas</div>
@@ -542,20 +542,20 @@ nav{position:fixed;top:0;left:0;right:0;background:var(--ink);z-index:100;height
           <div class="field">
             <label>Foto KTP <span style="color:var(--food)">*</span></label>
             <div class="upload-area" onclick="triggerUpload('ktpFile')">
-              <input type="file" id="ktpFile" accept="image/*,.pdf" onchange="previewUpload('ktpFile','ktpPreview')">
+              <input type="file" id="ktpFile" accept="image/*" onchange="previewUpload('ktpFile','ktpPreview')">
               <div class="up-icon">🪪</div>
               <div class="up-text">Klik atau drag KTP ke sini</div>
-              <div class="up-hint">JPG, PNG, atau PDF · Maks 5MB</div>
+              <div class="up-hint">JPG atau PNG · Maks 32MB</div>
             </div>
             <div class="upload-preview" id="ktpPreview"></div>
           </div>
           <div class="field">
             <label>Bukti Transfer Pembayaran <span style="color:var(--food)">*</span></label>
             <div class="upload-area" onclick="triggerUpload('transferFile')">
-              <input type="file" id="transferFile" accept="image/*,.pdf" onchange="previewUpload('transferFile','transferPreview')">
+              <input type="file" id="transferFile" accept="image/*" onchange="previewUpload('transferFile','transferPreview')">
               <div class="up-icon">🏦</div>
               <div class="up-text">Klik atau drag bukti transfer</div>
-              <div class="up-hint">JPG, PNG, atau PDF · Maks 5MB</div>
+              <div class="up-hint">JPG atau PNG · Maks 32MB</div>
             </div>
             <div class="upload-preview" id="transferPreview"></div>
           </div>
@@ -759,13 +759,12 @@ nav{position:fixed;top:0;left:0;right:0;background:var(--ink);z-index:100;height
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
 import { getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
 import { getFirestore, collection, addDoc, getDocs, doc, updateDoc, query, where, onSnapshot, serverTimestamp, orderBy } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
-import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-storage.js";
+// Firebase Storage tidak digunakan — menggunakan ImgBB API
 
 const firebaseConfig = {
   apiKey: "AIzaSyDRUD_rNBVhADEeLDihluv5UuXkdYoSJlY",
   authDomain: "holistikfestumkm-ccb4b.firebaseapp.com",
   projectId: "holistikfestumkm-ccb4b",
-  storageBucket: "holistikfestumkm-ccb4b.firebasestorage.app",
   messagingSenderId: "539848946942",
   appId: "1:539848946942:web:6c02c5631321de179da1af"
 };
@@ -773,8 +772,26 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
-const storage = getStorage(app);
 const provider = new GoogleAuthProvider();
+
+// ─── IMGBB CONFIG ─────────────────────────────────────────
+// Daftar gratis di https://imgbb.com → My Profile → API → Add API key
+// Ganti string di bawah dengan API key Anda
+const IMGBB_API_KEY = 'GANTI_DENGAN_API_KEY_IMGBB_ANDA';
+
+async function uploadToImgBB(file, label) {
+  showLoading(`Mengupload ${label}...`);
+  const formData = new FormData();
+  formData.append('image', file);
+  formData.append('key', IMGBB_API_KEY);
+  const res = await fetch('https://api.imgbb.com/1/upload', {
+    method: 'POST',
+    body: formData
+  });
+  const json = await res.json();
+  if (!json.success) throw new Error('Upload ' + label + ' gagal: ' + (json.error?.message || 'Unknown error'));
+  return json.data.url; // URL gambar langsung
+}
 
 // ─── ADMIN EMAILS ────────────────────────────────────────
 const ADMIN_EMAILS = ["admin@gmail.com","holistikfestumkm@gmail.com"];
@@ -1066,7 +1083,8 @@ window.nextStep4 = function(){
   const ktp = document.getElementById('ktpFile').files[0];
   const tr = document.getElementById('transferFile').files[0];
   if(!ktp||!tr){ alert('Upload KTP dan bukti transfer terlebih dahulu.'); return; }
-  if(ktp.size>5*1024*1024||tr.size>5*1024*1024){ alert('Ukuran file maksimal 5MB.'); return; }
+  if(ktp.size>32*1024*1024||tr.size>32*1024*1024){ alert('Ukuran file maksimal 32MB.'); return; }
+  if(!ktp.type.startsWith('image/')||!tr.type.startsWith('image/')){ alert('File harus berupa gambar (JPG, PNG, dll).'); return; }
   buildSummary();
   goStep(5);
 };
@@ -1098,20 +1116,17 @@ window.submitRegistration = async function(){
   if(!document.getElementById('agreeCheck').checked){ alert('Centang persetujuan ketentuan terlebih dahulu.'); return; }
   if(!currentUser){ alert('Silakan login Google terlebih dahulu.'); return; }
   
-  showLoading('Mengupload dokumen...');
   try {
+    if(IMGBB_API_KEY === 'GANTI_DENGAN_API_KEY_IMGBB_ANDA'){
+      hideLoading();
+      alert('⚠️ ImgBB API Key belum diisi!\n\nBuka index.html → cari IMGBB_API_KEY → isi dengan API key dari imgbb.com');
+      return;
+    }
     const ktp = document.getElementById('ktpFile').files[0];
     const tr = document.getElementById('transferFile').files[0];
-    const ts = Date.now();
-    
-    const ktpRef = ref(storage,`uploads/ktp_${ts}_${ktp.name}`);
-    await uploadBytes(ktpRef,ktp);
-    const ktpUrl = await getDownloadURL(ktpRef);
-    
-    showLoading('Mengupload bukti transfer...');
-    const trRef = ref(storage,`uploads/transfer_${ts}_${tr.name}`);
-    await uploadBytes(trRef,tr);
-    const trUrl = await getDownloadURL(trRef);
+
+    const ktpUrl = await uploadToImgBB(ktp, 'KTP');
+    const trUrl = await uploadToImgBB(tr, 'Bukti Transfer');
     
     showLoading('Menyimpan pendaftaran...');
     const data = {

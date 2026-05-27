@@ -38,12 +38,10 @@
 html{scroll-behavior:smooth}
 body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);min-height:100vh;font-size:15px}
 
-/* ── SCROLLBAR ── */
 ::-webkit-scrollbar{width:5px;height:5px}
 ::-webkit-scrollbar-track{background:var(--cream2)}
 ::-webkit-scrollbar-thumb{background:var(--cream3);border-radius:10px}
 
-/* ── NAV ── */
 nav{position:fixed;top:0;left:0;right:0;background:var(--ink);z-index:100;height:58px;display:flex;align-items:center;padding:0 28px;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,.06)}
 .nav-logo{font-family:'Fraunces',serif;font-size:1.05rem;color:#fff;letter-spacing:.01em;display:flex;align-items:center;gap:10px}
 .nav-logo span{color:var(--orange);font-style:italic}
@@ -58,24 +56,17 @@ nav{position:fixed;top:0;left:0;right:0;background:var(--ink);z-index:100;height
 .btn-logout{background:transparent;color:rgba(255,255,255,.6);border:1px solid rgba(255,255,255,.2);padding:5px 13px;border-radius:6px;font-size:.78rem;cursor:pointer;font-family:'DM Sans',sans-serif;transition:.15s}
 .btn-logout:hover{color:#fff;border-color:rgba(255,255,255,.4)}
 
-/* ── HERO ── */
 .hero{margin-top:58px;background:var(--ink);padding:52px 28px 44px;position:relative;overflow:hidden}
 .hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle at 20% 50%, rgba(194,65,12,.12) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(194,65,12,.08) 0%, transparent 40%)}
 .hero-inner{max-width:980px;margin:0 auto;display:grid;grid-template-columns:1fr auto;gap:32px;align-items:center}
 @media(max-width:700px){.hero-inner{grid-template-columns:1fr}}
-.hero-text{}
 .hero-eyebrow{display:inline-flex;align-items:center;gap:8px;background:rgba(194,65,12,.18);border:1px solid rgba(194,65,12,.3);color:rgba(255,255,255,.75);padding:5px 14px;border-radius:20px;font-size:.78rem;font-weight:500;margin-bottom:20px;letter-spacing:.03em}
 .hero h1{font-family:'Fraunces',serif;font-size:clamp(2rem,4.5vw,3.2rem);color:#fff;line-height:1.12;font-weight:700;margin-bottom:14px}
 .hero h1 em{color:var(--orange);font-style:italic}
 .hero-sub{color:rgba(255,255,255,.5);font-size:.92rem;line-height:1.75;max-width:440px;margin-bottom:26px}
 .hero-tags{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:30px}
 .htag{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.65);padding:5px 13px;border-radius:20px;font-size:.78rem;font-weight:500}
-.btn-hero{background:var(--orange);color:#fff;border:none;padding:13px 30px;border-radius:9px;font-family:'DM Sans',sans-serif;font-weight:600;font-size:.95rem;cursor:pointer;transition:.18s;display:inline-flex;align-items:center;gap:8px}
-.btn-hero:hover{background:var(--orange-dark);transform:translateY(-2px);box-shadow:0 8px 24px rgba(194,65,12,.35)}
-.btn-hero svg{transition:.18s}
-.btn-hero:hover svg{transform:translateX(3px)}
 
-/* Countdown */
 .hero-cd{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:18px 22px;text-align:center}
 .cd-title{font-size:.68rem;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.1em;margin-bottom:12px;font-weight:600}
 .cd-nums{display:flex;gap:4px;align-items:center}
@@ -85,16 +76,13 @@ nav{position:fixed;top:0;left:0;right:0;background:var(--ink);z-index:100;height
 .cd-sep{font-family:'Fraunces',serif;font-size:1.6rem;color:rgba(255,255,255,.2);padding-bottom:12px}
 .cd-deadline{margin-top:12px;font-size:.72rem;color:rgba(255,255,255,.35);border-top:1px solid rgba(255,255,255,.08);padding-top:10px}
 
-/* ── INFO STRIP ── */
 .info-strip{background:var(--orange);display:flex;justify-content:center;gap:0;flex-wrap:wrap}
 .is-item{padding:11px 20px;color:#fff;font-size:.8rem;font-weight:500;border-right:1px solid rgba(255,255,255,.2);display:flex;align-items:center;gap:6px}
 .is-item:last-child{border-right:none}
 .is-item svg{opacity:.8;flex-shrink:0}
 
-/* ── MAIN ── */
 .main{max-width:980px;margin:0 auto;padding:32px 20px 60px}
 
-/* ── TOP TABS ── */
 .top-tabs{display:flex;background:#fff;border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:28px;box-shadow:var(--shadow)}
 .ttab{flex:1;padding:13px 8px;text-align:center;font-size:.83rem;font-weight:600;cursor:pointer;color:var(--ink);opacity:.45;transition:.18s;border-right:1px solid var(--border);position:relative}
 .ttab:last-child{border-right:none}
@@ -104,11 +92,9 @@ nav{position:fixed;top:0;left:0;right:0;background:var(--ink);z-index:100;height
 .ttab-icon{font-size:1rem;display:block;margin-bottom:3px}
 #adminTabBtn{display:none}
 
-/* ── TAB CONTENT ── */
 .tab-content{display:none}
 .tab-content.active{display:block}
 
-/* ── STEPPER ── */
 .stepper{display:flex;align-items:flex-start;margin-bottom:28px;background:#fff;border:1px solid var(--border);border-radius:12px;overflow:hidden;box-shadow:var(--shadow)}
 .wz{flex:1;padding:14px 10px;text-align:center;cursor:pointer;transition:.18s;border-right:1px solid var(--border);position:relative}
 .wz:last-child{border-right:none}
@@ -120,20 +106,16 @@ nav{position:fixed;top:0;left:0;right:0;background:var(--ink);z-index:100;height
 .wz.done .wz-lbl{opacity:.7;color:var(--green)}
 .wz.done .wz-num::before{content:'✓';font-size:.75rem}
 .wz.done .wz-num-txt{display:none}
-.wz::after{display:none}
 
-/* ── PANELS ── */
 .panel{display:none}
 .panel.active{display:block}
 
-/* ── CARD ── */
 .card{background:#fff;border:1px solid var(--border);border-radius:14px;padding:26px;box-shadow:var(--shadow);margin-bottom:16px}
 .card-head{display:flex;align-items:center;gap:10px;margin-bottom:5px}
 .card-head-icon{width:34px;height:34px;background:var(--orange-light);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0}
 .card-title{font-family:'Fraunces',serif;font-size:1.25rem;font-weight:700;color:var(--ink)}
 .card-sub{font-size:.83rem;color:#7A6E60;margin-bottom:20px;margin-top:2px;padding-left:44px}
 
-/* ── CATEGORY SELECT ── */
 .cat-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 @media(max-width:480px){.cat-grid{grid-template-columns:1fr}}
 .cat-card{border:2px solid var(--border);border-radius:12px;padding:20px;cursor:pointer;transition:.18s;position:relative;background:#fff}
@@ -148,7 +130,6 @@ nav{position:fixed;top:0;left:0;right:0;background:var(--ink);z-index:100;height
 .cat-zone.multi{background:var(--blue-light);color:var(--blue)}
 .cat-zone.food{background:var(--orange-light);color:var(--orange-dark)}
 
-/* ── DENAH ── */
 .denah-top-label{background:var(--ink);color:#fff;text-align:center;padding:8px;border-radius:9px 9px 0 0;font-size:.8rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;margin-bottom:0}
 .denah-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;background:#fff;border:1px solid var(--border);border-radius:0 0 10px 10px;padding:10px 8px 12px}
 .denah{display:flex;gap:5px;min-width:580px}
@@ -407,7 +388,6 @@ nav{position:fixed;top:0;left:0;right:0;background:var(--ink);z-index:100;height
 </head>
 <body>
 
-<!-- NAV -->
 <nav>
   <div class="nav-logo">
     <div class="nav-dot"></div>
@@ -418,7 +398,6 @@ nav{position:fixed;top:0;left:0;right:0;background:var(--ink);z-index:100;height
   </div>
 </nav>
 
-<!-- HERO -->
 <div class="hero">
   <div class="hero-inner">
     <div class="hero-text">
@@ -431,10 +410,6 @@ nav{position:fixed;top:0;left:0;right:0;background:var(--ink);z-index:100;height
         <span class="htag">✅ QR Check-in</span>
         <span class="htag">🔌 Listrik termasuk</span>
       </div>
-      <button class="btn-hero" id="btnMulaiDaftar">
-        Mulai Pendaftaran
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 3l5 5-5 5M3 8h10" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </button>
     </div>
     <div>
       <div class="hero-cd">
@@ -454,7 +429,6 @@ nav{position:fixed;top:0;left:0;right:0;background:var(--ink);z-index:100;height
   </div>
 </div>
 
-<!-- INFO STRIP -->
 <div class="info-strip">
   <div class="is-item">
     <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="white" stroke-width="1.5"/><path d="M5 8l2 2 4-4" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg>
@@ -474,13 +448,11 @@ nav{position:fixed;top:0;left:0;right:0;background:var(--ink);z-index:100;height
   </div>
 </div>
 
-<!-- LOADING -->
 <div class="loading-overlay" id="loadingOverlay">
   <div class="spinner"></div>
   <div class="loading-text" id="loadingText">Memproses...</div>
 </div>
 
-<!-- MODAL -->
 <div class="modal-overlay" id="modalOverlay" onclick="closeModalOutside(event)">
   <div class="modal-box" id="modalBox">
     <div class="modal-title">Detail Pendaftaran <button class="modal-close" onclick="closeModal()">✕</button></div>
@@ -488,10 +460,7 @@ nav{position:fixed;top:0;left:0;right:0;background:var(--ink);z-index:100;height
   </div>
 </div>
 
-<!-- MAIN -->
 <div class="main" id="mainArea">
-
-  <!-- TOP TABS -->
   <div class="top-tabs">
     <div class="ttab active" id="ttDaftar" onclick="switchTab('daftar')">
       <span class="ttab-icon">📝</span>Pendaftaran
@@ -507,7 +476,6 @@ nav{position:fixed;top:0;left:0;right:0;background:var(--ink);z-index:100;height
     </div>
   </div>
 
-  <!-- TAB DAFTAR -->
   <div class="tab-content active" id="tab-daftar">
     <div class="stepper">
       <div class="wz active" id="wz1"><div class="wz-num"><span class="wz-num-txt">1</span></div><div class="wz-lbl">Pilih Stand</div></div>
@@ -665,14 +633,12 @@ nav{position:fixed;top:0;left:0;right:0;background:var(--ink);z-index:100;height
     </div>
   </div>
 
-  <!-- TAB TIKET -->
   <div class="tab-content" id="tab-tiket">
     <div class="login-notice" id="loginNotice" style="display:none">🔐 Silakan <strong>Login Google</strong> untuk melihat tiket Anda.</div>
     <span class="sec-label">Pendaftaran Saya</span>
     <div class="tickets-grid" id="ticketsGrid"><div class="empty-state">Belum ada pendaftaran.</div></div>
   </div>
 
-  <!-- TAB RULES -->
   <div class="tab-content" id="tab-rules">
     <div class="rs-card"><div class="rs-head"><span class="rs-head-icon">💰</span> Harga Stand</div>
     <table class="price-table"><thead><tr><th>Grade</th><th>Posisi di Lapangan</th><th>Harga Sewa</th></tr></thead>
@@ -682,7 +648,6 @@ nav{position:fixed;top:0;left:0;right:0;background:var(--ink);z-index:100;height
     </tbody></table></div>
   </div>
 
-  <!-- TAB ADMIN -->
   <div class="tab-content" id="tab-admin">
     <div class="admin-hero"><div><div class="admin-title">Admin Dashboard</div><div class="admin-sub">Kelola seluruh pendaftaran stand UMKM 2026</div></div>
     <div class="admin-btns"><button class="btn-export" onclick="exportCSV(false)">📥 Export Approved</button><button class="btn-export" onclick="exportCSV(true)">📊 Export Semua</button></div></div>
@@ -701,7 +666,6 @@ nav{position:fixed;top:0;left:0;right:0;background:var(--ink);z-index:100;height
 <button class="float-help" onclick="switchTab('rules')" title="Lihat Ketentuan">?</button>
 
 <script type="module">
-// Firebase imports and initialization
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-analytics.js";
 import { getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
@@ -723,13 +687,10 @@ const auth = getAuth(app);
 const db = getFirestore(app);
 const provider = new GoogleAuthProvider();
 
-// Constants
 const IMGBB_KEY = '76b51317391c38c2f5a78c131c3b66c9';
 const ADMIN_EMAILS = ['sobatambyar1990@gmail.com', 'holistikfestumkm@gmail.com'];
 const PRICES = {A:1250000, B:1100000, C:1000000};
-const WA_PANITIA = '6282322069665';
 
-// Stand data
 const BLOKS_DATA = [
   { name:'Blok I', type:'multi', sections:[{ grade:'A', pairs:[['A1','A2'],['A11','A12'],['A21','A22']] },{ grade:'B', pairs:[['B1','B2'],['B11','B12'],['B21','B22']] },{ grade:'C', pairs:[['C1','C2'],['C11','C12'],['C24','C25']] }]},
   { name:'Blok II', type:'multi', sections:[{ grade:'A', pairs:[['A3','A4'],['A13','A14'],['A23','A24']] },{ grade:'B', pairs:[['B3','B4'],['B13','B14'],['B23','B24']] },{ grade:'C', pairs:[['C3','C4'],['C13','C14'],['C26','C27']] }]},
@@ -738,43 +699,15 @@ const BLOKS_DATA = [
   { name:'Blok V', type:'food', sections:[{ grade:'A', pairs:[['A9','A10'],['A19','A20'],['A29','A30']] },{ grade:'B', pairs:[['B9','B10'],['B19','B20'],['B29','B30']] },{ grade:'C', pairs:[['C9','C10'],['C22','C23'],['C32','C33']] }]}
 ];
 
-// State
 let currentUser = null, selCat = null, selStand = null, selGrade = null;
 let payType = 'lunas', bookedStands = {}, allRegs = [];
 let adminFilter = 'all', gradeFilter = 'all', adminListenerOn = false;
 let currentRegId = null;
 
-// Utility
 const rupiah = n => 'Rp ' + n.toLocaleString('id-ID');
 const showLoading = t => { document.getElementById('loadingText').textContent = t||'Memproses...'; document.getElementById('loadingOverlay').classList.add('open'); };
 const hideLoading = () => document.getElementById('loadingOverlay').classList.remove('open');
 
-// ============================================================
-// PERBAIKAN UTAMA: Tombol Mulai Pendaftaran
-// ============================================================
-document.addEventListener('DOMContentLoaded', function() {
-  const btnMulai = document.getElementById('btnMulaiDaftar');
-  if (btnMulai) {
-    btnMulai.addEventListener('click', function(e) {
-      e.preventDefault();
-      e.stopPropagation();
-      const mainArea = document.getElementById('mainArea');
-      if (mainArea) {
-        mainArea.scrollIntoView({ 
-          behavior: 'smooth',
-          block: 'start'
-        });
-      } else {
-        console.error('Element mainArea tidak ditemukan');
-      }
-    });
-    console.log('Tombol Mulai Pendaftaran siap digunakan');
-  } else {
-    console.error('Tombol btnMulaiDaftar tidak ditemukan di DOM');
-  }
-});
-
-// Countdown
 (function tick(){
   const diff = new Date('2026-06-10T23:59:59+07:00').getTime() - Date.now();
   if(diff <= 0){ document.getElementById('cdD').textContent='00'; return; }
@@ -786,7 +719,6 @@ document.addEventListener('DOMContentLoaded', function() {
   setTimeout(tick,1000);
 })();
 
-// Auth functions
 window.loginGoogle = async () => {
   try { provider.setCustomParameters({prompt:'select_account'}); await signInWithPopup(auth,provider); }
   catch(e){ alert('Login gagal: '+e.message); }
@@ -991,14 +923,9 @@ window.submitRegistration = async function(){
 };
 
 window.downloadPDF = function(){
-  alert('Fungsi download PDF akan menyertakan kwitansi lengkap dengan denah. (Implementasi penuh tersedia di versi lengkap)');
+  alert('Download PDF akan segera tersedia');
 };
 
-window.downloadPDFById = async function(id){
-  alert('Download PDF untuk ID: '+id);
-};
-
-// Admin functions
 function startAdminListener(){
   onSnapshot(collection(db,'registrations'),snap=>{
     allRegs=[];
@@ -1035,14 +962,10 @@ window.renderAdmin = function(){
   });
 };
 
-window.exportCSV = function(full){
-  alert('Export CSV akan tersedia di versi lengkap');
-};
-
+window.exportCSV = function(full){ alert('Export CSV akan segera tersedia'); };
 window.closeModalOutside = e=>{ if(e.target===document.getElementById('modalOverlay')) closeModal(); };
 window.closeModal = ()=>document.getElementById('modalOverlay').classList.remove('open');
 
-// Initial load
 (async()=>{
   try{
     const snap=await getDocs(collection(db,'registrations'));

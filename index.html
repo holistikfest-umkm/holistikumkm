@@ -274,7 +274,6 @@ nav{position:fixed;top:0;left:0;right:0;background:var(--ink);z-index:100;height
 .modal-rows div{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--cream2)}
 .modal-actions{display:flex;gap:10px;margin-top:20px}
 .modal-actions button{flex:1}
-/* ✅ FIX: loading overlay dengan id yang benar */
 .loading-overlay{display:none;position:fixed;inset:0;background:rgba(26,21,16,.65);z-index:300;align-items:center;justify-content:center;flex-direction:column;gap:14px;backdrop-filter:blur(4px)}
 .loading-overlay.open{display:flex}
 .spinner{width:44px;height:44px;border:3px solid rgba(255,255,255,.2);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite}
@@ -342,12 +341,13 @@ nav{position:fixed;top:0;left:0;right:0;background:var(--ink);z-index:100;height
   <div class="is-item">Loading barang: 18 Juni 2026, 20.00 WIB</div>
 </div>
 
-<!-- ✅ FIX UTAMA: Tambah id="loadingText" pada div loading -->
+<!-- Loading Overlay -->
 <div class="loading-overlay" id="loadingOverlay">
   <div class="spinner"></div>
   <div class="loading-text" id="loadingText">Memproses...</div>
 </div>
 
+<!-- Modal Overlay -->
 <div class="modal-overlay" id="modalOverlay" onclick="closeModalOutside(event)">
   <div class="modal-box">
     <div class="modal-title">Detail <button class="modal-close" onclick="closeModal()">✕</button></div>
@@ -583,19 +583,22 @@ let payType = 'lunas', bookedStands = {}, allRegs = [];
 let adminFilter = 'all', gradeFilter = 'all', adminListenerOn = false;
 let currentRegId = null;
 
-// ✅ FIX: rupiah dengan null-safe
-const rupiah = n => 'Rp ' + (n || 0).toLocaleString('id-ID');
+// ✅ FIX 1: rupiah dengan null-safe dan Number() agar tidak crash jika undefined
+const rupiah = n => {
+  const num = Number(n);
+  return 'Rp ' + (isNaN(num) ? 0 : num).toLocaleString('id-ID');
+};
 
-// ✅ FIX: showLoading/hideLoading null-safe
+// ✅ FIX 2: showLoading/hideLoading null-safe
 const showLoading = t => {
   const overlay = document.getElementById('loadingOverlay');
   const text = document.getElementById('loadingText');
-  if(text) text.textContent = t || 'Memproses...';
-  if(overlay) overlay.classList.add('open');
+  if (text) text.textContent = t || 'Memproses...';
+  if (overlay) overlay.classList.add('open');
 };
 const hideLoading = () => {
   const overlay = document.getElementById('loadingOverlay');
-  if(overlay) overlay.classList.remove('open');
+  if (overlay) overlay.classList.remove('open');
 };
 
 // Countdown
@@ -916,6 +919,7 @@ window.renderAdmin = function(){
   });
 };
 
+// ✅ FIX 3: openDetail — perbaiki backtick ganda yang menyebabkan syntax error
 window.openDetail = function(id){
   const r=allRegs.find(x=>x.id===id);
   if(!r) return;
@@ -927,14 +931,18 @@ window.openDetail = function(id){
   ];
   const modalBody=document.getElementById('modalBody');
   if(modalBody){
+    // ✅ FIX: Backtick tunggal yang benar, bukan backtick ganda
+    const ktpHtml = r.ktpUrl ? `<img class="modal-img" src="${r.ktpUrl}">` : '';
+    const trHtml = r.transferUrl ? `<img class="modal-img" src="${r.transferUrl}">` : '';
+    const boothSafe = (r.boothNumber||'').replace(/'/g, "\\'");
     modalBody.innerHTML=`
-      ${r.ktpUrl?`<img class="modal-img" src="${r.ktpUrl}">``:''}
-      ${r.transferUrl?`<img class="modal-img" src="${r.transferUrl}">``:''}
+      ${ktpHtml}
+      ${trHtml}
       <div class="modal-rows">${rows.map(([l,v])=>`<div><span>${l}</span><span>${v}</span></div>`).join('')}</div>
       <div class="modal-actions">
-        <button class="btn-approve" onclick="approveReg('${id}');closeModal()">✅ Approve</button>
-        <button class="btn-reject" onclick="rejectReg('${id}');closeModal()">❌ Tolak</button>
-        <button class="btn-delete" onclick="deleteReg('${id}','${r.boothNumber||''}');closeModal()">🗑 Hapus</button>
+        <button class="btn-approve" onclick="approveReg('${id}');closeModal()"><i class='fas fa-check'></i> Approve</button>
+        <button class="btn-reject" onclick="rejectReg('${id}');closeModal()"><i class='fas fa-times'></i> Tolak</button>
+        <button class="btn-delete" onclick="deleteReg('${id}','${boothSafe}',true)"><i class='fas fa-trash'></i> Hapus</button>
       </div>
     `;
   }
@@ -953,6 +961,7 @@ window.approveReg = async function(id){
 
 window.rejectReg = async function(id){
   const reason=prompt('Alasan penolakan (opsional):');
+  if(reason === null) return; // user cancel prompt
   showLoading('Menolak...');
   try{
     await updateDoc(doc(db,'registrations',id),{paymentStatus:'rejected',rejectReason:reason||''});
@@ -961,8 +970,8 @@ window.rejectReg = async function(id){
   }catch(e){ hideLoading(); alert('Gagal: '+e.message); }
 };
 
-// ✅ FIX UTAMA: deleteReg tanpa crash
-window.deleteReg = async function(id, boothNumber){
+// ✅ FIX 4: deleteReg — tutup modal DULU sebelum showLoading, force refresh token
+window.deleteReg = async function(id, boothNumber, fromModal = false){
   if(!confirm(`⚠️ PERINGATAN!\n\nAnda akan MENGHAPUS pendaftaran stand ${boothNumber}.\n\nData tidak dapat dipulihkan.\n\nYakin ingin menghapus?`)) return;
   if(!confirm(`KONFIRMASI AKHIR:\nHapus permanen stand ${boothNumber}?`)) return;
 
@@ -971,8 +980,13 @@ window.deleteReg = async function(id, boothNumber){
     return;
   }
 
+  // ✅ Tutup modal SEBELUM showLoading agar elemen DOM loading tidak terkunci
+  if(fromModal) closeModal();
+
   showLoading('Menghapus data...');
   try{
+    // ✅ Force refresh token agar Firestore tidak reject karena token kedaluwarsa
+    await currentUser.getIdToken(true);
     await deleteDoc(doc(db,'registrations',id));
     hideLoading();
     alert(`✅ Stand ${boothNumber} berhasil dihapus.`);

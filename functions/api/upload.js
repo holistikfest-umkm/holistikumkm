@@ -1,4 +1,5 @@
 export async function onRequest(context) {
+
   if (context.request.method !== 'POST') {
     return new Response(
       JSON.stringify({ error: 'Method not allowed' }),
@@ -13,63 +14,76 @@ export async function onRequest(context) {
   }
 
   try {
+
     const formData = await context.request.formData();
     const file = formData.get('file');
 
     if (!file) {
       return new Response(
-        JSON.stringify({ error: 'Tidak ada file' }),
+        JSON.stringify({ error: 'No file uploaded' }),
         {
           status: 400,
           headers: {
-            'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': '*'
+            'Content-Type': 'application/json'
           }
         }
       );
     }
 
-    // validasi ukuran
+    // MAX 5MB
     if (file.size > 5 * 1024 * 1024) {
       return new Response(
         JSON.stringify({ error: 'Max 5MB' }),
         {
           status: 400,
           headers: {
-            'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': '*'
+            'Content-Type': 'application/json'
           }
         }
       );
     }
 
-    // kirim langsung ke Telegraph
-    const telegraphForm = new FormData();
-    telegraphForm.append('file', file);
+    // convert ke base64
+    const arrayBuffer = await file.arrayBuffer();
 
-    const telegraphRes = await fetch(
-      'https://telegra.ph/upload',
+    let binary = '';
+    const bytes = new Uint8Array(arrayBuffer);
+
+    for (let i = 0; i < bytes.byteLength; i++) {
+      binary += String.fromCharCode(bytes[i]);
+    }
+
+    const base64 = btoa(binary);
+
+    // API KEY IMGBB
+    const API_KEY = '76b51317391c38c2f5a78c131c3b66c9';
+
+    const body = new URLSearchParams();
+    body.append('key', API_KEY);
+    body.append('image', base64);
+
+    const uploadRes = await fetch(
+      'https://api.imgbb.com/1/upload',
       {
         method: 'POST',
-        body: telegraphForm
+        body
       }
     );
 
-    const result = await telegraphRes.json();
+    const result = await uploadRes.json();
 
     console.log(result);
 
-    if (!Array.isArray(result) || !result[0]?.src) {
+    if (!result.success) {
       return new Response(
         JSON.stringify({
-          error: 'Gagal upload ke Telegraph',
+          error: 'Upload ImgBB gagal',
           detail: result
         }),
         {
           status: 500,
           headers: {
-            'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': '*'
+            'Content-Type': 'application/json'
           }
         }
       );
@@ -78,7 +92,7 @@ export async function onRequest(context) {
     return new Response(
       JSON.stringify({
         success: true,
-        url: `https://telegra.ph${result[0].src}`
+        url: result.data.url
       }),
       {
         status: 200,
@@ -90,6 +104,7 @@ export async function onRequest(context) {
     );
 
   } catch (err) {
+
     return new Response(
       JSON.stringify({
         error: err.message
@@ -97,10 +112,10 @@ export async function onRequest(context) {
       {
         status: 500,
         headers: {
-          'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': '*'
+          'Content-Type': 'application/json'
         }
       }
     );
+
   }
 }

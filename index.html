@@ -9,7 +9,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 <style>
-/* ========== SAMA SEPERTI SEBELUMNYA ========== */
 :root{
   --ink:#1A1510;
   --ink2:#2E2820;
@@ -38,11 +37,9 @@
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);min-height:100vh;font-size:15px}
-
 ::-webkit-scrollbar{width:5px;height:5px}
 ::-webkit-scrollbar-track{background:var(--cream2)}
 ::-webkit-scrollbar-thumb{background:var(--cream3);border-radius:10px}
-
 nav{position:fixed;top:0;left:0;right:0;background:var(--ink);z-index:100;height:58px;display:flex;align-items:center;padding:0 28px;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,.06)}
 .nav-logo{font-family:'Fraunces',serif;font-size:1.05rem;color:#fff;letter-spacing:.01em;display:flex;align-items:center;gap:10px}
 .nav-logo span{color:var(--orange);font-style:italic}
@@ -56,7 +53,6 @@ nav{position:fixed;top:0;left:0;right:0;background:var(--ink);z-index:100;height
 .admin-badge{background:var(--orange);color:#fff;font-size:.68rem;padding:2px 8px;border-radius:4px;font-weight:700}
 .btn-logout{background:transparent;color:rgba(255,255,255,.6);border:1px solid rgba(255,255,255,.2);padding:5px 13px;border-radius:6px;font-size:.78rem;cursor:pointer}
 .btn-logout:hover{color:#fff}
-
 .hero{margin-top:58px;background:var(--ink);padding:52px 28px 44px;position:relative;overflow:hidden}
 .hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle at 20% 50%, rgba(194,65,12,.12) 0%, transparent 50%)}
 .hero-inner{max-width:980px;margin:0 auto;display:grid;grid-template-columns:1fr auto;gap:32px;align-items:center}
@@ -67,7 +63,6 @@ nav{position:fixed;top:0;left:0;right:0;background:var(--ink);z-index:100;height
 .hero-sub{color:rgba(255,255,255,.5);font-size:.92rem;max-width:440px;margin-bottom:26px}
 .hero-tags{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:30px}
 .htag{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.65);padding:5px 13px;border-radius:20px;font-size:.78rem}
-
 .hero-cd{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:18px 22px;text-align:center}
 .cd-title{font-size:.68rem;color:rgba(255,255,255,.4);text-transform:uppercase;margin-bottom:12px}
 .cd-nums{display:flex;gap:4px;align-items:center}
@@ -76,13 +71,10 @@ nav{position:fixed;top:0;left:0;right:0;background:var(--ink);z-index:100;height
 .cd-lbl{font-size:.6rem;color:rgba(255,255,255,.35);margin-top:3px}
 .cd-sep{font-family:'Fraunces',serif;font-size:1.6rem;color:rgba(255,255,255,.2);padding-bottom:12px}
 .cd-deadline{margin-top:12px;font-size:.72rem;color:rgba(255,255,255,.35);border-top:1px solid rgba(255,255,255,.08);padding-top:10px}
-
 .info-strip{background:var(--orange);display:flex;justify-content:center;flex-wrap:wrap}
 .is-item{padding:11px 20px;color:#fff;font-size:.8rem;font-weight:500;border-right:1px solid rgba(255,255,255,.2);display:flex;align-items:center;gap:6px}
 .is-item:last-child{border-right:none}
-
 .main{max-width:980px;margin:0 auto;padding:32px 20px 60px}
-
 .top-tabs{display:flex;background:#fff;border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:28px}
 .ttab{flex:1;padding:13px 8px;text-align:center;font-size:.83rem;font-weight:600;cursor:pointer;color:var(--ink);opacity:.45;border-right:1px solid var(--border);position:relative}
 .ttab:last-child{border-right:none}
@@ -90,10 +82,8 @@ nav{position:fixed;top:0;left:0;right:0;background:var(--ink);z-index:100;height
 .ttab.active::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2.5px;background:var(--orange)}
 .ttab-icon{font-size:1rem;display:block;margin-bottom:3px}
 #adminTabBtn{display:none}
-
 .tab-content{display:none}
 .tab-content.active{display:block}
-
 .stepper{display:flex;margin-bottom:28px;background:#fff;border:1px solid var(--border);border-radius:12px;overflow:hidden}
 .wz{flex:1;padding:14px 10px;text-align:center;cursor:pointer;border-right:1px solid var(--border);position:relative}
 .wz:last-child{border-right:none}
@@ -105,16 +95,13 @@ nav{position:fixed;top:0;left:0;right:0;background:var(--ink);z-index:100;height
 .wz.done .wz-lbl{opacity:.7;color:var(--green)}
 .wz.done .wz-num::before{content:'✓';font-size:.75rem}
 .wz.done .wz-num-txt{display:none}
-
 .panel{display:none}
 .panel.active{display:block}
-
 .card{background:#fff;border:1px solid var(--border);border-radius:14px;padding:26px;box-shadow:var(--shadow);margin-bottom:16px}
 .card-head{display:flex;align-items:center;gap:10px;margin-bottom:5px}
 .card-head-icon{width:34px;height:34px;background:var(--orange-light);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1rem}
 .card-title{font-family:'Fraunces',serif;font-size:1.25rem;font-weight:700}
 .card-sub{font-size:.83rem;color:#7A6E60;margin-bottom:20px;padding-left:44px}
-
 .cat-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 @media(max-width:480px){.cat-grid{grid-template-columns:1fr}}
 .cat-card{border:2px solid var(--border);border-radius:12px;padding:20px;cursor:pointer;position:relative;background:#fff}
@@ -128,7 +115,6 @@ nav{position:fixed;top:0;left:0;right:0;background:var(--ink);z-index:100;height
 .cat-zone{margin-top:10px;display:inline-block;padding:3px 10px;border-radius:5px;font-size:.73rem;font-weight:700}
 .cat-zone.multi{background:var(--blue-light);color:var(--blue)}
 .cat-zone.food{background:var(--orange-light);color:var(--orange-dark)}
-
 .denah-top-label{background:var(--ink);color:#fff;text-align:center;padding:8px;border-radius:9px 9px 0 0;font-size:.8rem;font-weight:600}
 .denah-wrap{overflow-x:auto;background:#fff;border:1px solid var(--border);border-radius:0 0 10px 10px;padding:10px}
 .denah{display:flex;gap:5px;min-width:580px}
@@ -146,15 +132,12 @@ nav{position:fixed;top:0;left:0;right:0;background:var(--ink);z-index:100;height
 .sc.sc-booked{background:var(--cream2)!important;color:var(--cream3)!important;cursor:not-allowed;text-decoration:line-through}
 .sc.sc-off{opacity:.15;cursor:not-allowed}
 .sc.sc-dim{opacity:.35}
-
 .stand-info{background:var(--cream2);border:1.5px solid var(--border);border-radius:10px;padding:14px 18px;display:none;justify-content:space-between;margin-top:12px}
 .stand-info.show{display:flex}
 .si-price{font-size:1.5rem;font-family:'Fraunces',serif;font-weight:700;color:var(--orange)}
-
 .grade-filter{display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap}
 .gf-pill{padding:7px 14px;border-radius:20px;border:1.5px solid var(--border);font-size:.78rem;font-weight:600;cursor:pointer;background:#fff}
 .gf-pill.active{border-color:var(--orange);background:var(--orange-light);color:var(--orange-dark)}
-
 .map-legend{display:flex;gap:14px;flex-wrap:wrap;margin-top:10px}
 .ml-item{display:flex;align-items:center;gap:5px;font-size:.77rem}
 .ml-dot{width:12px;height:12px;border-radius:3px}
@@ -164,7 +147,6 @@ nav{position:fixed;top:0;left:0;right:0;background:var(--ink);z-index:100;height
 .mb-pintu{background:var(--green-light);color:var(--green)}
 .mb-makanan{background:var(--orange-light);color:var(--orange-dark)}
 .mb-arena{background:var(--blue-light);color:var(--blue)}
-
 .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 @media(max-width:560px){.form-grid{grid-template-columns:1fr}}
 .ff{display:flex;flex-direction:column;gap:6px}
@@ -174,7 +156,6 @@ nav{position:fixed;top:0;left:0;right:0;background:var(--ink);z-index:100;height
 .ff input,.ff select,.ff textarea{border:1.5px solid var(--border);border-radius:9px;padding:10px 14px;font-family:'DM Sans',sans-serif;font-size:.9rem}
 .ff input:focus{border-color:var(--orange);outline:none}
 .ff .fhint{font-size:.75rem;color:#9A8E82}
-
 .pay-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px}
 .pay-opt{border:2px solid var(--border);border-radius:12px;padding:16px;cursor:pointer;position:relative}
 .pay-opt.selected{border-color:var(--orange);background:var(--orange-light)}
@@ -182,14 +163,12 @@ nav{position:fixed;top:0;left:0;right:0;background:var(--ink);z-index:100;height
 .pay-opt.selected .pay-check{opacity:1}
 .pay-opt-name{font-family:'Fraunces',serif;font-size:1.05rem;font-weight:700}
 .pay-opt-amount{font-size:1.2rem;font-family:'Fraunces',serif;font-weight:700;color:var(--orange)}
-
 .rek-box{background:var(--ink);border-radius:12px;padding:20px;margin-bottom:16px}
 .rek-title{font-size:.68rem;font-weight:700;color:rgba(255,255,255,.4);text-transform:uppercase;margin-bottom:14px}
 .rek-row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.07);font-size:.85rem}
 .rek-row span:first-child{color:rgba(255,255,255,.5)}
 .rek-row span:last-child{font-weight:600;color:#fff}
 .rek-row.rek-total span:last-child{color:var(--orange);font-size:1.15rem}
-
 .upload-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 .upload-zone{border:2px dashed var(--border);border-radius:12px;padding:20px;text-align:center;cursor:pointer;position:relative}
 .upload-zone:hover{border-color:var(--orange);background:var(--orange-light)}
@@ -198,26 +177,21 @@ nav{position:fixed;top:0;left:0;right:0;background:var(--ink);z-index:100;height
 .upload-preview{display:none;margin-top:10px;align-items:center;gap:8px}
 .upload-preview.show{display:flex}
 .upload-preview img{max-height:60px;border-radius:6px}
-
 .notice{border-radius:10px;padding:12px 16px;font-size:.82rem;display:flex;gap:10px;margin-bottom:16px}
 .notice.info{background:#EFF6FF;color:#1E3A6E}
 .notice.warn{background:var(--amber-light);color:#78350F}
-
 .summary-table{background:#fff;border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:20px}
 .sum-row{display:flex;justify-content:space-between;padding:12px 18px;border-bottom:1px solid var(--cream2)}
 .sum-row:last-child{border-bottom:none;background:var(--cream)}
 .sum-row.total span:last-child{color:var(--orange);font-size:1.2rem;font-weight:700}
 .sum-stand-badge{background:var(--orange);color:#fff;padding:2px 12px;border-radius:5px}
-
 .agree-wrap{display:flex;gap:10px;background:var(--cream2);border:1px solid var(--border);border-radius:10px;padding:14px;margin-bottom:16px}
 .agree-link{color:var(--orange);font-weight:600;text-decoration:underline;cursor:pointer}
-
 .btn-row{display:flex;gap:10px;margin-top:6px}
 .btn-back{flex:1;background:#fff;color:var(--ink);border:1.5px solid var(--border);padding:12px;border-radius:9px;font-weight:600;cursor:pointer}
 .btn-next{flex:2;background:var(--orange);color:#fff;border:none;padding:13px;border-radius:9px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px}
 .btn-next:hover{background:var(--orange-dark)}
 .btn-next:disabled{background:var(--cream3);cursor:not-allowed}
-
 .success-wrap{text-align:center;padding:28px 16px}
 .success-icon{width:64px;height:64px;border-radius:50%;background:var(--green-light);display:inline-flex;align-items:center;justify-content:center;font-size:1.8rem;margin-bottom:18px}
 .success-title{font-family:'Fraunces',serif;font-size:1.9rem;font-weight:700}
@@ -228,16 +202,9 @@ nav{position:fixed;top:0;left:0;right:0;background:var(--ink);z-index:100;height
 .tb-row span:first-child{color:rgba(255,255,255,.45)}
 .tb-row span:last-child{color:#fff;font-weight:600}
 #qr-display{margin-top:16px;display:flex;justify-content:center}
-
-.benefits-box{background:var(--cream2);border:1px solid var(--border);border-radius:12px;padding:18px;max-width:400px;margin:0 auto 18px;text-align:left}
-.bx-title{font-size:.72rem;font-weight:700;color:#9A8E82;text-transform:uppercase;margin-bottom:12px}
-.bx-item{display:flex;gap:10px;padding:7px 0;border-bottom:1px solid var(--border);font-size:.82rem}
-.bx-item:last-child{border-bottom:none}
-
 .success-btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
 .btn-dl{background:var(--orange);color:#fff;border:none;padding:12px 24px;border-radius:9px;font-weight:700;cursor:pointer}
 .btn-sec-sm{background:#fff;color:var(--ink);border:1.5px solid var(--border);padding:12px 20px;border-radius:9px;font-weight:600;cursor:pointer}
-
 .tickets-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:16px}
 .tkt{background:#fff;border:1px solid var(--border);border-radius:14px;padding:20px}
 .tkt-stand{font-family:'Fraunces',serif;font-size:1.7rem;font-weight:700}
@@ -250,9 +217,7 @@ nav{position:fixed;top:0;left:0;right:0;background:var(--ink);z-index:100;height
 .tkt-btns{display:flex;gap:7px;flex-wrap:wrap}
 .btn-tkt{padding:8px 14px;border-radius:7px;font-size:.78rem;font-weight:600;cursor:pointer;border:none}
 .btn-tkt.dl{background:var(--cream2);color:var(--ink)}
-.btn-tkt.qr{background:var(--green-light);color:var(--green)}
 .btn-tkt.wa{background:#DCFCE7;color:#166534;text-decoration:none;display:inline-flex;align-items:center;gap:5px}
-
 .rs-card{background:#fff;border:1px solid var(--border);border-radius:14px;padding:24px;margin-bottom:14px}
 .rs-head{font-family:'Fraunces',serif;font-size:1.15rem;font-weight:700;margin-bottom:16px;display:flex;align-items:center;gap:10px}
 .price-table{width:100%;border-collapse:collapse}
@@ -262,22 +227,11 @@ nav{position:fixed;top:0;left:0;right:0;background:var(--ink);z-index:100;height
 .gb-a{background:var(--blue-light);color:var(--blue)}
 .gb-b{background:var(--purple-light);color:var(--purple)}
 .gb-c{background:var(--teal-blue-light);color:var(--teal-blue)}
-.rules-list{list-style:none}
-.rules-list li{padding:9px 0;border-bottom:1px solid var(--cream2);padding-left:22px;position:relative}
-.rules-list li::before{content:'—';position:absolute;left:0;color:var(--orange)}
-
-.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.contact-card{background:var(--cream2);border:1px solid var(--border);border-radius:10px;padding:16px}
-.cc-label{font-size:.72rem;font-weight:700;color:#9A8E82;text-transform:uppercase}
-.cc-val{font-size:.95rem;font-weight:700}
-.wa-btn{display:inline-flex;align-items:center;gap:7px;background:var(--green);color:#fff;padding:9px 16px;border-radius:8px;text-decoration:none;margin-top:10px}
-
 .admin-hero{background:var(--ink);border-radius:14px;padding:22px 24px;margin-bottom:20px;display:flex;justify-content:space-between;flex-wrap:wrap}
 .admin-title{font-family:'Fraunces',serif;font-size:1.5rem;color:#fff}
 .admin-sub{color:rgba(255,255,255,.45)}
 .admin-btns{display:flex;gap:8px}
 .btn-export{background:rgba(255,255,255,.1);color:#fff;border:1px solid rgba(255,255,255,.2);padding:9px 16px;border-radius:8px;cursor:pointer}
-
 .stats-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px;margin-bottom:22px}
 .stat{background:#fff;border:1px solid var(--border);border-radius:12px;padding:18px}
 .stat-lbl{font-size:.73rem;font-weight:700;color:#9A8E82;text-transform:uppercase}
@@ -286,13 +240,11 @@ nav{position:fixed;top:0;left:0;right:0;background:var(--ink);z-index:100;height
 .stat-val.o{color:var(--orange)}
 .stat-val.r{color:var(--red)}
 .stat-val.b{color:var(--blue)}
-
 .admin-controls{display:flex;gap:10px;margin-bottom:18px;flex-wrap:wrap;align-items:center}
 .filter-pill{padding:7px 15px;border-radius:20px;border:1.5px solid var(--border);font-size:.8rem;font-weight:600;cursor:pointer;background:#fff}
 .filter-pill.active{background:var(--ink);color:#fff;border-color:var(--ink)}
 .search-box{border:1.5px solid var(--border);border-radius:9px;padding:8px 14px;outline:none;flex:1;max-width:260px}
 .search-box:focus{border-color:var(--orange)}
-
 .admin-list{display:flex;flex-direction:column;gap:10px}
 .reg-card{background:#fff;border:1px solid var(--border);border-radius:12px;padding:18px 20px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px}
 .reg-main{display:flex;gap:18px;align-items:center;flex-wrap:wrap;flex:1}
@@ -313,7 +265,6 @@ nav{position:fixed;top:0;left:0;right:0;background:var(--ink);z-index:100;height
 .btn-approve{background:var(--green-light);color:var(--green)}
 .btn-reject{background:var(--red-light);color:var(--red)}
 .btn-delete{background:#1a1a1a;color:#fff}
-
 .modal-overlay{display:none;position:fixed;inset:0;background:rgba(26,21,16,.55);z-index:200;align-items:center;justify-content:center;padding:24px;backdrop-filter:blur(3px)}
 .modal-overlay.open{display:flex}
 .modal-box{background:#fff;border-radius:16px;max-width:540px;width:100%;max-height:90vh;overflow-y:auto;padding:28px}
@@ -323,29 +274,22 @@ nav{position:fixed;top:0;left:0;right:0;background:var(--ink);z-index:100;height
 .modal-rows div{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--cream2)}
 .modal-actions{display:flex;gap:10px;margin-top:20px}
 .modal-actions button{flex:1}
-
+/* ✅ FIX: loading overlay dengan id yang benar */
 .loading-overlay{display:none;position:fixed;inset:0;background:rgba(26,21,16,.65);z-index:300;align-items:center;justify-content:center;flex-direction:column;gap:14px;backdrop-filter:blur(4px)}
 .loading-overlay.open{display:flex}
 .spinner{width:44px;height:44px;border:3px solid rgba(255,255,255,.2);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
-
+.loading-text{color:#fff;font-size:.9rem;font-weight:500}
 .sec-label{font-size:.71rem;font-weight:700;letter-spacing:.1em;color:#9A8E82;text-transform:uppercase;margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--cream2);display:block}
 .float-help{position:fixed;bottom:22px;right:22px;width:46px;height:46px;background:var(--orange);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.2rem;cursor:pointer;box-shadow:0 4px 16px rgba(194,65,12,.4);z-index:50;border:none}
 .float-help:hover{transform:scale(1.1)}
 .empty-state{color:#9A8E82;padding:24px;text-align:center}
 .login-notice{background:#EFF6FF;border-radius:10px;padding:14px 18px;font-size:.84rem;color:#1E3A6E;margin-bottom:20px;display:flex;gap:10px}
-
-/* Tooltip untuk membantu user */
 .tooltip-hint{position:relative;cursor:help;border-bottom:1px dashed var(--orange);margin-left:5px}
 .tooltip-hint:hover::after{content:attr(data-tip);position:absolute;bottom:100%;left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;padding:5px 10px;border-radius:6px;font-size:.7rem;white-space:nowrap;z-index:100}
-
-/* Badge rekomendasi */
 .recommend-badge{background:var(--green);color:#fff;font-size:.65rem;padding:2px 8px;border-radius:10px;margin-left:8px}
-
-/* Quick stats untuk user */
 .user-stats{background:var(--cream2);border-radius:10px;padding:12px 16px;margin-bottom:16px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
 .user-stat-item{display:flex;align-items:center;gap:8px;font-size:.8rem}
-
 @media(max-width:640px){
   .form-grid,.pay-grid,.upload-grid,.contact-grid{grid-template-columns:1fr}
   .admin-hero{flex-direction:column;align-items:flex-start}
@@ -398,8 +342,18 @@ nav{position:fixed;top:0;left:0;right:0;background:var(--ink);z-index:100;height
   <div class="is-item">Loading barang: 18 Juni 2026, 20.00 WIB</div>
 </div>
 
-<div class="loading-overlay" id="loadingOverlay"><div class="spinner"></div><div class="loading-text">Memproses...</div></div>
-<div class="modal-overlay" id="modalOverlay" onclick="closeModalOutside(event)"><div class="modal-box"><div class="modal-title">Detail <button class="modal-close" onclick="closeModal()">✕</button></div><div id="modalBody"></div></div></div>
+<!-- ✅ FIX UTAMA: Tambah id="loadingText" pada div loading -->
+<div class="loading-overlay" id="loadingOverlay">
+  <div class="spinner"></div>
+  <div class="loading-text" id="loadingText">Memproses...</div>
+</div>
+
+<div class="modal-overlay" id="modalOverlay" onclick="closeModalOutside(event)">
+  <div class="modal-box">
+    <div class="modal-title">Detail <button class="modal-close" onclick="closeModal()">✕</button></div>
+    <div id="modalBody"></div>
+  </div>
+</div>
 
 <div class="main" id="mainArea">
   <div class="top-tabs">
@@ -411,23 +365,20 @@ nav{position:fixed;top:0;left:0;right:0;background:var(--ink);z-index:100;height
 
   <!-- TAB DAFTAR -->
   <div class="tab-content active" id="tab-daftar">
-    <!-- Quick Stats untuk User -->
     <div class="user-stats" id="userStats" style="display:none">
       <div class="user-stat-item"><i class="fas fa-store"></i> <span id="userRegCount">0</span> pendaftaran</div>
       <div class="user-stat-item"><i class="fas fa-check-circle" style="color:var(--green)"></i> <span id="userApprovedCount">0</span> disetujui</div>
       <div class="user-stat-item"><i class="fas fa-clock" style="color:var(--amber)"></i> <span id="userPendingCount">0</span> menunggu</div>
     </div>
-
     <div class="stepper">
       <div class="wz active" id="wz1"><div class="wz-num"><span class="wz-num-txt">1</span></div><div class="wz-lbl">Pilih Stand</div></div>
       <div class="wz" id="wz2"><div class="wz-num"><span class="wz-num-txt">2</span></div><div class="wz-lbl">Data & Bayar</div></div>
       <div class="wz" id="wz3"><div class="wz-num"><span class="wz-num-txt">3</span></div><div class="wz-lbl">Konfirmasi</div></div>
     </div>
-
     <div class="panel active" id="p1">
       <div class="card">
         <div class="card-head"><div class="card-head-icon">🏪</div><div class="card-title">Kategori Usaha</div></div>
-        <div class="card-sub">Pilih kategori sesuai produk yang Anda jual. <span class="tooltip-hint" data-tip="Multi Produk: fashion, kerajinan, dll | Makanan: kuliner, minuman">❓</span></div>
+        <div class="card-sub">Pilih kategori sesuai produk yang Anda jual.</div>
         <div class="cat-grid">
           <div class="cat-card" id="catMulti" onclick="selectCat('multi')"><div class="cat-check">✓</div><span class="cat-emoji">🛍️</span><div class="cat-name">Multi Produk</div><div class="cat-desc">Fashion, kerajinan, kosmetik, elektronik, tanaman</div><div class="cat-zone multi">Blok I & II</div></div>
           <div class="cat-card" id="catFood" onclick="selectCat('food')"><div class="cat-check">✓</div><span class="cat-emoji">🍜</span><div class="cat-name">Makanan & Minuman</div><div class="cat-desc">Kuliner, jajanan, minuman, makanan kemasan</div><div class="cat-zone food">Blok III–V</div></div>
@@ -435,12 +386,12 @@ nav{position:fixed;top:0;left:0;right:0;background:var(--ink);z-index:100;height
       </div>
       <div class="card" id="mapCard" style="display:none">
         <div class="card-head"><div class="card-head-icon">🗺️</div><div class="card-title">Pilih Stand di Denah</div></div>
-        <div class="card-sub">Klik pada stand yang tersedia (warna cerah). Stand abu-abu sudah terisi.<span class="tooltip-hint" data-tip="Grade A (biru) paling depan dekat pintu masuk | Grade C (biru tua) dekat arena bermain">🎯 Rekomendasi: Grade A paling strategis!</span></div>
+        <div class="card-sub">Klik pada stand yang tersedia. Stand abu-abu sudah terisi.</div>
         <div class="grade-filter">
           <div class="gf-pill active" onclick="setGradeFilter('all',this)">Semua Grade</div>
-          <div class="gf-pill" onclick="setGradeFilter('A',this)"><div class="gf-dot" style="background:var(--blue-light)"></div>Grade A — Rp 1.250.000 <span class="recommend-badge">Best</span></div>
-          <div class="gf-pill" onclick="setGradeFilter('B',this)"><div class="gf-dot" style="background:var(--purple-light)"></div>Grade B — Rp 1.100.000</div>
-          <div class="gf-pill" onclick="setGradeFilter('C',this)"><div class="gf-dot" style="background:var(--teal-blue-light)"></div>Grade C — Rp 1.000.000</div>
+          <div class="gf-pill" onclick="setGradeFilter('A',this)">Grade A — Rp 1.250.000 <span class="recommend-badge">Best</span></div>
+          <div class="gf-pill" onclick="setGradeFilter('B',this)">Grade B — Rp 1.100.000</div>
+          <div class="gf-pill" onclick="setGradeFilter('C',this)">Grade C — Rp 1.000.000</div>
         </div>
         <div class="denah-top-label">▲ PINTU MASUK UTAMA</div>
         <div class="denah-wrap"><div class="denah" id="denahMap"></div></div>
@@ -472,13 +423,12 @@ nav{position:fixed;top:0;left:0;right:0;background:var(--ink);z-index:100;height
         <div class="form-grid">
           <div class="ff"><label>Nama UMKM / Brand <span>*</span></label><input type="text" id="f_standName" placeholder="Contoh: Batik Nusantara"></div>
           <div class="ff"><label>Nama Pemilik (KTP) <span>*</span></label><input type="text" id="f_ownerName" placeholder="Nama lengkap sesuai KTP"></div>
-          <div class="ff"><label>WhatsApp <span>*</span> <span class="tooltip-hint" data-tip="Kami akan kirim notifikasi ke nomor ini">📱</span></label><input type="tel" id="f_phone" placeholder="08xxxxxxxxxx"><div class="fhint">Contoh: 081234567890</div></div>
+          <div class="ff"><label>WhatsApp <span>*</span></label><input type="tel" id="f_phone" placeholder="08xxxxxxxxxx"><div class="fhint">Contoh: 081234567890</div></div>
           <div class="ff"><label>Email <span>*</span></label><input type="email" id="f_email" placeholder="email@domain.com"></div>
           <div class="ff full"><label>Jenis Produk <span>*</span></label><input type="text" id="f_product" placeholder="Contoh: Batik tulis, keripik pisang, dll"></div>
           <div class="ff full"><label>Alamat (KTP)</label><textarea id="f_address" rows="2" placeholder="Alamat sesuai KTP"></textarea></div>
         </div>
       </div>
-
       <div class="card">
         <div class="card-head"><div class="card-head-icon">💳</div><div class="card-title">Metode Pembayaran</div></div>
         <div class="pay-grid">
@@ -494,7 +444,6 @@ nav{position:fixed;top:0;left:0;right:0;background:var(--ink);z-index:100;height
         </div>
         <div class="notice warn"><i class="fas fa-exclamation-triangle"></i><div>Cantumkan <strong>Nama UMKM</strong> di keterangan transfer</div></div>
       </div>
-
       <div class="card">
         <div class="card-head"><div class="card-head-icon">📎</div><div class="card-title">Upload Dokumen</div></div>
         <div class="notice info"><i class="fas fa-info-circle"></i><div>Foto KTP dan bukti transfer harus JPG/PNG, maks 32MB</div></div>
@@ -518,21 +467,39 @@ nav{position:fixed;top:0;left:0;right:0;background:var(--ink);z-index:100;height
         <div class="card-head"><div class="card-head-icon">📋</div><div class="card-title">Ringkasan Pendaftaran</div></div>
         <div class="summary-table">
           <div class="sum-row"><span>Stand</span><span><span class="sum-stand-badge" id="sumStand">–</span></span></div>
-          <div class="sum-row"><span>Kategori</span><span id="sumCat">–</span></div><div class="sum-row"><span>Grade</span><span id="sumGrade">–</span></div>
-          <div class="sum-row"><span>Nama UMKM</span><span id="sumUmkm">–</span></div><div class="sum-row"><span>Pemilik</span><span id="sumOwner">–</span></div>
-          <div class="sum-row"><span>WhatsApp</span><span id="sumPhone">–</span></div><div class="sum-row"><span>Produk</span><span id="sumProduct">–</span></div>
-          <div class="sum-row"><span>Metode</span><span id="sumMethod">–</span></div><div class="sum-row total"><span>Total Dibayar</span><span id="sumTotal">–</span></div>
+          <div class="sum-row"><span>Kategori</span><span id="sumCat">–</span></div>
+          <div class="sum-row"><span>Grade</span><span id="sumGrade">–</span></div>
+          <div class="sum-row"><span>Nama UMKM</span><span id="sumUmkm">–</span></div>
+          <div class="sum-row"><span>Pemilik</span><span id="sumOwner">–</span></div>
+          <div class="sum-row"><span>WhatsApp</span><span id="sumPhone">–</span></div>
+          <div class="sum-row"><span>Produk</span><span id="sumProduct">–</span></div>
+          <div class="sum-row"><span>Metode</span><span id="sumMethod">–</span></div>
+          <div class="sum-row total"><span>Total Dibayar</span><span id="sumTotal">–</span></div>
         </div>
-        <div class="agree-wrap"><input type="checkbox" id="agreeChk"><label>Saya setuju dengan <span class="agree-link" onclick="switchTab('rules')">Ketentuan Holistik Fest UMKM 2026</span></label></div>
+        <div class="agree-wrap"><input type="checkbox" id="agreeChk"><label for="agreeChk">&nbsp;Saya setuju dengan <span class="agree-link" onclick="switchTab('rules')">Ketentuan Holistik Fest UMKM 2026</span></label></div>
         <div class="btn-row"><button class="btn-back" onclick="goPanel(2)"><i class="fas fa-arrow-left"></i> Kembali</button><button class="btn-next" onclick="submitRegistration()"><i class="fas fa-paper-plane"></i> Kirim Pendaftaran</button></div>
       </div>
     </div>
 
     <div class="panel" id="p4">
-      <div class="card"><div class="success-wrap"><div class="success-icon"><i class="fas fa-check-circle"></i></div><div class="success-title">Pendaftaran Terkirim!</div><div class="success-sub">Admin akan verifikasi dalam 1×24 jam.</div>
-      <div class="ticket-box"><div class="tb-stand" id="tbStand">–</div><div class="tb-status"><i class="fas fa-clock"></i> Menunggu Verifikasi</div>
-      <div class="tb-row"><span>UMKM</span><span id="tbUmkm">–</span></div><div class="tb-row"><span>Kategori</span><span id="tbCat">–</span></div><div class="tb-row"><span>Grade</span><span id="tbGrade">–</span></div><div class="tb-row"><span>Dibayar</span><span id="tbTotal">–</span></div><div id="qr-display"></div></div>
-      <div class="success-btns"><button class="btn-dl" onclick="downloadPDF()"><i class="fas fa-download"></i> Kwitansi + Denah</button><button class="btn-sec-sm" onclick="switchTab('tiket')"><i class="fas fa-ticket-alt"></i> Tiket Saya</button></div></div></div>
+      <div class="card"><div class="success-wrap">
+        <div class="success-icon"><i class="fas fa-check-circle"></i></div>
+        <div class="success-title">Pendaftaran Terkirim!</div>
+        <div class="success-sub">Admin akan verifikasi dalam 1×24 jam.</div>
+        <div class="ticket-box">
+          <div class="tb-stand" id="tbStand">–</div>
+          <div class="tb-status"><i class="fas fa-clock"></i> Menunggu Verifikasi</div>
+          <div class="tb-row"><span>UMKM</span><span id="tbUmkm">–</span></div>
+          <div class="tb-row"><span>Kategori</span><span id="tbCat">–</span></div>
+          <div class="tb-row"><span>Grade</span><span id="tbGrade">–</span></div>
+          <div class="tb-row"><span>Dibayar</span><span id="tbTotal">–</span></div>
+          <div id="qr-display"></div>
+        </div>
+        <div class="success-btns">
+          <button class="btn-dl" onclick="downloadPDF()"><i class="fas fa-download"></i> Kwitansi + Denah</button>
+          <button class="btn-sec-sm" onclick="switchTab('tiket')"><i class="fas fa-ticket-alt"></i> Tiket Saya</button>
+        </div>
+      </div></div>
     </div>
   </div>
 
@@ -542,21 +509,38 @@ nav{position:fixed;top:0;left:0;right:0;background:var(--ink);z-index:100;height
     <div class="tickets-grid" id="ticketsGrid"><div class="empty-state">Belum ada pendaftaran</div></div>
   </div>
 
-  <!-- TAB RULES (disederhanakan) -->
+  <!-- TAB RULES -->
   <div class="tab-content" id="tab-rules">
-    <div class="rs-card"><div class="rs-head"><i class="fas fa-tag"></i> Harga Stand</div>
-    <table class="price-table"><thead><tr><th>Grade</th><th>Posisi</th><th>Harga</th></tr></thead>
-    <tbody><tr><td><span class="grade-badge gb-a">A</span></td><td>Baris depan (pintu masuk)</td><td><strong>Rp 1.250.000</strong></td></tr>
-    <tr><td><span class="grade-badge gb-b">B</span></td><td>Baris tengah</td><td><strong>Rp 1.100.000</strong></td></tr>
-    <tr><td><span class="grade-badge gb-c">C</span></td><td>Baris belakang</td><td><strong>Rp 1.000.000</strong></td></tr></tbody></table></div>
+    <div class="rs-card">
+      <div class="rs-head"><i class="fas fa-tag"></i> Harga Stand</div>
+      <table class="price-table">
+        <thead><tr><th>Grade</th><th>Posisi</th><th>Harga</th></tr></thead>
+        <tbody>
+          <tr><td><span class="grade-badge gb-a">A</span></td><td>Baris depan (pintu masuk)</td><td><strong>Rp 1.250.000</strong></td></tr>
+          <tr><td><span class="grade-badge gb-b">B</span></td><td>Baris tengah</td><td><strong>Rp 1.100.000</strong></td></tr>
+          <tr><td><span class="grade-badge gb-c">C</span></td><td>Baris belakang</td><td><strong>Rp 1.000.000</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 
   <!-- TAB ADMIN -->
   <div class="tab-content" id="tab-admin">
-    <div class="admin-hero"><div><div class="admin-title">Admin Dashboard</div><div class="admin-sub">Kelola pendaftaran UMKM</div></div>
-    <div class="admin-btns"><button class="btn-export" onclick="exportCSV(false)"><i class="fas fa-download"></i> Export Approved</button><button class="btn-export" onclick="exportCSV(true)"><i class="fas fa-file-excel"></i> Export Semua</button></div></div>
+    <div class="admin-hero">
+      <div><div class="admin-title">Admin Dashboard</div><div class="admin-sub">Kelola pendaftaran UMKM</div></div>
+      <div class="admin-btns">
+        <button class="btn-export" onclick="exportCSV(false)"><i class="fas fa-download"></i> Export Approved</button>
+        <button class="btn-export" onclick="exportCSV(true)"><i class="fas fa-file-excel"></i> Export Semua</button>
+      </div>
+    </div>
     <div class="stats-grid" id="statsGrid"></div>
-    <div class="admin-controls"><button class="filter-pill active" onclick="setFilter('all',this)">Semua</button><button class="filter-pill" onclick="setFilter('pending',this)">⏳ Pending</button><button class="filter-pill" onclick="setFilter('approved',this)">✅ Approved</button><button class="filter-pill" onclick="setFilter('rejected',this)">❌ Ditolak</button><input class="search-box" id="adminSearch" placeholder="🔍 Cari nama / stand..." oninput="renderAdmin()"></div>
+    <div class="admin-controls">
+      <button class="filter-pill active" onclick="setFilter('all',this)">Semua</button>
+      <button class="filter-pill" onclick="setFilter('pending',this)">⏳ Pending</button>
+      <button class="filter-pill" onclick="setFilter('approved',this)">✅ Approved</button>
+      <button class="filter-pill" onclick="setFilter('rejected',this)">❌ Ditolak</button>
+      <input class="search-box" id="adminSearch" placeholder="🔍 Cari nama / stand..." oninput="renderAdmin()">
+    </div>
     <div class="admin-list" id="adminList"></div>
   </div>
 </div>
@@ -565,7 +549,6 @@ nav{position:fixed;top:0;left:0;right:0;background:var(--ink);z-index:100;height
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
-import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-analytics.js";
 import { getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
 import { getFirestore, collection, addDoc, getDocs, doc, updateDoc, deleteDoc, query, where, onSnapshot, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
 
@@ -600,9 +583,20 @@ let payType = 'lunas', bookedStands = {}, allRegs = [];
 let adminFilter = 'all', gradeFilter = 'all', adminListenerOn = false;
 let currentRegId = null;
 
-const rupiah = n => 'Rp ' + n.toLocaleString('id-ID');
-const showLoading = t => { document.getElementById('loadingText').textContent = t; document.getElementById('loadingOverlay').classList.add('open'); };
-const hideLoading = () => document.getElementById('loadingOverlay').classList.remove('open');
+// ✅ FIX: rupiah dengan null-safe
+const rupiah = n => 'Rp ' + (n || 0).toLocaleString('id-ID');
+
+// ✅ FIX: showLoading/hideLoading null-safe
+const showLoading = t => {
+  const overlay = document.getElementById('loadingOverlay');
+  const text = document.getElementById('loadingText');
+  if(text) text.textContent = t || 'Memproses...';
+  if(overlay) overlay.classList.add('open');
+};
+const hideLoading = () => {
+  const overlay = document.getElementById('loadingOverlay');
+  if(overlay) overlay.classList.remove('open');
+};
 
 // Countdown
 (function tick(){
@@ -620,7 +614,6 @@ window.loginGoogle = async () => { try { await signInWithPopup(auth, provider); 
 window.logout = async () => { await signOut(auth); location.reload(); };
 const isAdmin = u => u && ADMIN_EMAILS.includes((u.email||'').toLowerCase());
 
-// Update user stats
 async function updateUserStats(uid){
   if(!uid) return;
   const q = query(collection(db,'registrations'), where('uid','==',uid));
@@ -642,7 +635,8 @@ onAuthStateChanged(auth, async user => {
   document.getElementById('loginNotice').style.display='none';
   if(isAdmin(user) && !adminListenerOn){ adminListenerOn=true; startAdminListener(); }
   document.getElementById('adminTabBtn').style.display = isAdmin(user)?'block':'none';
-  if(document.getElementById('f_email') && user && !document.getElementById('f_email').value) document.getElementById('f_email').value = user.email||'';
+  const emailEl = document.getElementById('f_email');
+  if(emailEl && !emailEl.value) emailEl.value = user.email||'';
   await updateUserStats(user.uid);
   loadMyTickets();
 });
@@ -650,13 +644,11 @@ onAuthStateChanged(auth, async user => {
 window.switchTab = function(tab){
   ['daftar','tiket','rules','admin'].forEach(t=>{
     document.getElementById('tab-'+t)?.classList.toggle('active',t===tab);
-    document.querySelector(`.ttab${t==='daftar'?'':`[onclick*="${t}"]`}`)?.classList.toggle('active',t===tab);
   });
-  // Perbaiki selector untuk tabs
   const tabs = document.querySelectorAll('.ttab');
-  const tabNames = ['daftar', 'tiket', 'rules', 'admin'];
-  tabNames.forEach((t, i) => {
-    if(t === tab) tabs[i]?.classList.add('active');
+  const tabNames = ['daftar','tiket','rules','admin'];
+  tabNames.forEach((t,i)=>{
+    if(t===tab) tabs[i]?.classList.add('active');
     else tabs[i]?.classList.remove('active');
   });
 };
@@ -680,7 +672,7 @@ window.selectCat = function(cat){
   document.getElementById('standInfo').classList.remove('show');
 };
 
-window.setGradeFilter = function(g, el){
+window.setGradeFilter = function(g,el){
   gradeFilter=g;
   document.querySelectorAll('.gf-pill').forEach(p=>p.classList.remove('active'));
   el.classList.add('active');
@@ -702,7 +694,7 @@ function buildDenah(){
         const row=document.createElement('div'); row.className='stand-row-map';
         [l,r].forEach(id=>{
           const cell=document.createElement('div');
-          const booked=!!bookedStands[id] && bookedStands[id] !== 'rejected';
+          const booked=!!bookedStands[id] && bookedStands[id]!=='rejected';
           const wrongCat=selCat && blok.type!==selCat;
           const dimByGrade=gradeFilter!=='all' && sec.grade!==gradeFilter;
           const isSel=id===selStand;
@@ -747,11 +739,11 @@ function updatePayAmounts(){
   if(!selGrade) return;
   const p=PRICES[selGrade];
   const dp=Math.round(p*0.7);
-  const lunasEl = document.getElementById('amtLunas');
-  const dpEl = document.getElementById('amtDP');
+  const lunasEl=document.getElementById('amtLunas');
+  const dpEl=document.getElementById('amtDP');
   if(lunasEl) lunasEl.textContent=rupiah(p);
   if(dpEl) dpEl.textContent=rupiah(dp);
-  const nominalEl = document.getElementById('nominalTransfer');
+  const nominalEl=document.getElementById('nominalTransfer');
   if(nominalEl) nominalEl.textContent=payType==='dp'?rupiah(dp):rupiah(p);
 }
 
@@ -776,16 +768,16 @@ window.validateP2 = function(){
     alert('Upload KTP dan bukti transfer'); return;
   }
   const p=PRICES[selGrade], paid=payType==='dp'?Math.round(p*0.7):p;
-  const sumEls = ['sumStand','sumCat','sumGrade','sumUmkm','sumOwner','sumPhone','sumProduct','sumMethod','sumTotal'];
-  const vals = [selStand, selCat==='food'?'Makanan':'Multi Produk', `Grade ${selGrade}`, v('f_standName'), v('f_ownerName'), v('f_phone'), v('f_product'), payType==='dp'?'DP 70%':'Lunas 100%', rupiah(paid)];
-  sumEls.forEach((id,i)=>{ const el=document.getElementById(id); if(el) el.textContent=vals[i]; });
+  const ids=['sumStand','sumCat','sumGrade','sumUmkm','sumOwner','sumPhone','sumProduct','sumMethod','sumTotal'];
+  const vals=[selStand,selCat==='food'?'Makanan':'Multi Produk',`Grade ${selGrade}`,v('f_standName'),v('f_ownerName'),v('f_phone'),v('f_product'),payType==='dp'?'DP 70%':'Lunas 100%',rupiah(paid)];
+  ids.forEach((id,i)=>{ const el=document.getElementById(id); if(el) el.textContent=vals[i]; });
   goPanel(3);
 };
 
 window.submitRegistration = async function(){
   if(!document.getElementById('agreeChk')?.checked){ alert('Centang persetujuan ketentuan'); return; }
   if(!currentUser){ alert('Login Google dulu'); return; }
-  if(bookedStands[selStand] && bookedStands[selStand] !== 'rejected'){ alert('Stand '+selStand+' sudah dipesan'); goPanel(1); return; }
+  if(bookedStands[selStand] && bookedStands[selStand]!=='rejected'){ alert('Stand '+selStand+' sudah dipesan'); goPanel(1); return; }
   try{
     const ktp=document.getElementById('ktpFile').files[0];
     const tr=document.getElementById('trFile').files[0];
@@ -797,19 +789,20 @@ window.submitRegistration = async function(){
       if(!json.success) throw new Error(`Upload ${label} gagal`);
       return json.data.url;
     }
-    const [ktpUrl, trUrl] = await Promise.all([upload(ktp,'KTP'), upload(tr,'Bukti Transfer')]);
+    const [ktpUrl,trUrl]=await Promise.all([upload(ktp,'KTP'),upload(tr,'Bukti Transfer')]);
     showLoading('Menyimpan data...');
     const v=id=>document.getElementById(id)?.value.trim()||'';
     const price=PRICES[selGrade];
     const paid=payType==='dp'?Math.round(price*0.7):price;
-    const data={ uid:currentUser.uid, email:currentUser.email, standName:v('f_standName'), ownerName:v('f_ownerName'), phone:v('f_phone'), emailPeserta:v('f_email'), productType:v('f_product'), address:v('f_address'), category:selCat==='food'?'Makanan':'Multi Produk', grade:selGrade, boothNumber:selStand, price, amountPaid:paid, paymentType:payType==='dp'?'DP 70%':'Lunas', paymentStatus:'pending', ktpUrl, transferUrl:trUrl, createdAt:serverTimestamp() };
+    const data={uid:currentUser.uid,email:currentUser.email,standName:v('f_standName'),ownerName:v('f_ownerName'),phone:v('f_phone'),emailPeserta:v('f_email'),productType:v('f_product'),address:v('f_address'),category:selCat==='food'?'Makanan':'Multi Produk',grade:selGrade,boothNumber:selStand,price,amountPaid:paid,paymentType:payType==='dp'?'DP 70%':'Lunas',paymentStatus:'pending',ktpUrl,transferUrl:trUrl,createdAt:serverTimestamp()};
     const ref=await addDoc(collection(db,'registrations'),data);
     currentRegId=ref.id;
     bookedStands[selStand]=true;
     hideLoading();
-    const tb = { tbStand:selStand, tbUmkm:v('f_standName'), tbCat:data.category, tbGrade:'Grade '+selGrade, tbMethod:data.paymentType, tbTotal:rupiah(paid) };
+    const tb={tbStand:selStand,tbUmkm:v('f_standName'),tbCat:data.category,tbGrade:'Grade '+selGrade,tbMethod:data.paymentType,tbTotal:rupiah(paid)};
     Object.entries(tb).forEach(([id,val])=>{ const el=document.getElementById(id); if(el) el.textContent=val; });
-    const qrDiv=document.getElementById('qr-display'); if(qrDiv){ qrDiv.innerHTML=''; new QRCode(qrDiv,{text:ref.id,width:100,height:100}); }
+    const qrDiv=document.getElementById('qr-display');
+    if(qrDiv){ qrDiv.innerHTML=''; new QRCode(qrDiv,{text:ref.id,width:100,height:100}); }
     goPanel(4);
     await updateUserStats(currentUser.uid);
     loadMyTickets();
@@ -820,33 +813,40 @@ window.downloadPDF = function(){ alert('Download PDF akan segera tersedia'); };
 
 async function loadMyTickets(){
   if(!currentUser) return;
-  const q = query(collection(db,'registrations'), where('uid','==',currentUser.uid));
-  const snap = await getDocs(q);
-  const grid = document.getElementById('ticketsGrid');
+  const q=query(collection(db,'registrations'),where('uid','==',currentUser.uid));
+  const snap=await getDocs(q);
+  const grid=document.getElementById('ticketsGrid');
   if(!grid) return;
   grid.innerHTML='';
   if(snap.empty){ grid.innerHTML='<div class="empty-state">Belum ada pendaftaran</div>'; return; }
-  snap.forEach(doc=>{
-    const d=doc.data();
-    const statusClass = d.paymentStatus==='approved'?'approved':d.paymentStatus==='rejected'?'rejected':'pending';
-    const statusText = d.paymentStatus==='approved'?'✅ Disetujui':d.paymentStatus==='rejected'?'❌ Ditolak':'⏳ Menunggu';
-    const waMsg = encodeURIComponent(`Halo, saya ${d.standName} ingin tanya status stand ${d.boothNumber}`);
+  snap.forEach(d=>{
+    const data=d.data();
+    const statusClass=data.paymentStatus==='approved'?'approved':data.paymentStatus==='rejected'?'rejected':'pending';
+    const statusText=data.paymentStatus==='approved'?'✅ Disetujui':data.paymentStatus==='rejected'?'❌ Ditolak':'⏳ Menunggu';
+    const waMsg=encodeURIComponent(`Halo, saya ${data.standName} ingin tanya status stand ${data.boothNumber}`);
     const el=document.createElement('div'); el.className='tkt';
-    el.innerHTML=`<div><div class="tkt-stand">${d.boothNumber}</div><div class="tkt-badge ${statusClass}">${statusText}</div></div>
-      <div class="tkt-rows"><div class="tkt-row"><span>UMKM</span><span>${d.standName}</span></div><div class="tkt-row"><span>Grade</span><span>Grade ${d.grade}</span></div><div class="tkt-row"><span>Dibayar</span><span>${rupiah(d.amountPaid)}</span></div></div>
-      <div class="tkt-btns"><button class="btn-tkt dl" onclick="downloadPDF()"><i class="fas fa-download"></i> Kwitansi</button><a class="btn-tkt wa" href="https://wa.me/6282322069665?text=${waMsg}" target="_blank"><i class="fab fa-whatsapp"></i> Tanya</a></div>`;
+    el.innerHTML=`<div><div class="tkt-stand">${data.boothNumber||'-'}</div><div class="tkt-badge ${statusClass}">${statusText}</div></div>
+      <div class="tkt-rows">
+        <div class="tkt-row"><span>UMKM</span><span>${data.standName||'-'}</span></div>
+        <div class="tkt-row"><span>Grade</span><span>Grade ${data.grade||'-'}</span></div>
+        <div class="tkt-row"><span>Dibayar</span><span>${rupiah(data.amountPaid)}</span></div>
+      </div>
+      <div class="tkt-btns">
+        <button class="btn-tkt dl" onclick="downloadPDF()"><i class="fas fa-download"></i> Kwitansi</button>
+        <a class="btn-tkt wa" href="https://wa.me/6282322069665?text=${waMsg}" target="_blank"><i class="fab fa-whatsapp"></i> Tanya</a>
+      </div>`;
     grid.appendChild(el);
   });
 }
 
-// ==================== ADMIN FUNCTIONS ====================
+// ==================== ADMIN ====================
 function startAdminListener(){
   onSnapshot(collection(db,'registrations'), snap=>{
-    allRegs = [];
-    snap.forEach(d=>allRegs.push({id:d.id, ...d.data()}));
+    allRegs=[];
+    snap.forEach(d=>allRegs.push({id:d.id,...d.data()}));
     allRegs.sort((a,b)=>(b.createdAt?.seconds||0)-(a.createdAt?.seconds||0));
-    bookedStands = {};
-    allRegs.forEach(r=>{ if(r.boothNumber && r.paymentStatus !== 'rejected') bookedStands[r.boothNumber] = r.paymentStatus; });
+    bookedStands={};
+    allRegs.forEach(r=>{ if(r.boothNumber && r.paymentStatus!=='rejected') bookedStands[r.boothNumber]=r.paymentStatus; });
     updateStats();
     renderAdmin();
     if(document.getElementById('p1')?.classList.contains('active')) buildDenah();
@@ -854,46 +854,45 @@ function startAdminListener(){
 }
 
 function updateStats(){
-  const total = allRegs.length;
-  const approved = allRegs.filter(r=>r.paymentStatus==='approved').length;
-  const pending = allRegs.filter(r=>r.paymentStatus==='pending').length;
-  const rejected = allRegs.filter(r=>r.paymentStatus==='rejected').length;
-  const multi = allRegs.filter(r=>r.category==='Multi Produk').length;
-  const food = allRegs.filter(r=>r.category==='Makanan').length;
-  const revenue = allRegs.filter(r=>r.paymentStatus==='approved').reduce((s,r)=>s+(r.amountPaid||0),0);
-  const statsHtml = `
+  const total=allRegs.length;
+  const approved=allRegs.filter(r=>r.paymentStatus==='approved').length;
+  const pending=allRegs.filter(r=>r.paymentStatus==='pending').length;
+  const rejected=allRegs.filter(r=>r.paymentStatus==='rejected').length;
+  const multi=allRegs.filter(r=>r.category==='Multi Produk').length;
+  const food=allRegs.filter(r=>r.category==='Makanan').length;
+  const revenue=allRegs.filter(r=>r.paymentStatus==='approved').reduce((s,r)=>s+(r.amountPaid||0),0);
+  const statsGrid=document.getElementById('statsGrid');
+  if(statsGrid) statsGrid.innerHTML=`
     <div class="stat"><div class="stat-lbl">Total</div><div class="stat-val">${total}</div></div>
     <div class="stat"><div class="stat-lbl">Approved</div><div class="stat-val g">${approved}</div></div>
-    <div class="stat"><div class="stat-lbl">Pending</div><div class="stat-val a">${pending}</div></div>
+    <div class="stat"><div class="stat-lbl">Pending</div><div class="stat-val o">${pending}</div></div>
     <div class="stat"><div class="stat-lbl">Ditolak</div><div class="stat-val r">${rejected}</div></div>
     <div class="stat"><div class="stat-lbl">Multi</div><div class="stat-val b">${multi}</div></div>
     <div class="stat"><div class="stat-lbl">Makanan</div><div class="stat-val o">${food}</div></div>
     <div class="stat"><div class="stat-lbl">Pendapatan</div><div class="stat-val g" style="font-size:1rem">${rupiah(revenue)}</div></div>
   `;
-  const statsGrid = document.getElementById('statsGrid');
-  if(statsGrid) statsGrid.innerHTML = statsHtml;
 }
 
-window.setFilter = function(f, el){
-  adminFilter = f;
+window.setFilter = function(f,el){
+  adminFilter=f;
   document.querySelectorAll('.filter-pill').forEach(p=>p.classList.remove('active'));
   el.classList.add('active');
   renderAdmin();
 };
 
 window.renderAdmin = function(){
-  const search = document.getElementById('adminSearch')?.value.toLowerCase() || '';
-  let list = [...allRegs];
-  if(adminFilter !== 'all') list = list.filter(r=>r.paymentStatus===adminFilter);
-  if(search) list = list.filter(r=> (r.standName||'').toLowerCase().includes(search) || (r.ownerName||'').toLowerCase().includes(search) || (r.boothNumber||'').toLowerCase().includes(search));
-  const container = document.getElementById('adminList');
+  const search=document.getElementById('adminSearch')?.value.toLowerCase()||'';
+  let list=[...allRegs];
+  if(adminFilter!=='all') list=list.filter(r=>r.paymentStatus===adminFilter);
+  if(search) list=list.filter(r=>(r.standName||'').toLowerCase().includes(search)||(r.ownerName||'').toLowerCase().includes(search)||(r.boothNumber||'').toLowerCase().includes(search));
+  const container=document.getElementById('adminList');
   if(!container) return;
-  container.innerHTML = '';
+  container.innerHTML='';
   if(!list.length){ container.innerHTML='<div class="empty-state">Tidak ada data</div>'; return; }
   list.forEach(r=>{
-    const statusBadge = r.paymentStatus==='approved'?'<span class="status-badge sb-approved">✅ Approved</span>':r.paymentStatus==='rejected'?'<span class="status-badge sb-rejected">❌ Ditolak</span>':'<span class="status-badge sb-pending">⏳ Pending</span>';
-    const div = document.createElement('div'); div.className='reg-card';
-    div.innerHTML = `
+    const statusBadge=r.paymentStatus==='approved'?'<span class="status-badge sb-approved">✅ Approved</span>':r.paymentStatus==='rejected'?'<span class="status-badge sb-rejected">❌ Ditolak</span>':'<span class="status-badge sb-pending">⏳ Pending</span>';
+    const div=document.createElement('div'); div.className='reg-card';
+    div.innerHTML=`
       <div class="reg-main">
         <div class="reg-stand">${r.boothNumber||'?'}</div>
         <div class="reg-info">
@@ -901,16 +900,16 @@ window.renderAdmin = function(){
           <div class="reg-meta">
             <span class="${r.category==='Makanan'?'rm-food':'rm-multi'}">${r.category||'-'}</span>
             <span class="rm-grade">Grade ${r.grade||'-'}</span>
-            <span class="rm-price">${rupiah(r.price||0)}</span>
+            <span class="rm-price">${rupiah(r.price)}</span>
             ${statusBadge}
           </div>
         </div>
       </div>
       <div class="reg-actions">
         <button class="btn-view" onclick="openDetail('${r.id}')"><i class="fas fa-eye"></i> Detail</button>
-        ${r.paymentStatus !== 'approved' ? `<button class="btn-approve" onclick="approveReg('${r.id}')"><i class="fas fa-check"></i> Approve</button>` : ''}
-        ${r.paymentStatus !== 'rejected' ? `<button class="btn-reject" onclick="rejectReg('${r.id}')"><i class="fas fa-times"></i> Tolak</button>` : ''}
-        <button class="btn-delete" onclick="deleteReg('${r.id}', '${r.boothNumber}')"><i class="fas fa-trash"></i> Hapus</button>
+        ${r.paymentStatus!=='approved'?`<button class="btn-approve" onclick="approveReg('${r.id}')"><i class="fas fa-check"></i> Approve</button>`:''}
+        ${r.paymentStatus!=='rejected'?`<button class="btn-reject" onclick="rejectReg('${r.id}')"><i class="fas fa-times"></i> Tolak</button>`:''}
+        <button class="btn-delete" onclick="deleteReg('${r.id}','${r.boothNumber||''}')"><i class="fas fa-trash"></i> Hapus</button>
       </div>
     `;
     container.appendChild(div);
@@ -918,24 +917,24 @@ window.renderAdmin = function(){
 };
 
 window.openDetail = function(id){
-  const r = allRegs.find(x=>x.id===id);
+  const r=allRegs.find(x=>x.id===id);
   if(!r) return;
-  const rows = [
-    ['ID', id], ['Stand', r.boothNumber], ['UMKM', r.standName], ['Pemilik', r.ownerName],
-    ['WhatsApp', r.phone], ['Email', r.emailPeserta], ['Kategori', r.category], ['Grade', r.grade],
-    ['Harga Sewa', rupiah(r.price)], ['Metode', r.paymentType], ['Terbayar', rupiah(r.amountPaid)],
-    ['Status', r.paymentStatus], ['Tgl Daftar', r.createdAt ? new Date(r.createdAt.seconds*1000).toLocaleString('id-ID') : '-']
+  const rows=[
+    ['ID',id],['Stand',r.boothNumber||'-'],['UMKM',r.standName||'-'],['Pemilik',r.ownerName||'-'],
+    ['WhatsApp',r.phone||'-'],['Email',r.emailPeserta||'-'],['Kategori',r.category||'-'],['Grade',r.grade||'-'],
+    ['Harga Sewa',rupiah(r.price)],['Metode',r.paymentType||'-'],['Terbayar',rupiah(r.amountPaid)],
+    ['Status',r.paymentStatus||'-'],['Tgl Daftar',r.createdAt?new Date(r.createdAt.seconds*1000).toLocaleString('id-ID'):'-']
   ];
-  const modalBody = document.getElementById('modalBody');
+  const modalBody=document.getElementById('modalBody');
   if(modalBody){
-    modalBody.innerHTML = `
-      ${r.ktpUrl ? `<img class="modal-img" src="${r.ktpUrl}">` : ''}
-      ${r.transferUrl ? `<img class="modal-img" src="${r.transferUrl}">` : ''}
+    modalBody.innerHTML=`
+      ${r.ktpUrl?`<img class="modal-img" src="${r.ktpUrl}">``:''}
+      ${r.transferUrl?`<img class="modal-img" src="${r.transferUrl}">``:''}
       <div class="modal-rows">${rows.map(([l,v])=>`<div><span>${l}</span><span>${v}</span></div>`).join('')}</div>
       <div class="modal-actions">
         <button class="btn-approve" onclick="approveReg('${id}');closeModal()">✅ Approve</button>
         <button class="btn-reject" onclick="rejectReg('${id}');closeModal()">❌ Tolak</button>
-        <button class="btn-delete" onclick="deleteReg('${id}','${r.boothNumber}');closeModal()">🗑 Hapus</button>
+        <button class="btn-delete" onclick="deleteReg('${id}','${r.boothNumber||''}');closeModal()">🗑 Hapus</button>
       </div>
     `;
   }
@@ -943,68 +942,71 @@ window.openDetail = function(id){
 };
 
 window.approveReg = async function(id){
-  if(!confirm('Setujui pendaftaran ini? Stand akan terkunci untuk pendaftar lain.')) return;
+  if(!confirm('Setujui pendaftaran ini?')) return;
   showLoading('Menyetujui...');
-  await updateDoc(doc(db,'registrations',id), { paymentStatus: 'approved' });
-  hideLoading();
-  alert('✅ Pendaftaran disetujui!');
+  try{
+    await updateDoc(doc(db,'registrations',id),{paymentStatus:'approved'});
+    hideLoading();
+    alert('✅ Pendaftaran disetujui!');
+  }catch(e){ hideLoading(); alert('Gagal: '+e.message); }
 };
 
 window.rejectReg = async function(id){
-  const reason = prompt('Alasan penolakan (opsional):');
+  const reason=prompt('Alasan penolakan (opsional):');
   showLoading('Menolak...');
-  await updateDoc(doc(db,'registrations',id), { paymentStatus: 'rejected', rejectReason: reason || '' });
-  hideLoading();
-  alert('❌ Pendaftaran ditolak');
+  try{
+    await updateDoc(doc(db,'registrations',id),{paymentStatus:'rejected',rejectReason:reason||''});
+    hideLoading();
+    alert('❌ Pendaftaran ditolak');
+  }catch(e){ hideLoading(); alert('Gagal: '+e.message); }
 };
 
-// ========== FITUR HAPUS DENGAN KONFIRMASI ==========
+// ✅ FIX UTAMA: deleteReg tanpa crash
 window.deleteReg = async function(id, boothNumber){
-  if(!confirm(`⚠️ PERINGATAN!\n\nAnda akan MENGHAPUS pendaftaran stand ${boothNumber}.\n\nSetelah dihapus:\n• Stand akan menjadi KOSONG\n• Pendaftar bisa daftar ulang\n• Data tidak dapat dipulihkan\n\nYakin ingin menghapus?`)){
+  if(!confirm(`⚠️ PERINGATAN!\n\nAnda akan MENGHAPUS pendaftaran stand ${boothNumber}.\n\nData tidak dapat dipulihkan.\n\nYakin ingin menghapus?`)) return;
+  if(!confirm(`KONFIRMASI AKHIR:\nHapus permanen stand ${boothNumber}?`)) return;
+
+  if(!currentUser || !ADMIN_EMAILS.includes(currentUser.email?.toLowerCase())){
+    alert('Akses ditolak. Hanya admin yang bisa menghapus.');
     return;
   }
-  const doubleConfirm = confirm(`KONFIRMASI AKHIR:\nHapus permanen stand ${boothNumber}?`);
-  if(!doubleConfirm) return;
-  
+
   showLoading('Menghapus data...');
-  try {
-    await deleteDoc(doc(db, 'registrations', id));
+  try{
+    await deleteDoc(doc(db,'registrations',id));
     hideLoading();
-    alert(`✅ Stand ${boothNumber} berhasil dihapus dan sekarang tersedia untuk pendaftar lain.`);
-    // Refresh bookedStands akan otomatis via onSnapshot
-  } catch(e) {
+    alert(`✅ Stand ${boothNumber} berhasil dihapus.`);
+  }catch(e){
     hideLoading();
-    alert('Gagal menghapus: '+e.message);
+    console.error('Delete error:', e);
+    alert('Gagal menghapus: '+e.message+'\nKode: '+(e.code||'-'));
   }
 };
 
 window.exportCSV = function(full){
-  const list = full ? allRegs : allRegs.filter(r=>r.paymentStatus==='approved');
-  let csv = full ? 'ID,Stand,UMKM,Pemilik,WhatsApp,Kategori,Grade,Sewa,Terbayar,Status,Tanggal\n' : 'Stand,UMKM,Pemilik,WhatsApp,Kategori,Grade,Sewa,Terbayar,Tanggal\n';
+  const list=full?allRegs:allRegs.filter(r=>r.paymentStatus==='approved');
+  let csv=full?'ID,Stand,UMKM,Pemilik,WhatsApp,Kategori,Grade,Sewa,Terbayar,Status,Tanggal\n':'Stand,UMKM,Pemilik,WhatsApp,Kategori,Grade,Sewa,Terbayar,Tanggal\n';
   list.forEach(r=>{
-    const tgl = r.createdAt ? new Date(r.createdAt.seconds*1000).toLocaleDateString('id-ID') : '';
-    if(full){
-      csv += `${r.id},${r.boothNumber},${r.standName},${r.ownerName},${r.phone},${r.category},${r.grade},${r.price},${r.amountPaid},${r.paymentStatus},${tgl}\n`;
-    } else {
-      csv += `${r.boothNumber},${r.standName},${r.ownerName},${r.phone},${r.category},${r.grade},${r.price},${r.amountPaid},${tgl}\n`;
-    }
+    const tgl=r.createdAt?new Date(r.createdAt.seconds*1000).toLocaleDateString('id-ID'):'';
+    if(full) csv+=`${r.id},${r.boothNumber||''},${r.standName||''},${r.ownerName||''},${r.phone||''},${r.category||''},${r.grade||''},${r.price||0},${r.amountPaid||0},${r.paymentStatus||''},${tgl}\n`;
+    else csv+=`${r.boothNumber||''},${r.standName||''},${r.ownerName||''},${r.phone||''},${r.category||''},${r.grade||''},${r.price||0},${r.amountPaid||0},${tgl}\n`;
   });
-  const blob = new Blob([csv], {type:'text/csv'});
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(blob);
-  a.download = full ? 'semua-pendaftar.csv' : 'peserta-approved.csv';
+  const blob=new Blob([csv],{type:'text/csv'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download=full?'semua-pendaftar.csv':'peserta-approved.csv';
   a.click();
 };
 
 window.closeModal = () => document.getElementById('modalOverlay')?.classList.remove('open');
-window.closeModalOutside = e => { if(e.target === document.getElementById('modalOverlay')) closeModal(); };
+window.closeModalOutside = e => { if(e.target===document.getElementById('modalOverlay')) closeModal(); };
 
-// Initial load
+// Initial load booked stands
 (async()=>{
   try{
-    const snap = await getDocs(collection(db,'registrations'));
-    snap.forEach(d=>{ const r=d.data(); if(r.boothNumber && r.paymentStatus !== 'rejected') bookedStands[r.boothNumber]=r.paymentStatus; });
-  }catch(e){}
+    const snap=await getDocs(collection(db,'registrations'));
+    snap.forEach(d=>{ const r=d.data(); if(r.boothNumber && r.paymentStatus!=='rejected') bookedStands[r.boothNumber]=r.paymentStatus; });
+  }catch(e){ console.warn('Initial load error:',e); }
 })();
 </script>
 </body>

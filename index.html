@@ -386,20 +386,15 @@ nav{position:fixed;top:0;left:0;right:0;background:var(--ink);z-index:100;height
       <div class="card" id="mapCard" style="display:none">
         <div class="card-head"><div class="card-head-icon">🗺️</div><div class="card-title">Pilih Stand di Denah</div></div>
         <div class="card-sub">Klik pada stand yang tersedia. Stand abu-abu sudah terisi.</div>
-        
         <div class="panggung-badge">🎤🎭 PANGGUNG UTAMA & VIP AREA — BERADA DI DEPAN (UTARA) GRADE A</div>
-        
         <div class="grade-filter">
           <div class="gf-pill active" onclick="setGradeFilter('all',this)">Semua Grade</div>
           <div class="gf-pill" onclick="setGradeFilter('A',this)">Grade A — Rp 1.250.000 <span class="recommend-badge">Best (Depan Panggung)</span></div>
           <div class="gf-pill" onclick="setGradeFilter('B',this)">Grade B — Rp 1.100.000</div>
           <div class="gf-pill" onclick="setGradeFilter('C',this)">Grade C — Rp 1.000.000</div>
         </div>
-        
         <div class="denah-wrap"><div class="denah" id="denahMap"></div></div>
-        
         <div class="pintu-badge">🚪🚶 PINTU MASUK UTAMA | TIKETING | TOILET | AREA MAKAN & PLAYGROUND — BERADA DI BELAKANG (SELATAN) GRADE C</div>
-        
         <div class="map-legend">
           <div class="ml-item"><div class="ml-dot" style="background:var(--blue-light)"></div>Grade A (depan panggung)</div>
           <div class="ml-item"><div class="ml-dot" style="background:var(--purple-light)"></div>Grade B (tengah)</div>
@@ -570,7 +565,6 @@ const provider = new GoogleAuthProvider();
 
 const ADMIN_EMAILS = ['sobatambyar1990@gmail.com', 'holistikfestumkm@gmail.com'];
 const PRICES = {A:1250000, B:1100000, C:1000000};
-const API_UPLOAD_URL = 'https://script.google.com/macros/s/AKfycbwYmTq24dUCL0QCigp937Gw8vJn54JnFmfsxKXzeNHTsC9n4gJzt5m-iR1Ble1oQWSYWA/exec';
 
 const BLOKS_DATA = [
   { name:'Blok I', type:'multi', sections:[{ grade:'A', pairs:[['A1','A2'],['A11','A12'],['A21','A22']] },{ grade:'B', pairs:[['B1','B2'],['B11','B12'],['B21','B22']] },{ grade:'C', pairs:[['C1','C2'],['C11','C12'],['C24','C25']] }]},
@@ -580,17 +574,16 @@ const BLOKS_DATA = [
   { name:'Blok V', type:'food', sections:[{ grade:'A', pairs:[['A9','A10'],['A19','A20'],['A29','A30']] },{ grade:'B', pairs:[['B9','B10'],['B19','B20'],['B29','B30']] },{ grade:'C', pairs:[['C9','C10'],['C22','C23'],['C32','C33']] }]}
 ];
 
-let currentUser = null, selCat = null, selStand = null, selGrade = null;
-let payType = 'lunas', bookedStands = {}, allRegs = [];
-let adminFilter = 'all', gradeFilter = 'all', adminListenerOn = false;
-let currentRegId = null;
+let currentUser=null, selCat=null, selStand=null, selGrade=null;
+let payType='lunas', bookedStands={}, allRegs=[];
+let adminFilter='all', gradeFilter='all', adminListenerOn=false;
+let currentRegId=null;
 
-const rupiah = n => 'Rp ' + (Number(n) || 0).toLocaleString('id-ID');
+const rupiah = n => 'Rp ' + (Number(n)||0).toLocaleString('id-ID');
 
-const showLoading = t => { let o=document.getElementById('loadingOverlay'); if(o) o.classList.add('open'); document.getElementById('loadingText').textContent=t||'Memproses...'; };
-const hideLoading = () => { let o=document.getElementById('loadingOverlay'); if(o) o.classList.remove('open'); };
+const showLoading = t => { document.getElementById('loadingOverlay').classList.add('open'); document.getElementById('loadingText').textContent=t||'Memproses...'; };
+const hideLoading = () => document.getElementById('loadingOverlay').classList.remove('open');
 
-// Upload ke Google Drive Apps Script
 async function uploadFile(file, type) {
   const base64 = await new Promise((resolve,reject)=>{
     const reader=new FileReader();
@@ -598,28 +591,18 @@ async function uploadFile(file, type) {
     reader.onerror=reject;
     reader.readAsDataURL(file);
   });
-
   const response = await fetch('https://script.google.com/macros/s/AKfycbwYmTq24dUCL0QCigp937Gw8vJn54JnFmfsxKXzeNHTsC9n4gJzt5m-iR1Ble1oQWSYWA/exec',{
     method:'POST',
-    body:JSON.stringify({
-      type:type,
-      fileName:file.name,
-      mimeType:file.type,
-      base64:base64
-    })
+    body:JSON.stringify({ type, fileName:file.name, mimeType:file.type, base64 })
   });
-
-  const text = await response.text();
-  let result = JSON.parse(text);
-
-  if(!result.success) throw new Error(result.error || 'Upload gagal');
+  const result = JSON.parse(await response.text());
+  if(!result.success) throw new Error(result.error||'Upload gagal');
   return result.fileId;
 }
 
-// Countdown timer
 (function tick(){
   const diff = new Date('2026-06-10T23:59:59+07:00').getTime() - Date.now();
-  if(diff <= 0){ document.getElementById('cdD').textContent='00'; return; }
+  if(diff<=0){ document.getElementById('cdD').textContent='00'; return; }
   const pad = n => String(Math.floor(n)).padStart(2,'0');
   document.getElementById('cdD').textContent = pad(diff/86400000);
   document.getElementById('cdH').textContent = pad((diff%86400000)/3600000);
@@ -628,21 +611,17 @@ async function uploadFile(file, type) {
   setTimeout(tick,1000);
 })();
 
-window.loginGoogle = async () => { try { await signInWithPopup(auth, provider); } catch(e){ alert('Login gagal: '+e.message); } };
+window.loginGoogle = async () => { try { await signInWithPopup(auth,provider); } catch(e){ alert('Login gagal: '+e.message); } };
 window.logout = async () => { await signOut(auth); location.reload(); };
 const isAdmin = u => u && ADMIN_EMAILS.includes((u.email||'').toLowerCase());
 
 async function updateUserStats(uid){
   if(!uid) return;
-  const q = query(collection(db,'registrations'), where('uid','==',uid));
-  const snap = await getDocs(q);
-  const total = snap.size;
-  const approved = snap.docs.filter(d => d.data().paymentStatus === 'approved').length;
-  const pending = snap.docs.filter(d => d.data().paymentStatus === 'pending').length;
-  document.getElementById('userRegCount').textContent = total;
-  document.getElementById('userApprovedCount').textContent = approved;
-  document.getElementById('userPendingCount').textContent = pending;
-  document.getElementById('userStats').style.display = total > 0 ? 'flex' : 'none';
+  const snap = await getDocs(query(collection(db,'registrations'),where('uid','==',uid)));
+  document.getElementById('userRegCount').textContent = snap.size;
+  document.getElementById('userApprovedCount').textContent = snap.docs.filter(d=>d.data().paymentStatus==='approved').length;
+  document.getElementById('userPendingCount').textContent = snap.docs.filter(d=>d.data().paymentStatus==='pending').length;
+  document.getElementById('userStats').style.display = snap.size>0?'flex':'none';
 }
 
 onAuthStateChanged(auth, async user => {
@@ -651,10 +630,10 @@ onAuthStateChanged(auth, async user => {
   if(!user){ nr.innerHTML='<button class="btn-login" onclick="loginGoogle()">🔐 Login Google</button>'; return; }
   nr.innerHTML=`<div class="user-chip"><img class="user-avatar" src="${user.photoURL||''}"><span class="user-name">${user.displayName||user.email}</span>${isAdmin(user)?'<span class="admin-badge">ADMIN</span>':''}<button class="btn-logout" onclick="logout()">Keluar</button></div>`;
   document.getElementById('loginNotice').style.display='none';
-  if(isAdmin(user) && !adminListenerOn){ adminListenerOn=true; startAdminListener(); }
+  if(isAdmin(user)&&!adminListenerOn){ adminListenerOn=true; startAdminListener(); }
   document.getElementById('adminTabBtn').style.display = isAdmin(user)?'block':'none';
-  const emailEl = document.getElementById('f_email');
-  if(emailEl && !emailEl.value) emailEl.value = user.email||'';
+  const emailEl=document.getElementById('f_email');
+  if(emailEl&&!emailEl.value) emailEl.value=user.email||'';
   await updateUserStats(user.uid);
   loadMyTickets();
   loadInitialBookings();
@@ -664,18 +643,15 @@ window.switchTab = function(tab){
   ['daftar','tiket','rules','admin'].forEach(t=>{
     document.getElementById('tab-'+t)?.classList.toggle('active',t===tab);
   });
-  const tabs = document.querySelectorAll('.ttab');
-  const tabNames = ['daftar','tiket','rules','admin'];
-  tabNames.forEach((t,i)=>{ if(t===tab) tabs[i]?.classList.add('active'); else tabs[i]?.classList.remove('active'); });
-  if(tab==='admin' && isAdmin(currentUser)) renderAdmin();
+  document.querySelectorAll('.ttab').forEach((el,i)=>{
+    el.classList.toggle('active',['daftar','tiket','rules','admin'][i]===tab);
+  });
+  if(tab==='admin'&&isAdmin(currentUser)) renderAdmin();
 };
 
 window.goPanel = function(n){
   [1,2,3,4].forEach(i=>document.getElementById('p'+i)?.classList.toggle('active',i===n));
-  [1,2,3].forEach(i=>{
-    const w=document.getElementById('wz'+i);
-    if(w) w.className='wz'+(i===n?' active':i<n?' done':'');
-  });
+  [1,2,3].forEach(i=>{ const w=document.getElementById('wz'+i); if(w) w.className='wz'+(i===n?' active':i<n?' done':''); });
   document.getElementById('mainArea').scrollIntoView({behavior:'smooth'});
 };
 
@@ -711,18 +687,17 @@ function buildDenah(){
         const row=document.createElement('div'); row.className='stand-row-map';
         [l,r].forEach(id=>{
           const cell=document.createElement('div');
-          const booked=!!bookedStands[id] && bookedStands[id]!=='rejected';
-          const wrongCat=selCat && blok.type!==selCat;
-          const dimByGrade=gradeFilter!=='all' && sec.grade!==gradeFilter;
+          const booked=!!bookedStands[id]&&bookedStands[id]!=='rejected';
+          const wrongCat=selCat&&blok.type!==selCat;
+          const dimByGrade=gradeFilter!=='all'&&sec.grade!==gradeFilter;
           const isSel=id===selStand;
           let cls=`sc g${sec.grade.toLowerCase()}`;
           if(booked) cls+=' sc-booked';
           else if(wrongCat) cls+=' sc-off';
           else if(isSel) cls+=' sc-selected';
           else if(dimByGrade) cls+=' sc-dim';
-          cell.className=cls;
-          cell.textContent=id;
-          if(!booked && !wrongCat) cell.onclick=()=>pickStand(id,sec.grade,blok.type);
+          cell.className=cls; cell.textContent=id;
+          if(!booked&&!wrongCat) cell.onclick=()=>pickStand(id,sec.grade,blok.type);
           row.appendChild(cell);
         });
         body.appendChild(row);
@@ -735,13 +710,11 @@ function pickStand(id,grade,type){
   selStand=id; selGrade=grade;
   buildDenah();
   const info=document.getElementById('standInfo');
-  if(info){
-    info.classList.add('show');
-    document.getElementById('siStand').textContent=id;
-    document.getElementById('siGrade').textContent=`Grade ${grade} ${grade==='A'?'(Depan Panggung Utama)':grade==='C'?'(Dekat Pintu Masuk)':'(Area Tengah)'}`;
-    document.getElementById('siType').textContent=type==='food'?'Makanan/Minuman':'Multi Produk';
-    document.getElementById('siPrice').textContent=rupiah(PRICES[grade]);
-  }
+  info.classList.add('show');
+  document.getElementById('siStand').textContent=id;
+  document.getElementById('siGrade').textContent=`Grade ${grade} ${grade==='A'?'(Depan Panggung Utama)':grade==='C'?'(Dekat Pintu Masuk)':'(Area Tengah)'}`;
+  document.getElementById('siType').textContent=type==='food'?'Makanan/Minuman':'Multi Produk';
+  document.getElementById('siPrice').textContent=rupiah(PRICES[grade]);
   document.getElementById('btnP1').disabled=false;
   updatePayAmounts();
 }
@@ -754,8 +727,7 @@ window.selectPay = function(type){
 
 function updatePayAmounts(){
   if(!selGrade) return;
-  const p=PRICES[selGrade];
-  const dp=Math.round(p*0.7);
+  const p=PRICES[selGrade], dp=Math.round(p*0.7);
   document.getElementById('amtLunas').textContent=rupiah(p);
   document.getElementById('amtDP').textContent=rupiah(dp);
   document.getElementById('nominalTransfer').textContent=payType==='dp'?rupiah(dp):rupiah(p);
@@ -766,21 +738,14 @@ window.handleUpload = function(inputId,previewId,imgId){
   const prev=document.getElementById(previewId);
   if(!f){ prev?.classList.remove('show'); return; }
   prev?.classList.add('show');
-  const img=document.getElementById(imgId);
-  if(img) img.src=URL.createObjectURL(f);
+  document.getElementById(imgId).src=URL.createObjectURL(f);
 };
 
 window.validateP2 = function(){
   const v=id=>document.getElementById(id)?.value.trim()||'';
-  if(!v('f_standName')||!v('f_ownerName')||!v('f_phone')||!v('f_email')||!v('f_product')){
-    alert('Lengkapi semua field wajib (*)'); return;
-  }
-  if(!/^08[0-9]{8,11}$/.test(v('f_phone').replace(/[-\s]/g,''))){
-    alert('Format WhatsApp tidak valid'); return;
-  }
-  if(!document.getElementById('ktpFile').files[0]||!document.getElementById('trFile').files[0]){
-    alert('Upload KTP dan bukti transfer'); return;
-  }
+  if(!v('f_standName')||!v('f_ownerName')||!v('f_phone')||!v('f_email')||!v('f_product')){ alert('Lengkapi semua field wajib (*)'); return; }
+  if(!/^08[0-9]{8,11}$/.test(v('f_phone').replace(/[-\s]/g,''))){ alert('Format WhatsApp tidak valid'); return; }
+  if(!document.getElementById('ktpFile').files[0]||!document.getElementById('trFile').files[0]){ alert('Upload KTP dan bukti transfer'); return; }
   const p=PRICES[selGrade], paid=payType==='dp'?Math.round(p*0.7):p;
   const ids=['sumStand','sumCat','sumGrade','sumUmkm','sumOwner','sumPhone','sumProduct','sumMethod','sumTotal'];
   const vals=[selStand,selCat==='food'?'Makanan':'Multi Produk',`Grade ${selGrade}${selGrade==='A'?' (Depan Panggung)':selGrade==='C'?' (Dekat Pintu Masuk)':''}`,v('f_standName'),v('f_ownerName'),v('f_phone'),v('f_product'),payType==='dp'?'DP 70%':'Lunas 100%',rupiah(paid)];
@@ -791,37 +756,23 @@ window.validateP2 = function(){
 window.submitRegistration = async function(){
   if(!document.getElementById('agreeChk')?.checked){ alert('Centang persetujuan ketentuan'); return; }
   if(!currentUser){ alert('Login Google dulu'); return; }
-  if(bookedStands[selStand] && bookedStands[selStand]!=='rejected'){ alert('Stand '+selStand+' sudah dipesan'); goPanel(1); return; }
-  try{
-    const ktpFile = document.getElementById('ktpFile').files[0];
-    const trFile = document.getElementById('trFile').files[0];
-    
-    if (!ktpFile || !trFile) {
-      alert('Upload KTP dan bukti transfer terlebih dahulu');
-      return;
-    }
-    
-    // Upload ke Cloudflare Pages API
-    const cekQ=query(collection(db,'registrations'),where('uid','==',currentUser.uid));
-    const cekSnap=await getDocs(cekQ);
+  if(bookedStands[selStand]&&bookedStands[selStand]!=='rejected'){ alert('Stand '+selStand+' sudah dipesan'); goPanel(1); return; }
+  try {
+    const ktpFile=document.getElementById('ktpFile').files[0];
+    const trFile=document.getElementById('trFile').files[0];
+    if(!ktpFile||!trFile){ alert('Upload KTP dan bukti transfer terlebih dahulu'); return; }
+    const cekSnap=await getDocs(query(collection(db,'registrations'),where('uid','==',currentUser.uid)));
     if(cekSnap.size>=5){ alert('Maksimal 5 stand per akun'); return; }
-
-    const [ktpFileId, transferFileId] = await Promise.all([
-      uploadFile(ktpFile,'ktp'),
-      uploadFile(trFile,'transfer')
-    ]);
-    
+    showLoading('Mengupload dokumen...');
+    const [ktpFileId,transferFileId]=await Promise.all([uploadFile(ktpFile,'ktp'),uploadFile(trFile,'transfer')]);
     showLoading('Menyimpan data...');
-    
     const v=id=>document.getElementById(id)?.value.trim()||'';
-    const price=PRICES[selGrade];
-    const paid=payType==='dp'?Math.round(price*0.7):price;
+    const price=PRICES[selGrade], paid=payType==='dp'?Math.round(price*0.7):price;
     const data={uid:currentUser.uid,email:currentUser.email,standName:v('f_standName'),ownerName:v('f_ownerName'),phone:v('f_phone'),emailPeserta:v('f_email'),productType:v('f_product'),address:v('f_address'),category:selCat==='food'?'Makanan':'Multi Produk',grade:selGrade,boothNumber:selStand,price,amountPaid:paid,paymentType:payType==='dp'?'DP 70%':'Lunas',paymentStatus:'pending',ktpFileId,transferFileId,createdAt:serverTimestamp()};
-    const ref = await addDoc(collection(db,'registrations'),data);
+    const ref=await addDoc(collection(db,'registrations'),data);
     currentRegId=ref.id;
     bookedStands[selStand]=true;
     hideLoading();
-    
     const tb={tbStand:selStand,tbUmkm:v('f_standName'),tbCat:data.category,tbGrade:'Grade '+selGrade+(selGrade==='A'?' (Depan Panggung)':selGrade==='C'?' (Dekat Pintu Masuk)':''),tbTotal:rupiah(paid)};
     Object.entries(tb).forEach(([id,val])=>{ const el=document.getElementById(id); if(el) el.textContent=val; });
     const qrDiv=document.getElementById('qr-display');
@@ -829,98 +780,294 @@ window.submitRegistration = async function(){
     goPanel(4);
     await updateUserStats(currentUser.uid);
     loadMyTickets();
-  }catch(e){ hideLoading(); alert('Error: '+e.message); }
+  } catch(e){ hideLoading(); alert('Error: '+e.message); }
 };
 
-// PDF Download Function - ACTIVE
-window.downloadPDF = async function() {
+// ═══════════════════════════════════════════════════════════════
+// DOWNLOAD PDF — Kwitansi Awal (setelah submit, masih pending)
+// ═══════════════════════════════════════════════════════════════
+window.downloadPDF = function() {
   const { jsPDF } = window.jspdf;
-  const doc = new jsPDF();
-  
-  const stand = document.getElementById('tbStand')?.innerText || 'Stand';
-  const umkm = document.getElementById('tbUmkm')?.innerText || 'UMKM';
-  const grade = document.getElementById('tbGrade')?.innerText || 'Grade';
-  const total = document.getElementById('tbTotal')?.innerText || 'Rp 0';
-  const tanggal = new Date().toLocaleDateString('id-ID', { day:'numeric', month:'long', year:'numeric' });
-  
-  doc.setFont('helvetica', 'bold');
-  doc.setFontSize(18);
-  doc.text('HOLISTIK FEST UMKM 2026', 20, 20);
-  doc.setFontSize(10);
-  doc.setFont('helvetica', 'normal');
-  doc.text('Jl. Garnisun No.1, Purworejo, Jawa Tengah', 20, 30);
-  doc.text('19 Juni 2026', 20, 37);
-  
-  doc.setDrawColor(200,200,200);
-  doc.line(20, 42, 190, 42);
-  
-  doc.setFontSize(14);
-  doc.setFont('helvetica', 'bold');
-  doc.text('KWITANSI PENDAFTARAN STAND', 20, 55);
-  
-  doc.setFontSize(11);
-  doc.setFont('helvetica', 'normal');
-  doc.text(`Nomor Stand: ${stand}`, 20, 70);
-  doc.text(`Nama UMKM: ${umkm}`, 20, 80);
-  doc.text(`Posisi: ${grade}`, 20, 90);
-  doc.text(`Total Pembayaran: ${total}`, 20, 100);
-  doc.text(`Tanggal Daftar: ${tanggal}`, 20, 110);
-  
-  doc.setFont('helvetica', 'italic');
-  doc.setTextColor(100,100,100);
-  doc.text('Terima kasih telah bergabung di Holistik Fest UMKM 2026', 20, 140);
-  doc.text('Pembayaran lunas / DP akan diverifikasi oleh admin.', 20, 148);
-  
-  doc.save(`kwitansi_${stand.replace(/\s/g,'_')}.pdf`);
+  const doc = new jsPDF({ unit:'mm', format:'a4' });
+  const stand   = document.getElementById('tbStand')?.innerText || '-';
+  const umkm    = document.getElementById('tbUmkm')?.innerText  || '-';
+  const grade   = document.getElementById('tbGrade')?.innerText || '-';
+  const total   = document.getElementById('tbTotal')?.innerText || '-';
+  const cat     = document.getElementById('tbCat')?.innerText   || '-';
+  const tanggal = new Date().toLocaleDateString('id-ID',{day:'numeric',month:'long',year:'numeric'});
+  const regId   = currentRegId ? 'REG-'+currentRegId.substr(0,10).toUpperCase() : 'REG-PENDING';
+  generateKwitansiPDF(doc, {stand,umkm,grade,total,cat,tanggal,regId,status:'pending'});
+  doc.save(`kwitansi_${stand}_HolistikFest2026.pdf`);
 };
+
+// ═══════════════════════════════════════════════════════════════
+// DOWNLOAD PDF — Kwitansi dari Tiket Saya (approved / tiket resmi)
+// ═══════════════════════════════════════════════════════════════
+window.downloadTicketPDF = function(id, booth, umkm, grade, amount, paymentType, category, ownerName, phone) {
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF({ unit:'mm', format:'a4' });
+  const total   = 'Rp ' + Number(amount).toLocaleString('id-ID');
+  const gradeLabel = 'Grade ' + grade + (grade==='A' ? ' — Depan Panggung Utama' : grade==='C' ? ' — Dekat Pintu Masuk' : ' — Area Tengah');
+  const tanggal = new Date().toLocaleDateString('id-ID',{day:'numeric',month:'long',year:'numeric'});
+  const regId   = 'REG-'+id.substr(0,10).toUpperCase();
+  generateKwitansiPDF(doc, {
+    stand: booth,
+    umkm: umkm,
+    grade: gradeLabel,
+    total: total,
+    cat: category || '-',
+    tanggal: tanggal,
+    regId: regId,
+    status: 'approved',
+    ownerName: ownerName || '',
+    phone: phone || '',
+    paymentType: paymentType || 'Lunas'
+  });
+  doc.save(`kwitansi_resmi_${booth}_HolistikFest2026.pdf`);
+};
+
+// ═══════════════════════════════════════════════════════════════
+// CORE PDF GENERATOR — dipakai oleh keduanya
+// ═══════════════════════════════════════════════════════════════
+function generateKwitansiPDF(doc, d) {
+  const W = 210, M = 18;
+
+  // ── HEADER GELAP ─────────────────────────────────────────────
+  doc.setFillColor(26, 21, 16);
+  doc.rect(0, 0, W, 60, 'F');
+
+  // Garis oranye paling atas
+  doc.setFillColor(194, 65, 12);
+  doc.rect(0, 0, W, 3, 'F');
+
+  // Label event
+  doc.setTextColor(244, 162, 97);
+  doc.setFontSize(8.5); doc.setFont('helvetica','italic');
+  doc.text('19 Juni 2026  ·  Garnisun Purworejo, Jawa Tengah', M, 16);
+
+  // Judul
+  doc.setTextColor(255, 255, 255);
+  doc.setFontSize(21); doc.setFont('helvetica','bold');
+  doc.text('HOLISTIK FEST UMKM 2026', M, 30);
+
+  // Sub judul
+  doc.setFontSize(9); doc.setFont('helvetica','normal');
+  doc.setTextColor(160, 150, 140);
+  const subTitle = d.status === 'approved' ? 'Kwitansi Resmi — Stand Terverifikasi' : 'Bukti Pendaftaran Stand (Menunggu Verifikasi)';
+  doc.text(subTitle, M, 41);
+
+  // Badge status (kanan atas)
+  if(d.status === 'approved') {
+    doc.setFillColor(21, 128, 61);
+    doc.roundedRect(W-M-48, 14, 48, 12, 3, 3, 'F');
+    doc.setTextColor(255, 255, 255);
+    doc.setFontSize(9); doc.setFont('helvetica','bold');
+    doc.text('✓  DISETUJUI', W-M-44, 21.5);
+  } else {
+    doc.setFillColor(180, 83, 9);
+    doc.roundedRect(W-M-48, 14, 48, 12, 3, 3, 'F');
+    doc.setTextColor(255, 255, 255);
+    doc.setFontSize(8.5); doc.setFont('helvetica','bold');
+    doc.text('⏳  PENDING', W-M-44, 21.5);
+  }
+
+  // Nomor dokumen
+  doc.setFontSize(7.5); doc.setFont('helvetica','normal');
+  doc.setTextColor(100, 92, 84);
+  doc.text(d.regId, W-M-48, 34);
+
+  // ── GARIS ORANYE BAWAH HEADER ────────────────────────────────
+  doc.setFillColor(194, 65, 12);
+  doc.rect(0, 60, W, 3, 'F');
+
+  // ── NOMOR STAND — area besar ──────────────────────────────────
+  // Kiri: nomor stand besar
+  doc.setTextColor(120, 110, 100);
+  doc.setFontSize(8); doc.setFont('helvetica','normal');
+  doc.text('NOMOR STAND', M, 78);
+
+  doc.setTextColor(26, 21, 16);
+  doc.setFontSize(46); doc.setFont('helvetica','bold');
+  doc.text(d.stand, M, 100);
+
+  // Grade pill
+  doc.setFillColor(230, 241, 251);
+  doc.roundedRect(M, 104, 60, 9, 3, 3, 'F');
+  doc.setTextColor(24, 95, 165);
+  doc.setFontSize(8.5); doc.setFont('helvetica','bold');
+  const gradeShort = typeof d.grade === 'string' ? d.grade : 'Grade ' + d.grade;
+  doc.text(gradeShort, M+4, 109.5);
+
+  // Kanan: kotak info ringkas
+  doc.setFillColor(247, 244, 239);
+  doc.roundedRect(122, 68, 70, 48, 4, 4, 'F');
+
+  doc.setTextColor(130, 120, 110);
+  doc.setFontSize(7.5); doc.setFont('helvetica','normal');
+  doc.text('NAMA UMKM', 128, 78);
+  doc.setTextColor(26, 21, 16);
+  doc.setFontSize(10); doc.setFont('helvetica','bold');
+  const umkmLines = doc.splitTextToSize(d.umkm, 58);
+  doc.text(umkmLines, 128, 85);
+
+  doc.setTextColor(130, 120, 110);
+  doc.setFontSize(7.5); doc.setFont('helvetica','normal');
+  doc.text('KATEGORI', 128, 98);
+  doc.setTextColor(26, 21, 16);
+  doc.setFontSize(9); doc.setFont('helvetica','bold');
+  doc.text(d.cat || '-', 128, 104);
+
+  doc.setTextColor(130, 120, 110);
+  doc.setFontSize(7.5); doc.setFont('helvetica','normal');
+  doc.text('TANGGAL CETAK', 128, 111);
+  doc.setTextColor(26, 21, 16);
+  doc.setFontSize(8.5); doc.setFont('helvetica','bold');
+  doc.text(d.tanggal, 128, 117);
+
+  // ── GARIS PEMISAH ────────────────────────────────────────────
+  doc.setDrawColor(214, 206, 192);
+  doc.setLineWidth(0.3);
+  doc.line(M, 120, W-M, 120);
+
+  // ── DETAIL ROWS ───────────────────────────────────────────────
+  const details = [
+    ['Nama UMKM / Brand',   d.umkm],
+    ['Pemilik',             d.ownerName || '-'],
+    ['WhatsApp',            d.phone || '-'],
+    ['Nomor Stand',         d.stand],
+    ['Posisi / Grade',      gradeShort],
+    ['Kategori Usaha',      d.cat || '-'],
+    ['Metode Pembayaran',   d.paymentType || 'Lunas 100%'],
+    ['Tanggal',             d.tanggal],
+    ['No. Referensi',       d.regId],
+    ['Status',              d.status === 'approved' ? 'Disetujui ✓' : 'Menunggu Verifikasi Admin'],
+  ];
+
+  let y = 133;
+  details.forEach(([label, value], i) => {
+    if(i%2===0){
+      doc.setFillColor(250, 248, 245);
+      doc.rect(M, y-5.5, W-2*M, 10, 'F');
+    }
+    doc.setFontSize(8); doc.setFont('helvetica','normal');
+    doc.setTextColor(130, 120, 110);
+    doc.text(label, M+3, y);
+
+    doc.setFont('helvetica','bold');
+    if(label==='Status' && d.status==='approved'){
+      doc.setTextColor(21, 128, 61);
+    } else {
+      doc.setTextColor(26, 21, 16);
+    }
+    doc.setFontSize(8.5);
+    const valStr = String(value||'-');
+    const valLines = doc.splitTextToSize(valStr, 88);
+    doc.text(valLines, W-M-3, y, {align:'right'});
+    y += 11;
+  });
+
+  // ── KOTAK TOTAL ───────────────────────────────────────────────
+  y += 3;
+  doc.setFillColor(247, 244, 239);
+  doc.roundedRect(M, y, W-2*M, 20, 4, 4, 'F');
+  doc.setDrawColor(214, 206, 192);
+  doc.setLineWidth(0.3);
+  doc.roundedRect(M, y, W-2*M, 20, 4, 4, 'S');
+  doc.setTextColor(130, 120, 110);
+  doc.setFontSize(8.5); doc.setFont('helvetica','normal');
+  doc.text('TOTAL PEMBAYARAN', M+6, y+8);
+  doc.setTextColor(26, 21, 16);
+  doc.setFontSize(8); doc.setFont('helvetica','normal');
+  const payNote = d.paymentType === 'DP 70%' ? '(DP 70% — sisa 30% paling lambat 10 Juni 2026)' : '(Pembayaran lunas 100%)';
+  doc.text(payNote, M+6, y+14);
+  doc.setTextColor(194, 65, 12);
+  doc.setFontSize(17); doc.setFont('helvetica','bold');
+  doc.text(d.total, W-M-4, y+13, {align:'right'});
+
+  // ── KOTAK REKENING ────────────────────────────────────────────
+  const ry = y + 26;
+  doc.setFillColor(26, 21, 16);
+  doc.roundedRect(M, ry, W-2*M, 40, 4, 4, 'F');
+
+  doc.setTextColor(100, 92, 84);
+  doc.setFontSize(7.5); doc.setFont('helvetica','bold');
+  doc.text('REKENING PEMBAYARAN RESMI', M+6, ry+9);
+
+  const rekRows = [
+    ['Bank',          'Bank BPD Jateng'],
+    ['No. Rekening',  '3020269366'],
+    ['Atas Nama',     'Dhevita Ervriana'],
+    ['Transfer Sebesar', d.total],
+  ];
+  let ry2 = ry+18;
+  rekRows.forEach(([l,v],i)=>{
+    const isLast = i===rekRows.length-1;
+    doc.setTextColor(140,130,120); doc.setFont('helvetica','normal');
+    doc.setFontSize(8.5);
+    doc.text(l, M+6, ry2);
+    doc.setTextColor(isLast ? 244 : 255, isLast ? 162 : 255, isLast ? 97 : 255);
+    doc.setFont('helvetica', isLast?'bold':'normal');
+    doc.setFontSize(isLast?11:8.5);
+    doc.text(v, W-M-4, ry2, {align:'right'});
+    ry2 += 8;
+  });
+
+  // ── FOOTER ────────────────────────────────────────────────────
+  const fy = ry+46;
+  doc.setFillColor(240, 238, 233);
+  doc.rect(0, fy, W, 25, 'F');
+
+  doc.setFillColor(194, 65, 12);
+  doc.rect(0, fy, 3, 25, 'F');
+
+  doc.setTextColor(26, 21, 16);
+  doc.setFontSize(8.5); doc.setFont('helvetica','bold');
+  doc.text('Informasi Penting:', M, fy+8);
+  doc.setFont('helvetica','normal');
+  doc.setTextColor(80, 70, 60);
+  doc.setFontSize(8);
+  doc.text('• Loading barang: 18 Juni 2026 pukul 20.00 WIB', M, fy+15);
+  doc.text('• Cantumkan nama UMKM di keterangan transfer  •  Simpan kwitansi ini sebagai bukti pendaftaran', M, fy+21);
+
+  // Nomor dokumen di pojok kanan bawah
+  doc.setTextColor(150, 140, 130);
+  doc.setFontSize(7.5);
+  doc.text(d.regId, W-M, fy+21, {align:'right'});
+}
 
 async function loadMyTickets(){
   if(!currentUser) return;
-  const q=query(collection(db,'registrations'),where('uid','==',currentUser.uid));
-  const snap=await getDocs(q);
-  const grid=document.getElementById('ticketsGrid');
+  const snap = await getDocs(query(collection(db,'registrations'),where('uid','==',currentUser.uid)));
+  const grid = document.getElementById('ticketsGrid');
   if(!grid) return;
   grid.innerHTML='';
   if(snap.empty){ grid.innerHTML='<div class="empty-state">Belum ada pendaftaran</div>'; return; }
   snap.forEach(d=>{
-    const data=d.data();
-    const statusClass=data.paymentStatus==='approved'?'approved':data.paymentStatus==='rejected'?'rejected':'pending';
-    const statusText=data.paymentStatus==='approved'?'✅ Disetujui':data.paymentStatus==='rejected'?'❌ Ditolak':'⏳ Menunggu';
-    const waMsg=encodeURIComponent(`Halo, saya ${data.standName} ingin tanya status stand ${data.boothNumber}`);
-    const el=document.createElement('div'); el.className='tkt';
-    el.innerHTML=`<div><div class="tkt-stand">${data.boothNumber||'-'}</div><div class="tkt-badge ${statusClass}">${statusText}</div></div>
+    const r = d.data();
+    const statusClass = r.paymentStatus==='approved'?'approved':r.paymentStatus==='rejected'?'rejected':'pending';
+    const statusText  = r.paymentStatus==='approved'?'✅ Disetujui':r.paymentStatus==='rejected'?'❌ Ditolak':'⏳ Menunggu';
+    const waMsg = encodeURIComponent(`Halo, saya ${r.standName} ingin tanya status stand ${r.boothNumber}`);
+    const el = document.createElement('div'); el.className='tkt';
+    el.innerHTML=`
+      <div><div class="tkt-stand">${r.boothNumber||'-'}</div><div class="tkt-badge ${statusClass}">${statusText}</div></div>
       <div class="tkt-rows">
-        <div class="tkt-row"><span>UMKM</span><span>${data.standName||'-'}</span></div>
-        <div class="tkt-row"><span>Grade</span><span>Grade ${data.grade||'-'}${data.grade==='A'?' (Depan Panggung)':data.grade==='C'?' (Dekat Pintu Masuk)':''}</span></div>
-        <div class="tkt-row"><span>Dibayar</span><span>${rupiah(data.amountPaid)}</span></div>
+        <div class="tkt-row"><span>UMKM</span><span>${r.standName||'-'}</span></div>
+        <div class="tkt-row"><span>Grade</span><span>Grade ${r.grade||'-'}${r.grade==='A'?' (Depan Panggung)':r.grade==='C'?' (Dekat Pintu Masuk)':''}</span></div>
+        <div class="tkt-row"><span>Dibayar</span><span>${rupiah(r.amountPaid)}</span></div>
       </div>
       <div class="tkt-btns">
-        <button class="btn-tkt dl" onclick="downloadTicketPDF('${data.id}','${data.boothNumber}','${data.standName}','${data.grade}',${data.amountPaid})"><i class="fas fa-download"></i> Kwitansi</button>
+        <button class="btn-tkt dl" onclick="downloadTicketPDF('${d.id}','${r.boothNumber||''}','${(r.standName||'').replace(/'/g,"\\'")}','${r.grade||''}',${r.amountPaid||0},'${r.paymentType||'Lunas'}','${r.category||''}','${(r.ownerName||'').replace(/'/g,"\\'")}','${(r.phone||'').replace(/'/g,"\\'")}')">
+          <i class="fas fa-download"></i> Kwitansi
+        </button>
         <a class="btn-tkt wa" href="https://wa.me/6282322069665?text=${waMsg}" target="_blank"><i class="fab fa-whatsapp"></i> Tanya</a>
       </div>`;
     grid.appendChild(el);
   });
 }
 
-window.downloadTicketPDF = function(id, booth, umkm, grade, amount) {
-  const { jsPDF } = window.jspdf;
-  const doc = new jsPDF();
-  doc.setFont('helvetica', 'bold');
-  doc.setFontSize(18);
-  doc.text('HOLISTIK FEST UMKM 2026', 20, 20);
-  doc.setFontSize(11);
-  doc.setFont('helvetica', 'normal');
-  doc.text(`Stand: ${booth}`, 20, 50);
-  doc.text(`UMKM: ${umkm}`, 20, 60);
-  doc.text(`Grade: ${grade}${grade==='A'?' (Depan Panggung)':grade==='C'?' (Dekat Pintu Masuk)':''}`, 20, 70);
-  doc.text(`Total: ${rupiah(amount)}`, 20, 80);
-  doc.text(`Tanggal: ${new Date().toLocaleDateString('id-ID')}`, 20, 90);
-  doc.save(`kwitansi_${booth}.pdf`);
-};
-
 async function loadInitialBookings(){
-  const snap=await getDocs(collection(db,'registrations'));
-  snap.forEach(d=>{ const r=d.data(); if(r.boothNumber && r.paymentStatus!=='rejected') bookedStands[r.boothNumber]=r.paymentStatus; });
+  const snap = await getDocs(collection(db,'registrations'));
+  snap.forEach(d=>{ const r=d.data(); if(r.boothNumber&&r.paymentStatus!=='rejected') bookedStands[r.boothNumber]=r.paymentStatus; });
   if(document.getElementById('p1')?.classList.contains('active')) buildDenah();
 }
 
@@ -930,31 +1077,25 @@ function startAdminListener(){
     snap.forEach(d=>allRegs.push({id:d.id,...d.data()}));
     allRegs.sort((a,b)=>(b.createdAt?.seconds||0)-(a.createdAt?.seconds||0));
     bookedStands={};
-    allRegs.forEach(r=>{ if(r.boothNumber && r.paymentStatus!=='rejected') bookedStands[r.boothNumber]=r.paymentStatus; });
-    updateStats();
-    renderAdmin();
+    allRegs.forEach(r=>{ if(r.boothNumber&&r.paymentStatus!=='rejected') bookedStands[r.boothNumber]=r.paymentStatus; });
+    updateStats(); renderAdmin();
     if(document.getElementById('p1')?.classList.contains('active')) buildDenah();
   });
 }
 
 function updateStats(){
-  const total=allRegs.length;
-  const approved=allRegs.filter(r=>r.paymentStatus==='approved').length;
-  const pending=allRegs.filter(r=>r.paymentStatus==='pending').length;
-  const rejected=allRegs.filter(r=>r.paymentStatus==='rejected').length;
-  const multi=allRegs.filter(r=>r.category==='Multi Produk').length;
-  const food=allRegs.filter(r=>r.category==='Makanan').length;
+  const total=allRegs.length, approved=allRegs.filter(r=>r.paymentStatus==='approved').length;
+  const pending=allRegs.filter(r=>r.paymentStatus==='pending').length, rejected=allRegs.filter(r=>r.paymentStatus==='rejected').length;
+  const multi=allRegs.filter(r=>r.category==='Multi Produk').length, food=allRegs.filter(r=>r.category==='Makanan').length;
   const revenue=allRegs.filter(r=>r.paymentStatus==='approved').reduce((s,r)=>s+(r.amountPaid||0),0);
-  const statsGrid=document.getElementById('statsGrid');
-  if(statsGrid) statsGrid.innerHTML=`
+  document.getElementById('statsGrid').innerHTML=`
     <div class="stat"><div class="stat-lbl">Total</div><div class="stat-val">${total}</div></div>
     <div class="stat"><div class="stat-lbl">Approved</div><div class="stat-val g">${approved}</div></div>
     <div class="stat"><div class="stat-lbl">Pending</div><div class="stat-val o">${pending}</div></div>
     <div class="stat"><div class="stat-lbl">Ditolak</div><div class="stat-val r">${rejected}</div></div>
     <div class="stat"><div class="stat-lbl">Multi</div><div class="stat-val b">${multi}</div></div>
     <div class="stat"><div class="stat-lbl">Makanan</div><div class="stat-val o">${food}</div></div>
-    <div class="stat"><div class="stat-lbl">Pendapatan</div><div class="stat-val g" style="font-size:1rem">${rupiah(revenue)}</div></div>
-  `;
+    <div class="stat"><div class="stat-lbl">Pendapatan</div><div class="stat-val g" style="font-size:1rem">${rupiah(revenue)}</div></div>`;
 }
 
 window.setFilter = function(f,el){
@@ -994,101 +1135,61 @@ window.renderAdmin = function(){
         ${r.paymentStatus!=='approved'?`<button class="btn-approve" onclick="approveReg('${r.id}')"><i class="fas fa-check"></i> Approve</button>`:''}
         ${r.paymentStatus!=='rejected'?`<button class="btn-reject" onclick="rejectReg('${r.id}')"><i class="fas fa-times"></i> Tolak</button>`:''}
         <button class="btn-delete" onclick="deleteReg('${r.id}','${r.boothNumber||''}')"><i class="fas fa-trash"></i> Hapus</button>
-      </div>
-    `;
+      </div>`;
     container.appendChild(div);
   });
 };
 
 window.openDetail = function(id){
-  const r = allRegs.find(x => x.id === id);
+  const r = allRegs.find(x=>x.id===id);
   if(!r) return;
-  
-  const rows = [
-    ['ID', id], ['Stand', r.boothNumber || '-'], ['UMKM', r.standName || '-'], 
-    ['Pemilik', r.ownerName || '-'], ['WhatsApp', r.phone || '-'], 
-    ['Email', r.emailPeserta || '-'], ['Kategori', r.category || '-'], 
-    ['Grade', r.grade || '-'], ['Harga Sewa', rupiah(r.price)], 
-    ['Metode', r.paymentType || '-'], ['Terbayar', rupiah(r.amountPaid)],
-    ['Status', r.paymentStatus || '-'], 
-    ['Tgl Daftar', r.createdAt ? new Date(r.createdAt.seconds * 1000).toLocaleString('id-ID') : '-']
-  ];
-  
-  const modalBody = document.getElementById('modalBody');
-  if(modalBody) {
-   const ktpUrl =
-  r.ktpUrl ||
-  (r.ktpFileId
-    ? `https://drive.google.com/thumbnail?id=${r.ktpFileId}&sz=w1200`
-    : '');
-
-const trUrl =
-  r.transferUrl ||
-  (r.transferFileId
-    ? `https://drive.google.com/thumbnail?id=${r.transferFileId}&sz=w1200`
-    : '');
-    
-    modalBody.innerHTML = `
-      <div style="display:flex; flex-direction:column; gap:20px; margin-bottom:20px;">
-        <div style="background:#f5f5f5; padding:12px; border-radius:12px;">
-          <strong>📷 FOTO KTP</strong>
-          ${ktpUrl ? `<img src="${ktpUrl}" style="width:100%; max-height:250px; object-fit:contain; margin-top:8px; border-radius:8px; border:1px solid #ddd;" onerror="this.src='https://placehold.co/400x250?text=Gambar+Gagal+Load&bg=red&textColor=white';">` : '<div class="notice warn">⚠️ Tidak ada foto KTP</div>'}
-        </div>
-        <div style="background:#f5f5f5; padding:12px; border-radius:12px;">
-          <strong>💳 BUKTI TRANSFER</strong>
-          ${trUrl ? `<img src="${trUrl}" style="width:100%; max-height:250px; object-fit:contain; margin-top:8px; border-radius:8px; border:1px solid #ddd;" onerror="this.src='https://placehold.co/400x250?text=Gambar+Gagal+Load&bg=red&textColor=white';">` : '<div class="notice warn">⚠️ Tidak ada bukti transfer</div>'}
-        </div>
+  const rows=[['ID',id],['Stand',r.boothNumber||'-'],['UMKM',r.standName||'-'],['Pemilik',r.ownerName||'-'],['WhatsApp',r.phone||'-'],['Email',r.emailPeserta||'-'],['Kategori',r.category||'-'],['Grade',r.grade||'-'],['Harga Sewa',rupiah(r.price)],['Metode',r.paymentType||'-'],['Terbayar',rupiah(r.amountPaid)],['Status',r.paymentStatus||'-'],['Tgl Daftar',r.createdAt?new Date(r.createdAt.seconds*1000).toLocaleString('id-ID'):'-']];
+  const ktpUrl = r.ktpUrl||(r.ktpFileId?`https://drive.google.com/thumbnail?id=${r.ktpFileId}&sz=w1200`:'');
+  const trUrl  = r.transferUrl||(r.transferFileId?`https://drive.google.com/thumbnail?id=${r.transferFileId}&sz=w1200`:'');
+  document.getElementById('modalBody').innerHTML=`
+    <div style="display:flex;flex-direction:column;gap:20px;margin-bottom:20px">
+      <div style="background:#f5f5f5;padding:12px;border-radius:12px"><strong>📷 FOTO KTP</strong>
+        ${ktpUrl?`<img src="${ktpUrl}" style="width:100%;max-height:250px;object-fit:contain;margin-top:8px;border-radius:8px;border:1px solid #ddd" onerror="this.src='https://placehold.co/400x250?text=Gambar+Gagal+Load';">`:' <div class="notice warn">⚠️ Tidak ada foto KTP</div>'}
       </div>
-      <div class="modal-rows">${rows.map(([l,v]) => `<div><span>${l}</span><span>${v}</span></div>`).join('')}</div>
-      <div class="modal-actions" style="margin-top:20px; display:flex; gap:10px;">
-        <button class="btn-approve" onclick="approveReg('${id}');closeModal()"><i class='fas fa-check'></i> Approve</button>
-        <button class="btn-reject" onclick="rejectReg('${id}');closeModal()"><i class='fas fa-times'></i> Tolak</button>
-        <button class="btn-delete" onclick="deleteReg('${id}','${(r.boothNumber || '').replace(/'/g, "\\'")}',true)"><i class='fas fa-trash'></i> Hapus</button>
+      <div style="background:#f5f5f5;padding:12px;border-radius:12px"><strong>💳 BUKTI TRANSFER</strong>
+        ${trUrl?`<img src="${trUrl}" style="width:100%;max-height:250px;object-fit:contain;margin-top:8px;border-radius:8px;border:1px solid #ddd" onerror="this.src='https://placehold.co/400x250?text=Gambar+Gagal+Load';">`:' <div class="notice warn">⚠️ Tidak ada bukti transfer</div>'}
       </div>
-    `;
-  }
+    </div>
+    <div class="modal-rows">${rows.map(([l,v])=>`<div><span>${l}</span><span>${v}</span></div>`).join('')}</div>
+    <div class="modal-actions" style="margin-top:20px;display:flex;gap:10px">
+      <button class="btn-approve" onclick="approveReg('${id}');closeModal()"><i class='fas fa-check'></i> Approve</button>
+      <button class="btn-reject" onclick="rejectReg('${id}');closeModal()"><i class='fas fa-times'></i> Tolak</button>
+      <button class="btn-delete" onclick="deleteReg('${id}','${(r.boothNumber||'').replace(/'/g,"\\'")}',true)"><i class='fas fa-trash'></i> Hapus</button>
+    </div>`;
   document.getElementById('modalOverlay')?.classList.add('open');
 };
 
 window.approveReg = async function(id){
   if(!confirm('Setujui pendaftaran ini?')) return;
   showLoading('Menyetujui...');
-  try{
-    await updateDoc(doc(db,'registrations',id),{paymentStatus:'approved'});
-    hideLoading();
-    alert('✅ Pendaftaran disetujui!');
-  }catch(e){ hideLoading(); alert('Gagal: '+e.message); }
+  try{ await updateDoc(doc(db,'registrations',id),{paymentStatus:'approved'}); hideLoading(); alert('✅ Pendaftaran disetujui!'); }
+  catch(e){ hideLoading(); alert('Gagal: '+e.message); }
 };
 
 window.rejectReg = async function(id){
   const reason=prompt('Alasan penolakan (opsional):');
-  if(reason === null) return;
+  if(reason===null) return;
   showLoading('Menolak...');
-  try{
-    await updateDoc(doc(db,'registrations',id),{paymentStatus:'rejected',rejectReason:reason||''});
-    hideLoading();
-    alert('❌ Pendaftaran ditolak');
-  }catch(e){ hideLoading(); alert('Gagal: '+e.message); }
+  try{ await updateDoc(doc(db,'registrations',id),{paymentStatus:'rejected',rejectReason:reason||''}); hideLoading(); alert('❌ Pendaftaran ditolak'); }
+  catch(e){ hideLoading(); alert('Gagal: '+e.message); }
 };
 
-window.deleteReg = async function(id, boothNumber, fromModal = false){
+window.deleteReg = async function(id, boothNumber, fromModal=false){
   if(!confirm(`⚠️ PERINGATAN!\n\nAnda akan MENGHAPUS pendaftaran stand ${boothNumber}.\n\nData tidak dapat dipulihkan.\n\nYakin ingin menghapus?`)) return;
   if(!confirm(`KONFIRMASI AKHIR:\nHapus permanen stand ${boothNumber}?`)) return;
-  if(!currentUser || !ADMIN_EMAILS.includes(currentUser.email?.toLowerCase())){
-    alert('Akses ditolak. Hanya admin yang bisa menghapus.');
-    return;
-  }
+  if(!currentUser||!ADMIN_EMAILS.includes(currentUser.email?.toLowerCase())){ alert('Akses ditolak.'); return; }
   if(fromModal) closeModal();
   showLoading('Menghapus data...');
   try{
     await currentUser.getIdToken(true);
     await deleteDoc(doc(db,'registrations',id));
-    hideLoading();
-    alert(`✅ Stand ${boothNumber} berhasil dihapus.`);
-  }catch(e){
-    hideLoading();
-    alert('Gagal menghapus: '+e.message);
-  }
+    hideLoading(); alert(`✅ Stand ${boothNumber} berhasil dihapus.`);
+  } catch(e){ hideLoading(); alert('Gagal menghapus: '+e.message); }
 };
 
 window.exportCSV = function(full){
@@ -1099,9 +1200,8 @@ window.exportCSV = function(full){
     if(full) csv+=`${r.id},${r.boothNumber||''},${r.standName||''},${r.ownerName||''},${r.phone||''},${r.category||''},${r.grade||''},${r.price||0},${r.amountPaid||0},${r.paymentStatus||''},${tgl}\n`;
     else csv+=`${r.boothNumber||''},${r.standName||''},${r.ownerName||''},${r.phone||''},${r.category||''},${r.grade||''},${r.price||0},${r.amountPaid||0},${tgl}\n`;
   });
-  const blob=new Blob([csv],{type:'text/csv'});
   const a=document.createElement('a');
-  a.href=URL.createObjectURL(blob);
+  a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));
   a.download=full?'semua-pendaftar.csv':'peserta-approved.csv';
   a.click();
 };

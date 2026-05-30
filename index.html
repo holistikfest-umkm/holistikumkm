@@ -827,107 +827,117 @@ window.downloadTicketPDF = function(id, booth, umkm, grade, amount, paymentType,
 };
 
 // ═══════════════════════════════════════════════════════════════
-// CORE PDF GENERATOR — dipakai oleh keduanya
+// CORE PDF GENERATOR — FIXED: tidak terpotong, muat di 1 halaman A4
 // ═══════════════════════════════════════════════════════════════
 function generateKwitansiPDF(doc, d) {
-  const W = 210, M = 18;
+  const W = 210, M = 16;
+  const PAGE_H = 297;
 
-  // ── HEADER GELAP ─────────────────────────────────────────────
+  // helper: tambah halaman baru jika konten melebihi batas
+  function checkPage(y, needed) {
+    if (y + needed > PAGE_H - 8) {
+      doc.addPage();
+      return 12; // reset y ke margin atas halaman baru
+    }
+    return y;
+  }
+
+  // ── HEADER ───────────────────────────────────────────────────
   doc.setFillColor(26, 21, 16);
-  doc.rect(0, 0, W, 60, 'F');
+  doc.rect(0, 0, W, 52, 'F');
 
-  // Garis oranye paling atas
+  // Garis oranye atas
   doc.setFillColor(194, 65, 12);
   doc.rect(0, 0, W, 3, 'F');
 
-  // Label event
+  // Lokasi & tanggal
   doc.setTextColor(244, 162, 97);
-  doc.setFontSize(8.5); doc.setFont('helvetica','italic');
-  doc.text('19 Juni 2026  ·  Garnisun Purworejo, Jawa Tengah', M, 16);
+  doc.setFontSize(8); doc.setFont('helvetica','italic');
+  doc.text('19 Juni 2026  ·  Garnisun Purworejo, Jawa Tengah', M, 14);
 
   // Judul
   doc.setTextColor(255, 255, 255);
-  doc.setFontSize(21); doc.setFont('helvetica','bold');
-  doc.text('HOLISTIK FEST UMKM 2026', M, 30);
+  doc.setFontSize(18); doc.setFont('helvetica','bold');
+  doc.text('HOLISTIK FEST UMKM 2026', M, 26);
 
-  // Sub judul
-  doc.setFontSize(9); doc.setFont('helvetica','normal');
+  // Subjudul
+  doc.setFontSize(8.5); doc.setFont('helvetica','normal');
   doc.setTextColor(160, 150, 140);
-  const subTitle = d.status === 'approved' ? 'Kwitansi Resmi — Stand Terverifikasi' : 'Bukti Pendaftaran Stand (Menunggu Verifikasi)';
-  doc.text(subTitle, M, 41);
+  const subTitle = d.status === 'approved'
+    ? 'Kwitansi Resmi — Stand Terverifikasi'
+    : 'Bukti Pendaftaran Stand (Menunggu Verifikasi)';
+  doc.text(subTitle, M, 36);
 
-  // Badge status (kanan atas)
-  if(d.status === 'approved') {
+  // Badge status
+  if (d.status === 'approved') {
     doc.setFillColor(21, 128, 61);
-    doc.roundedRect(W-M-48, 14, 48, 12, 3, 3, 'F');
-    doc.setTextColor(255, 255, 255);
-    doc.setFontSize(9); doc.setFont('helvetica','bold');
-    doc.text('✓  DISETUJUI', W-M-44, 21.5);
-  } else {
-    doc.setFillColor(180, 83, 9);
-    doc.roundedRect(W-M-48, 14, 48, 12, 3, 3, 'F');
+    doc.roundedRect(W-M-44, 12, 44, 11, 2.5, 2.5, 'F');
     doc.setTextColor(255, 255, 255);
     doc.setFontSize(8.5); doc.setFont('helvetica','bold');
-    doc.text('⏳  PENDING', W-M-44, 21.5);
+    doc.text('✓  DISETUJUI', W-M-40, 19);
+  } else {
+    doc.setFillColor(180, 83, 9);
+    doc.roundedRect(W-M-44, 12, 44, 11, 2.5, 2.5, 'F');
+    doc.setTextColor(255, 255, 255);
+    doc.setFontSize(8); doc.setFont('helvetica','bold');
+    doc.text('⏳  PENDING', W-M-40, 19);
   }
 
-  // Nomor dokumen
-  doc.setFontSize(7.5); doc.setFont('helvetica','normal');
+  // No dokumen di header
+  doc.setFontSize(7); doc.setFont('helvetica','normal');
   doc.setTextColor(100, 92, 84);
-  doc.text(d.regId, W-M-48, 34);
+  doc.text(d.regId, W-M-44, 30);
 
-  // ── GARIS ORANYE BAWAH HEADER ────────────────────────────────
+  // Garis oranye bawah header
   doc.setFillColor(194, 65, 12);
-  doc.rect(0, 60, W, 3, 'F');
+  doc.rect(0, 52, W, 2.5, 'F');
 
-  // ── NOMOR STAND — area besar ──────────────────────────────────
+  // ── AREA STAND + INFO RINGKAS ─────────────────────────────────
+  let y = 60;
+
   // Kiri: nomor stand besar
-  doc.setTextColor(120, 110, 100);
-  doc.setFontSize(8); doc.setFont('helvetica','normal');
-  doc.text('NOMOR STAND', M, 78);
+  doc.setTextColor(100, 92, 84);
+  doc.setFontSize(7.5); doc.setFont('helvetica','normal');
+  doc.text('NOMOR STAND', M, y);
 
   doc.setTextColor(26, 21, 16);
-  doc.setFontSize(46); doc.setFont('helvetica','bold');
-  doc.text(d.stand, M, 100);
+  doc.setFontSize(40); doc.setFont('helvetica','bold');
+  doc.text(d.stand, M, y + 18);
 
   // Grade pill
-  doc.setFillColor(230, 241, 251);
-  doc.roundedRect(M, 104, 60, 9, 3, 3, 'F');
-  doc.setTextColor(24, 95, 165);
-  doc.setFontSize(8.5); doc.setFont('helvetica','bold');
+  doc.setFillColor(219, 234, 254);
+  doc.roundedRect(M, y + 21, 64, 8, 2, 2, 'F');
+  doc.setTextColor(30, 64, 175);
+  doc.setFontSize(7.5); doc.setFont('helvetica','bold');
   const gradeShort = typeof d.grade === 'string' ? d.grade : 'Grade ' + d.grade;
-  doc.text(gradeShort, M+4, 109.5);
+  doc.text(gradeShort, M + 3, y + 26.5);
 
-  // Kanan: kotak info ringkas
+  // Kanan: kotak info
   doc.setFillColor(247, 244, 239);
-  doc.roundedRect(122, 68, 70, 48, 4, 4, 'F');
+  doc.roundedRect(120, y - 3, 72, 36, 3, 3, 'F');
 
-  doc.setTextColor(130, 120, 110);
-  doc.setFontSize(7.5); doc.setFont('helvetica','normal');
-  doc.text('NAMA UMKM', 128, 78);
+  doc.setTextColor(120, 110, 100);
+  doc.setFontSize(7); doc.setFont('helvetica','normal');
+  doc.text('NAMA UMKM', 125, y + 5);
   doc.setTextColor(26, 21, 16);
-  doc.setFontSize(10); doc.setFont('helvetica','bold');
-  const umkmLines = doc.splitTextToSize(d.umkm, 58);
-  doc.text(umkmLines, 128, 85);
+  doc.setFontSize(9.5); doc.setFont('helvetica','bold');
+  const umkmLines = doc.splitTextToSize(d.umkm, 60);
+  doc.text(umkmLines, 125, y + 11);
 
-  doc.setTextColor(130, 120, 110);
-  doc.setFontSize(7.5); doc.setFont('helvetica','normal');
-  doc.text('KATEGORI', 128, 98);
-  doc.setTextColor(26, 21, 16);
-  doc.setFontSize(9); doc.setFont('helvetica','bold');
-  doc.text(d.cat || '-', 128, 104);
-
-  doc.setTextColor(130, 120, 110);
-  doc.setFontSize(7.5); doc.setFont('helvetica','normal');
-  doc.text('TANGGAL CETAK', 128, 111);
+  doc.setTextColor(120, 110, 100);
+  doc.setFontSize(7); doc.setFont('helvetica','normal');
+  doc.text('KATEGORI', 125, y + 22);
   doc.setTextColor(26, 21, 16);
   doc.setFontSize(8.5); doc.setFont('helvetica','bold');
-  doc.text(d.tanggal, 128, 117);
+  doc.text(d.cat || '-', 125, y + 28);
 
-  // ── GARIS PEMISAH ────────────────────────────────────────────
+  y += 35; // selesai area stand
+
+  // ── GARIS PEMISAH ─────────────────────────────────────────────
   doc.setDrawColor(214, 206, 192);
   doc.setLineWidth(0.3);
-  doc.line(M, 120, W-M, 120);
+  doc.line(M, y, W - M, y);
+  y += 6;
 
   // ── DETAIL ROWS ───────────────────────────────────────────────
   const details = [
@@ -943,96 +953,109 @@ function generateKwitansiPDF(doc, d) {
     ['Status',              d.status === 'approved' ? 'Disetujui ✓' : 'Menunggu Verifikasi Admin'],
   ];
 
-  let y = 133;
+  const ROW_H = 9;
   details.forEach(([label, value], i) => {
-    if(i%2===0){
+    y = checkPage(y, ROW_H + 2);
+    if (i % 2 === 0) {
       doc.setFillColor(250, 248, 245);
-      doc.rect(M, y-5.5, W-2*M, 10, 'F');
+      doc.rect(M, y - 4.5, W - 2 * M, ROW_H, 'F');
     }
-    doc.setFontSize(8); doc.setFont('helvetica','normal');
-    doc.setTextColor(130, 120, 110);
-    doc.text(label, M+3, y);
+    doc.setFontSize(7.5); doc.setFont('helvetica','normal');
+    doc.setTextColor(120, 110, 100);
+    doc.text(label, M + 3, y);
 
     doc.setFont('helvetica','bold');
-    if(label==='Status' && d.status==='approved'){
+    doc.setFontSize(8);
+    if (label === 'Status' && d.status === 'approved') {
       doc.setTextColor(21, 128, 61);
     } else {
       doc.setTextColor(26, 21, 16);
     }
-    doc.setFontSize(8.5);
-    const valStr = String(value||'-');
+    const valStr = String(value || '-');
     const valLines = doc.splitTextToSize(valStr, 88);
-    doc.text(valLines, W-M-3, y, {align:'right'});
-    y += 11;
+    doc.text(valLines, W - M - 3, y, { align: 'right' });
+    y += ROW_H;
   });
+
+  y += 4;
 
   // ── KOTAK TOTAL ───────────────────────────────────────────────
-  y += 3;
+  y = checkPage(y, 22);
   doc.setFillColor(247, 244, 239);
-  doc.roundedRect(M, y, W-2*M, 20, 4, 4, 'F');
+  doc.roundedRect(M, y, W - 2 * M, 20, 3, 3, 'F');
   doc.setDrawColor(214, 206, 192);
-  doc.setLineWidth(0.3);
-  doc.roundedRect(M, y, W-2*M, 20, 4, 4, 'S');
-  doc.setTextColor(130, 120, 110);
-  doc.setFontSize(8.5); doc.setFont('helvetica','normal');
-  doc.text('TOTAL PEMBAYARAN', M+6, y+8);
-  doc.setTextColor(26, 21, 16);
+  doc.setLineWidth(0.25);
+  doc.roundedRect(M, y, W - 2 * M, 20, 3, 3, 'S');
+
+  doc.setTextColor(120, 110, 100);
   doc.setFontSize(8); doc.setFont('helvetica','normal');
-  const payNote = d.paymentType === 'DP 70%' ? '(DP 70% — sisa 30% paling lambat 10 Juni 2026)' : '(Pembayaran lunas 100%)';
-  doc.text(payNote, M+6, y+14);
+  doc.text('TOTAL PEMBAYARAN', M + 5, y + 7);
+
+  const payNote = (d.paymentType === 'DP 70%')
+    ? '(DP 70% — sisa 30% paling lambat 10 Juni 2026)'
+    : '(Pembayaran lunas 100%)';
+  doc.setFontSize(7.5);
+  doc.text(payNote, M + 5, y + 13.5);
+
   doc.setTextColor(194, 65, 12);
-  doc.setFontSize(17); doc.setFont('helvetica','bold');
-  doc.text(d.total, W-M-4, y+13, {align:'right'});
+  doc.setFontSize(15); doc.setFont('helvetica','bold');
+  doc.text(d.total, W - M - 4, y + 13, { align: 'right' });
+
+  y += 25;
 
   // ── KOTAK REKENING ────────────────────────────────────────────
-  const ry = y + 26;
+  y = checkPage(y, 36);
   doc.setFillColor(26, 21, 16);
-  doc.roundedRect(M, ry, W-2*M, 40, 4, 4, 'F');
+  doc.roundedRect(M, y, W - 2 * M, 34, 3, 3, 'F');
 
   doc.setTextColor(100, 92, 84);
-  doc.setFontSize(7.5); doc.setFont('helvetica','bold');
-  doc.text('REKENING PEMBAYARAN RESMI', M+6, ry+9);
+  doc.setFontSize(7); doc.setFont('helvetica','bold');
+  doc.text('REKENING PEMBAYARAN RESMI', M + 5, y + 8);
 
   const rekRows = [
-    ['Bank',          'Bank BPD Jateng'],
-    ['No. Rekening',  '3020269366'],
-    ['Atas Nama',     'Dhevita Ervriana'],
+    ['Bank',             'Bank BPD Jateng'],
+    ['No. Rekening',     '3020269366'],
+    ['Atas Nama',        'Dhevita Ervriana'],
     ['Transfer Sebesar', d.total],
   ];
-  let ry2 = ry+18;
-  rekRows.forEach(([l,v],i)=>{
-    const isLast = i===rekRows.length-1;
-    doc.setTextColor(140,130,120); doc.setFont('helvetica','normal');
-    doc.setFontSize(8.5);
-    doc.text(l, M+6, ry2);
+  let ry2 = y + 16;
+  rekRows.forEach(([l, v], i) => {
+    const isLast = i === rekRows.length - 1;
+    doc.setTextColor(140, 130, 120);
+    doc.setFont('helvetica','normal');
+    doc.setFontSize(8);
+    doc.text(l, M + 5, ry2);
     doc.setTextColor(isLast ? 244 : 255, isLast ? 162 : 255, isLast ? 97 : 255);
-    doc.setFont('helvetica', isLast?'bold':'normal');
-    doc.setFontSize(isLast?11:8.5);
-    doc.text(v, W-M-4, ry2, {align:'right'});
-    ry2 += 8;
+    doc.setFont('helvetica', isLast ? 'bold' : 'normal');
+    doc.setFontSize(isLast ? 10 : 8);
+    doc.text(v, W - M - 4, ry2, { align: 'right' });
+    ry2 += 7;
   });
 
+  y += 38;
+
   // ── FOOTER ────────────────────────────────────────────────────
-  const fy = ry+46;
+  y = checkPage(y, 22);
   doc.setFillColor(240, 238, 233);
-  doc.rect(0, fy, W, 25, 'F');
+  doc.rect(0, y, W, 22, 'F');
 
   doc.setFillColor(194, 65, 12);
-  doc.rect(0, fy, 3, 25, 'F');
+  doc.rect(0, y, 2.5, 22, 'F');
 
   doc.setTextColor(26, 21, 16);
-  doc.setFontSize(8.5); doc.setFont('helvetica','bold');
-  doc.text('Informasi Penting:', M, fy+8);
-  doc.setFont('helvetica','normal');
-  doc.setTextColor(80, 70, 60);
-  doc.setFontSize(8);
-  doc.text('• Loading barang: 18 Juni 2026 pukul 20.00 WIB', M, fy+15);
-  doc.text('• Cantumkan nama UMKM di keterangan transfer  •  Simpan kwitansi ini sebagai bukti pendaftaran', M, fy+21);
+  doc.setFontSize(8); doc.setFont('helvetica','bold');
+  doc.text('Informasi Penting:', M, y + 7);
 
-  // Nomor dokumen di pojok kanan bawah
-  doc.setTextColor(150, 140, 130);
+  doc.setFont('helvetica','normal');
+  doc.setTextColor(70, 62, 54);
   doc.setFontSize(7.5);
-  doc.text(d.regId, W-M, fy+21, {align:'right'});
+  doc.text('• Loading barang: 18 Juni 2026 pukul 20.00 WIB', M, y + 13.5);
+  doc.text('• Cantumkan nama UMKM di keterangan transfer  •  Simpan kwitansi ini sebagai bukti pendaftaran', M, y + 19.5);
+
+  // No. dokumen pojok kanan bawah footer
+  doc.setTextColor(160, 150, 140);
+  doc.setFontSize(7);
+  doc.text(d.regId, W - M, y + 19.5, { align: 'right' });
 }
 
 async function loadMyTickets(){

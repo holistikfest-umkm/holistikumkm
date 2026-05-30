@@ -570,7 +570,7 @@ const provider = new GoogleAuthProvider();
 
 const ADMIN_EMAILS = ['sobatambyar1990@gmail.com', 'holistikfestumkm@gmail.com'];
 const PRICES = {A:1250000, B:1100000, C:1000000};
-const API_UPLOAD_URL = 'https://script.google.com/macros/s/AKfycbwYmTq24dUCL0QCigp937Gw8vJn54JnFmfsxKXzeNHTsC9n4gJzt5m-iR1Ble1oQWSYWA/exec';
+const API_UPLOAD_URL = 'https://script.google.com/macros/s/AKfycbxjKBCanKWVzql2kKrYi-hfX27GvGzOU5SEvnhkQs5csXztjjDDBIY_Ym-w37mMclCFFw/exec';
 
 const BLOKS_DATA = [
   { name:'Blok I', type:'multi', sections:[{ grade:'A', pairs:[['A1','A2'],['A11','A12'],['A21','A22']] },{ grade:'B', pairs:[['B1','B2'],['B11','B12'],['B21','B22']] },{ grade:'C', pairs:[['C1','C2'],['C11','C12'],['C24','C25']] }]},
@@ -598,9 +598,9 @@ async function uploadFile(file, type) {
     reader.onerror=reject;
     reader.readAsDataURL(file);
   });
+
   const response = await fetch(API_UPLOAD_URL,{
     method:'POST',
-    headers:{'Content-Type':'application/json'},
     body:JSON.stringify({
       type:type,
       fileName:file.name,
@@ -608,7 +608,15 @@ async function uploadFile(file, type) {
       base64:base64
     })
   });
-  const result=await response.json();
+
+  const text = await response.text();
+  let result;
+  try{
+    result = JSON.parse(text);
+  }catch(e){
+    throw new Error('Response Apps Script tidak valid: '+text);
+  }
+
   if(!result.success) throw new Error(result.error||'Upload gagal');
   return result.fileId;
 }

@@ -337,7 +337,7 @@ nav{position:fixed;top:0;left:0;right:0;background:var(--ink);z-index:100;height
 </div>
 
 <div class="info-strip">
-  <div class="is-item">1 peserta = 1 stand</div>
+  <div class="is-item">maksimal 5 stand per akun</div>
   <div class="is-item">Upload KTP + bukti transfer wajib</div>
   <div class="is-item">DP min. 70% — deadline 10 Juni 2026</div>
   <div class="is-item">Loading barang: 18 Juni 2026, 20.00 WIB</div>
@@ -570,7 +570,7 @@ const provider = new GoogleAuthProvider();
 
 const ADMIN_EMAILS = ['sobatambyar1990@gmail.com', 'holistikfestumkm@gmail.com'];
 const PRICES = {A:1250000, B:1100000, C:1000000};
-const API_UPLOAD_URL = 'https://holistikumkm.pages.dev/api/upload';
+const API_UPLOAD_URL = 'https://script.google.com/macros/s/AKfycbwYmTq24dUCL0QCigp937Gw8vJn54JnFmfsxKXzeNHTsC9n4gJzt5m-iR1Ble1oQWSYWA/exec';
 
 const BLOKS_DATA = [
   { name:'Blok I', type:'multi', sections:[{ grade:'A', pairs:[['A1','A2'],['A11','A12'],['A21','A22']] },{ grade:'B', pairs:[['B1','B2'],['B11','B12'],['B21','B22']] },{ grade:'C', pairs:[['C1','C2'],['C11','C12'],['C24','C25']] }]},
@@ -590,30 +590,27 @@ const rupiah = n => 'Rp ' + (Number(n) || 0).toLocaleString('id-ID');
 const showLoading = t => { let o=document.getElementById('loadingOverlay'); if(o) o.classList.add('open'); document.getElementById('loadingText').textContent=t||'Memproses...'; };
 const hideLoading = () => { let o=document.getElementById('loadingOverlay'); if(o) o.classList.remove('open'); };
 
-// Fungsi upload ke Cloudflare Pages API
-async function uploadFile(file, label) {
-  showLoading(`Upload ${label}...`);
-  
-  const formData = new FormData();
-  formData.append('file', file);
-  
-  try {
-    const response = await fetch(API_UPLOAD_URL, {
-      method: 'POST',
-      body: formData
-    });
-    
-    const result = await response.json();
-    
-    if (!result.success) {
-      throw new Error(result.error || 'Upload gagal');
-    }
-    
-    return result.url;
-  } catch (error) {
-    console.error('Upload error:', error);
-    throw new Error(`Upload ${label} gagal: ${error.message}`);
-  }
+// Upload ke Google Drive Apps Script
+async function uploadFile(file, type) {
+  const base64 = await new Promise((resolve,reject)=>{
+    const reader=new FileReader();
+    reader.onload=()=>resolve(reader.result.split(',')[1]);
+    reader.onerror=reject;
+    reader.readAsDataURL(file);
+  });
+  const response = await fetch(API_UPLOAD_URL,{
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({
+      type:type,
+      fileName:file.name,
+      mimeType:file.type,
+      base64:base64
+    })
+  });
+  const result=await response.json();
+  if(!result.success) throw new Error(result.error||'Upload gagal');
+  return result.fileId;
 }
 
 // Countdown timer
@@ -802,9 +799,13 @@ window.submitRegistration = async function(){
     }
     
     // Upload ke Cloudflare Pages API
-    const [ktpUrl, trUrl] = await Promise.all([
-      uploadFile(ktpFile, 'KTP'),
-      uploadFile(trFile, 'Bukti Transfer')
+    const cekQ=query(collection(db,'registrations'),where('uid','==',currentUser.uid));
+    const cekSnap=await getDocs(cekQ);
+    if(cekSnap.size>=5){ alert('Maksimal 5 stand per akun'); return; }
+
+    const [ktpFileId, transferFileId] = await Promise.all([
+      uploadFile(ktpFile,'ktp'),
+      uploadFile(trFile,'transfer')
     ]);
     
     showLoading('Menyimpan data...');
@@ -812,7 +813,7 @@ window.submitRegistration = async function(){
     const v=id=>document.getElementById(id)?.value.trim()||'';
     const price=PRICES[selGrade];
     const paid=payType==='dp'?Math.round(price*0.7):price;
-    const data={uid:currentUser.uid,email:currentUser.email,standName:v('f_standName'),ownerName:v('f_ownerName'),phone:v('f_phone'),emailPeserta:v('f_email'),productType:v('f_product'),address:v('f_address'),category:selCat==='food'?'Makanan':'Multi Produk',grade:selGrade,boothNumber:selStand,price,amountPaid:paid,paymentType:payType==='dp'?'DP 70%':'Lunas',paymentStatus:'pending',ktpUrl,transferUrl:trUrl,createdAt:serverTimestamp()};
+    const data={uid:currentUser.uid,email:currentUser.email,standName:v('f_standName'),ownerName:v('f_ownerName'),phone:v('f_phone'),emailPeserta:v('f_email'),productType:v('f_product'),address:v('f_address'),category:selCat==='food'?'Makanan':'Multi Produk',grade:selGrade,boothNumber:selStand,price,amountPaid:paid,paymentType:payType==='dp'?'DP 70%':'Lunas',paymentStatus:'pending',ktpFileId,transferFileId,createdAt:serverTimestamp()};
     const ref = await addDoc(collection(db,'registrations'),data);
     currentRegId=ref.id;
     bookedStands[selStand]=true;

@@ -1016,8 +1016,17 @@ window.openDetail = function(id){
   
   const modalBody = document.getElementById('modalBody');
   if(modalBody) {
-    const ktpUrl = r.ktpUrl || '';
-    const trUrl = r.transferUrl || '';
+   const ktpUrl =
+  r.ktpUrl ||
+  (r.ktpFileId
+    ? `https://drive.google.com/thumbnail?id=${r.ktpFileId}&sz=w1200`
+    : '');
+
+const trUrl =
+  r.transferUrl ||
+  (r.transferFileId
+    ? `https://drive.google.com/thumbnail?id=${r.transferFileId}&sz=w1200`
+    : '');
     
     modalBody.innerHTML = `
       <div style="display:flex; flex-direction:column; gap:20px; margin-bottom:20px;">
